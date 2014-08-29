@@ -24,8 +24,9 @@ A QEP is designed to be a single location for overview of a requested change and
 
 QEP Types?
 ------------- 
-There are two kinds of a QEPs
- - **Standard** - A standard code, UI, or application workflow proposal.  These are normally related to the core project itself, or the API. 
+There are three kinds of a QEPs
+ - **Technical (API)** - A Technical code and API focused proposal.  These are normally related to the core project itself and more focus around the code structure . 
+ - **GUI / Workflow (UX)** - A UI, or application workflow focused proposal. These are related to how QGIS looks and preforms to the user.  These may not require new code but might be full UI reworks.
  - **Process** - A QEP that is a proposal to change a process which the community around QGIS follow s. This could be something like changing the bug tracker, changing website platform, etc.
 
 Who can discuss a QEP?
