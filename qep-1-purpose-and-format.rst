@@ -38,7 +38,8 @@ Who can vote?
 
 Only a set allocated pool of people can formally vote on a QEP for it to be accepted.  The pool depends on the type of QEP.
 
-- **Standard** - A standard QEP can be voted on by the following members: xxxxxxx
+- **Technical (API)** - A Technical QEP can be voted on by the following members: xxxxxxx
+- **GUI / Workflow (UX)** - A GUI / Workflow QEP can be voted on by the following members: xxxxxxx
 - **Process** -  A process QEP is voted by the PSC exclusively and only the PSC.
 
 Submitting a QEP?
