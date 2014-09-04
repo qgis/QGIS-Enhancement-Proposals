@@ -116,6 +116,11 @@ An example plugin is available:
 
 https://github.com/elpaso/qgis-helloserver
 
+A running implementation of the sever plugins basic functionalities is available here:
+
+https://github.com/elpaso/QGIS/tree/serverplugins
+
+
 
 #.# Python Bindings
 ...................
