@@ -121,6 +121,8 @@ Only in case we decide to pass cached parsed project to the plugins, a python wr
 
 The proposed implementation adds a cmake flag to enable the functionality and just a few lines of code to ``qgis_map_serv.cpp``, the implementation is done in a separated class contained in a single implementation/header C++ couple.
 
+In order to allow headless loading of plugins, is was also necessary to provide a new environment variable wich defines ``mConfigPath`` which normally defaults to the user home directory (www-data doesn't define one). The addition of this environment variable ``QGIS_CUSTOM_CONFIG_PATH`` has no impact on the rest of QGIS.
+
 #. Test Coverage
 ----------------
 
