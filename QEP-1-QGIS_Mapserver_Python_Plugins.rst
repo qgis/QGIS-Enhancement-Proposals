@@ -1,7 +1,7 @@
 .. _qep#[.#]:
 
 ========================================================================
-QGIS Enhancement #: QGIS Server Python Plugins
+QGIS RFC 2: QGIS Server Python Plugins
 ========================================================================
 
 :Date: 2014/09/04
@@ -55,22 +55,6 @@ Example query string::
 
     http://localhost/cgi-bin/qgis_mapserv.fcgi?SERVICE=HELLO&REQUEST=SayHello
 
-Example response::
-
-    200 OK
-    Connection: close
-    Date: Thu, 04 Sep 2014 09:56:36 GMT
-    Server: Apache/2.4.7 (Ubuntu)
-    Vary: Accept-Encoding
-    Content-Length: 12
-    Content-Type: text/plain
-    Client-Date: Thu, 04 Sep 2014 09:56:36 GMT
-    Client-Peer: 127.0.0.1:80
-    Client-Response-Num: 1
-
-    HelloServer
-
-
 When all checks are done the plugin runs by calling the method in the *REQUEST*, the method receives the project path and the query string as parameters.
 
 
@@ -92,6 +76,22 @@ Example method::
         print "HelloServer"
         return 'text/plain'
 
+
+
+Example response::
+
+    200 OK
+    Connection: close
+    Date: Thu, 04 Sep 2014 09:56:36 GMT
+    Server: Apache/2.4.7 (Ubuntu)
+    Vary: Accept-Encoding
+    Content-Length: 12
+    Content-Type: text/plain
+    Client-Date: Thu, 04 Sep 2014 09:56:36 GMT
+    Client-Peer: 127.0.0.1:80
+    Client-Response-Num: 1
+
+    HelloServer
 
 
 Because in the proposed implementation the server plugins are not separated from the desktop plugins, the user could take advantage (without being forced to) of the well known QGIS Desktop plugins interface system to configure the behaviour of the QGIS Server side of the plugin.
