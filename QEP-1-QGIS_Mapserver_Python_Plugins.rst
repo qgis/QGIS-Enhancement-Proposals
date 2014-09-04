@@ -51,6 +51,26 @@ If a plugin exists for the required *SERVICE*, additional checks are made to ver
 * the plugin has a method named as the *REQUEST*
 
 
+Example query string::
+
+    http://localhost/cgi-bin/qgis_mapserv.fcgi?SERVICE=HELLO&REQUEST=SayHello
+
+Example response::
+
+    200 OK
+    Connection: close
+    Date: Thu, 04 Sep 2014 09:56:36 GMT
+    Server: Apache/2.4.7 (Ubuntu)
+    Vary: Accept-Encoding
+    Content-Length: 12
+    Content-Type: text/plain
+    Client-Date: Thu, 04 Sep 2014 09:56:36 GMT
+    Client-Peer: 127.0.0.1:80
+    Client-Response-Num: 1
+
+    HelloServer
+
+
 When all checks are done the plugin runs by calling the method in the *REQUEST*, the method receives the project path and the query string as parameters.
 
 
@@ -111,6 +131,124 @@ The proposed implementation adds a cmake flag to enable the functionality and ju
 
 Loading the Python machinery at FCGI startup causes a small delay, subsequent calls to non python services (WMS, WFS etc.) will not cause any delay because those calls will never hit the 404 handler that obviously comes last.
 
+A quick test done with `ab` compares the a.m. example call (SayHello) with the standard exception output::
+
+    SAYHELLO REQUEST
+
+    ab -r -n 1000 -c 100  'http://qwc/cgi-bin/qgis_mapserv.fcgi?SERVICE=HELLO&request=SayHello'
+    This is ApacheBench, Version 2.3 <$Revision: 1528965 $>
+    Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+    Licensed to The Apache Software Foundation, http://www.apache.org/
+
+    Benchmarking qwc (be patient)
+    Completed 100 requests
+    Completed 200 requests
+    Completed 300 requests
+    Completed 400 requests
+    Completed 500 requests
+    Completed 600 requests
+    Completed 700 requests
+    Completed 800 requests
+    Completed 900 requests
+    Completed 1000 requests
+    Finished 1000 requests
+
+
+    Server Software:        Apache/2.4.7
+    Server Hostname:        qwc
+    Server Port:            80
+
+    Document Path:          /cgi-bin/qgis_mapserv.fcgi?SERVICE=HELLO&request=SayHello
+    Document Length:        12 bytes
+
+    Concurrency Level:      100
+    Time taken for tests:   1.370 seconds
+    Complete requests:      1000
+    Failed requests:        0
+    Total transferred:      187000 bytes
+    HTML transferred:       12000 bytes
+    Requests per second:    729.93 [#/sec] (mean)
+    Time per request:       137.000 [ms] (mean)
+    Time per request:       1.370 [ms] (mean, across all concurrent requests)
+    Transfer rate:          133.30 [Kbytes/sec] received
+
+    Connection Times (ms)
+                min  mean[+/-sd] median   max
+    Connect:        0    1   1.5      0       6
+    Processing:     2   40  62.3     38    1043
+    Waiting:        2   40  62.3     38    1043
+    Total:          8   41  62.4     38    1044
+
+    Percentage of the requests served within a certain time (ms)
+    50%     38
+    66%     39
+    75%     39
+    80%     40
+    90%     40
+    95%     41
+    98%     42
+    99%     46
+    100%   1044 (longest request)
+
+
+    EMPTY REQUEST (Exception)
+
+    ab -r -n 1000 -c 100  'http://qwc/cgi-bin/qgis_mapserv.fcgi'
+    This is ApacheBench, Version 2.3 <$Revision: 1528965 $>
+    Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+    Licensed to The Apache Software Foundation, http://www.apache.org/
+
+    Benchmarking qwc (be patient)
+    Completed 100 requests
+    Completed 200 requests
+    Completed 300 requests
+    Completed 400 requests
+    Completed 500 requests
+    Completed 600 requests
+    Completed 700 requests
+    Completed 800 requests
+    Completed 900 requests
+    Completed 1000 requests
+    Finished 1000 requests
+
+
+    Server Software:        Apache/2.4.7
+    Server Hostname:        qwc
+    Server Port:            80
+
+    Document Path:          /cgi-bin/qgis_mapserv.fcgi
+    Document Length:        225 bytes
+
+    Concurrency Level:      100
+    Time taken for tests:   1.111 seconds
+    Complete requests:      1000
+    Failed requests:        0
+    Total transferred:      399000 bytes
+    HTML transferred:       225000 bytes
+    Requests per second:    899.77 [#/sec] (mean)
+    Time per request:       111.139 [ms] (mean)
+    Time per request:       1.111 [ms] (mean, across all concurrent requests)
+    Transfer rate:          350.59 [Kbytes/sec] received
+
+    Connection Times (ms)
+                min  mean[+/-sd] median   max
+    Connect:        0    0   0.9      0       3
+    Processing:     2   27  62.6     24    1025
+    Waiting:        2   27  62.6     24    1025
+    Total:          6   27  62.7     24    1025
+
+    Percentage of the requests served within a certain time (ms)
+    50%     24
+    66%     25
+    75%     25
+    80%     25
+    90%     26
+    95%     27
+    98%     29
+    99%     30
+    100%   1025 (longest request)
+
+
 In case we decide to implement signals/slots bound to request start and response we could expect an impact in performances that would probably be almost negligible in case there is no match with any listening plugin.
 
 
@@ -129,7 +267,7 @@ Other enhancements could wrap the cached parsed project C++ object and pass it t
 #. Restrictions
 ---------------
 
-(optional)
+If the plugin has a Desktop interface it cannot usually access to user's `QSettings`, this means that plugins options have to be stored somewhere else in order to be accessible by the server side.
 
 #. Backwards Compatibility
 --------------------------
