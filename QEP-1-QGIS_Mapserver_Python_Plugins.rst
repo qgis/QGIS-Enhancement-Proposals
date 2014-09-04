@@ -64,9 +64,9 @@ Example metadata::
     methods=GetCapabilities,GetOutput,RemoteConsole,SayHello
 
 
-The plugin (static) method has access to global python environment and can run arbitrary python commands, it can optionally return a content type string (the server defaults to `text/plain`).
+The plugin (static) method has access to global python environment and can run arbitrary python commands, it can optionally return a content type string (the server defaults to ``text/plain``).
 
-The plugin CGI-style output is captured diverting `stdout` and `stderr` to a custom buffer which becomes the server response.
+The plugin CGI-style output is captured diverting ``stdout`` and ``stderr`` to a custom buffer which becomes the server response.
 
 Example method::
 
@@ -119,7 +119,7 @@ Only in case we decide to pass cached parsed project to the plugins, a python wr
 #.# Affected Files
 ..................
 
-The proposed implementation adds a cmake flag to enable the functionality and just a few lines of code to `qgis_map_serv.cpp`, the implementation is done in a separated class contained in a single implementation/header C++ couple.
+The proposed implementation adds a cmake flag to enable the functionality and just a few lines of code to ``qgis_map_serv.cpp``, the implementation is done in a separated class contained in a single implementation/header C++ couple.
 
 #. Test Coverage
 ----------------
@@ -131,7 +131,7 @@ The proposed implementation adds a cmake flag to enable the functionality and ju
 
 Loading the Python machinery at FCGI startup causes a small delay, subsequent calls to non python services (WMS, WFS etc.) will not cause any delay because those calls will never hit the 404 handler that obviously comes last.
 
-A quick test done with `ab` compares the a.m. example call (SayHello) with the standard exception output::
+A quick test done with ``ab`` compares the a.m. example call (SayHello) with the standard exception output::
 
     SAYHELLO REQUEST
 
@@ -267,7 +267,7 @@ Other enhancements could wrap the cached parsed project C++ object and pass it t
 #. Restrictions
 ---------------
 
-If the plugin has a Desktop interface it cannot usually access to user's `QSettings`, this means that plugins options have to be stored somewhere else in order to be accessible by the server side.
+If the plugin has a Desktop interface it cannot usually access to user's ``QSettings``, this means that plugins options have to be stored somewhere else in order to be accessible by the server side.
 
 #. Backwards Compatibility
 --------------------------
