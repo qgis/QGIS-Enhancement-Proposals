@@ -18,7 +18,9 @@ QGIS RFC 2: QGIS Server Python Plugins
 #. Summary
 ----------
 
-QGIS Desktop takes enormous advantages from the additional features implemented with Python Plugins, this proposal is about extending Python plugins to the server side. The rationale behind server plugins is doublefold: first they will provide additional services without the need to touch the C++ codebase, second, they will allow for GUI-based configuration from QGIS Desktop.
+QGIS Desktop takes enormous advantages from the additional features implemented with Python Plugins, this proposal is about extending Python plugins to the server side.
+
+The rationale behind server plugins is doublefold: first they will provide additional services without the need to touch the C++ codebase, second, they will allow for GUI-based configuration from QGIS Desktop.
 
 Possible applications:
 
@@ -47,7 +49,7 @@ A possible further enhancement would allow the plugins to listen to particular s
 
 The proposed solution is to load Python plugins when FCGI application starts and maintain an hash of services declared by the plugins.
 
-When the FCGI loops ends without a match for the available C++ services (WMS, WFS, WCS), if (and only) python plugins have been registered in the hash and of course Python support is enabled, 404 handler runs and matches the SERVICE parameter with the *service* metatag declared by the plugin.
+When the FCGI loop ends without a match for the available C++ services (WMS, WFS, WCS), if (and only) python plugins have been registered in the hash and of course Python support is enabled, 404 handler runs and matches the SERVICE parameter with the *service* metatag declared by the plugin.
 
 If a plugin exists for the required *SERVICE*, additional checks are made to verify if it can run:
 
