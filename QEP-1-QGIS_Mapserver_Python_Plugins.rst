@@ -40,7 +40,7 @@ A possible further enhancement would allow the plugins to listen to particular s
 #. Implementation Details
 -------------------------
 
-The proposed (simplest and unobtrusive) solution is to load Python plugins when FCGI application starts and maintain an hash of services declared by the plugins.
+The proposed solution is to load Python plugins when FCGI application starts and maintain an hash of services declared by the plugins.
 
 When the FCGI loops ends without a match for the available C++ services (WMS, WFS, WCS), if (and only) python plugins have been registered in the hash and of course Python support is enabled, 404 handler runs and matches the SERVICE parameter with the *service* metatag declared by the plugin.
 
@@ -62,11 +62,13 @@ Example metadata::
 
 The plugin (static) method has access to global python environment and can run arbitrary python commands, it can optionally return a content type string (the server defaults to `text/plain`).
 
+The plugin CGI-style output is captured diverting `stdout` and `stderr` to a custom buffer which becomes the server response.
+
 Example method::
 
     @staticmethod
     def SayHello(project_path, parameters):
-        """Just say a sentence"""
+        """Just say something"""
         print "HelloServer"
         return 'text/plain'
 
