@@ -18,7 +18,7 @@ QGIS RFC 2: QGIS Server Python Plugins
 #. Summary
 ----------
 
-QGIS Desktop takes enormous advantages from the additional features implemented with Python Plugins. The rationale behind server plugins is doublefold: first they could provide additional services without the need to touch the C++ codebase, second, they allow for GUI-based configuration from QGIS Desktop.
+QGIS Desktop takes enormous advantages from the additional features implemented with Python Plugins, this proposal is about extending Python plugins to the server side. The rationale behind server plugins is doublefold: first they will provide additional services without the need to touch the C++ codebase, second, they will allow for GUI-based configuration from QGIS Desktop.
 
 Possible applications:
 
@@ -26,14 +26,19 @@ Possible applications:
 * authentication/authorization
 * additional services (WPS etc.)
 
+Python plugins for the server side are not meant to replace the existing professional solutions available for heavy traffic websites but will provide ready to use, easy to install and easy to configure alternatives for the average user.
+
+Server plugins will also broaden the number of developers for server extensions, that could eventually become part of the core, as happened many times for QGIS desktop.
+
 
 #. Proposed [Technical] Solution | Change
 -----------------------------------------
 
 The proposed (simplest and unobtrusive) solution is to load Python plugins that declare a *service* metatag and match the *SERVICE* parameter in the query string to run the plugin. The plugin must also expose the *REQUEST* methods it provides.
 
-A possible further enhancement would allow the plugins to listen to particular signals emitted at least:
+A possible further enhancement would allow the plugins to listen to particular signals emitted, for example:
 
+* at FCGI startup
 * after the request object is created
 * before the response is sent to the client
 
@@ -98,7 +103,7 @@ Because in the proposed implementation the server plugins are not separated from
 
 The proposed implementation do not enforce the fact that a plugin must have a Desktop interface just allows for it.
 
-Since we would be mixing Desktop and Server side, the environment for those plugins that have a Desktop interface should be carefully configured with proper permissions to allow information sharing from the desktop user to the webserver user.
+Since we would be mixing Desktop and Server side, the environment for those plugins that have a Desktop interface should be carefully configured with proper permissions to allow information (configuration files) sharing from the desktop user to the webserver user.
 
 
 
@@ -121,7 +126,7 @@ Only in case we decide to pass cached parsed project to the plugins, a python wr
 
 The proposed implementation adds a cmake flag to enable the functionality and just a few lines of code to ``qgis_map_serv.cpp``, the implementation is done in a separated class contained in a single implementation/header C++ couple.
 
-In order to allow headless loading of plugins, is was also necessary to provide a new environment variable wich defines ``mConfigPath`` which normally defaults to the user home directory (www-data doesn't define one). The addition of this environment variable ``QGIS_CUSTOM_CONFIG_PATH`` has no impact on the rest of QGIS.
+In order to allow headless loading of plugins, is was also necessary to provide a new environment variable wich defines ``mConfigPath`` which normally defaults to a path starting from the user home directory (www-data doesn't define one). The addition of this environment variable ``QGIS_CUSTOM_CONFIG_PATH`` has no impact on the rest of QGIS.
 
 #. Test Coverage
 ----------------
