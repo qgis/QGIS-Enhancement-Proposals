@@ -36,19 +36,32 @@ As a general rule one should consult the mailing list to consider community opin
 Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-In brief the project team votes on proposals submitted as pull requests on this git repository. Proposals are available for review for at least seven days, and a single veto is sufficient to delay progress though ultimately a majority of members can pass a proposal.
+In brief the project team votes on proposals submitted as pull requests on this git repository.
 
 Detailed Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Proposals are written up and submitted as pull requests on this git repository and announced on the qgis-developer mailing list.
-- Proposals are open for discussion and voting by any interested party, not just committee members
-- Proposals need to be available for review for at least seven business days before a final decision can be made.
-- Respondents may vote "+1" to indicate support for the proposal and a willingness to support implementation.
-- Respondents may vote "-1" to veto a proposal, but must provide clear reasoning and alternate approaches to resolving the problem within the two days.
-- A vote of -0 indicates mild disagreement, but has no effect. A 0 indicates no opinion. A +0 indicate mild support, but has no effect.
+- Proposals are open for discussion and voting by any interested party, not just committee members, however votes by non PSC members only count as support for the idea not in the final score.
 - Anyone may comment on proposals on the pull request, but only members of the Project Steering Committee's votes will be counted.
-- A proposal will be accepted if it receives +2 (including the proposer) and no vetos (-1).
+- While in a draft stage a QEP can be open with no time limit as the idea evolves.
+ 
+
+Voting
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- Voting can only take place once the QEP is in final draft mode 
+- Voting is only open for seven days
+
+Only the PSC can take a final vote on the proposal before it is accepted.  The voting weights are as follows:
+
+	- "+1" to indicate support for the proposal and a willingness to support implementation.
+	- "-1" to veto a proposal, but must provide clear reasoning and alternate approaches to resolving the problem within the seven days.
+	- -0 indicates mild disagreement, but has no effect. 
+	- 0 indicates no opinion
+	- +0 indicate mild support, but has no effect.
+
+- A proposal will be accepted if it receives +3 (including the proposer) and no vetos (-1).
 - Upon completion of discussion and voting the proposer should announce whether they are proceeding (proposal accepted) or are withdrawing their proposal (vetoed).
 - The Chair adjudicates in cases of disputes about voting. 
 
