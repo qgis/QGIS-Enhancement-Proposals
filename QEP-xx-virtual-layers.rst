@@ -50,9 +50,9 @@ The proposed design is based on these different use cases for vector layers:
 #. Proposed Solution
 --------------------
 
-SQLite provides a very useful feature designed to embed its database engine in a third party application: [virtual table](http://www.sqlite.org/vtab.html).
+SQLite provides a very useful feature designed to embed its database engine in a third party application: `virtual table`_.
 It offers the ability to expose internal data as an SQLite table. Then any operations available on a regular table can also be applied to a virtual table. The implementation can then choose to apply or ignore some of the operations. For instance, QGIS virtual tables are seen for now as being read only, so UPDATE operations will be ignored.
-A C API (as well as a `Python API<https://github.com/rogerbinns/apsw>`_) allows to create such a virtual table mechanism.
+A C API (as well as a `Python API`_) allows to create such a virtual table mechanism.
 
 It makes a perfect candidate for the implementation of virtual layers in QGIS:
 
@@ -60,7 +60,12 @@ It makes a perfect candidate for the implementation of virtual layers in QGIS:
 *   Spatialite, as an extension to SQlite is already used as a spatial format, with growing support in GIS applications
 *   it brings an embeddable powerful SQL engine
 
-This proposal is inspired by the `VirtualOGR<https://www.gaia-gis.it/fossil/libspatialite/wiki?name=VirtualOGR>`_ driver for Spatialite that allows to open any OGR-supported format as a virtual table.
+This proposal is inspired by the `VirtualOGR`_ driver for Spatialite that allows to open any OGR-supported format as a virtual table.
+
+
+.. _virtual table: http://www.sqlite.org/vtab.html
+.. _VirtualOGR: https://www.gaia-gis.it/fossil/libspatialite/wiki?name=VirtualOGR
+.. _Python API: https://github.com/rogerbinns/apsw
 
 #.# Data model
 -------------
@@ -82,12 +87,14 @@ Opening / creating a virtual layer will try to create each referenced layers.
 #.# Type handling
 -----------------
 
-SQLite uses `dynamic typing<http://www.sqlite.org/datatype3.html>`_ for each value.
+SQLite uses `dynamic typing`_ for each value.
 However, one may want to make sure a static type is ensured for columns of a virtual layer (for use in feature form widgets for instance).
 
 Some additional information are thus needed to carry typing information for columns of a virtual layer. They have to be defined during the construction of a virtual layer.
 When fetching data however, column values may be of a different type than the type declared (stored in a QVariant). Type casting has to be handled when setting the SQL query.
 This is similar to what SQLite calls "type affinity": some type is defined for a column, but the actual type of a given row/column value may change.
+
+.. _dynamic typing: http://www.sqlite.org/datatype3.html
 
 #.# Indexes
 -----------
