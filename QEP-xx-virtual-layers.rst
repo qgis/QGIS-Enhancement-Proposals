@@ -17,7 +17,7 @@ QGIS Enhancement #: Support Of Virtual Layers
 
     See :ref:`QEP 1 <qep1>` for description of QEP process.
 
-#. Summary
+# Summary
 ----------
 
 This enhancement proposal is about the addition of "virtual layers" to the QGIS core.
@@ -41,10 +41,11 @@ For now the virtual layer is mainly seen for vector layers, but extension to ras
 ---------------------
 
 The proposed design is based on these different use cases for vector layers:
-* create a dynamic point layer based on X,Y(,Z) coordinates
-* allow to filter features based on a SQL query, even for data sources not designed for that (CSV, ODS, etc.), and including spatial operators (Transform, Intersects, etc.)
-* allow to join different layers (including with a spatial clause)
-* give access to attributes that are computed, based on the value of other attributes (this may be somehow redundant with the possibilities offered by virtual fields in expressions)
+
+-   create a dynamic point layer based on X,Y(,Z) coordinates
+-   allow to filter features based on a SQL query, even for data sources not designed for that (CSV, ODS, etc.), and including spatial operators (Transform, Intersects, etc.)
+-   allow to join different layers (including with a spatial clause)
+-   give access to attributes that are computed, based on the value of other attributes (this may be somehow redundant with the possibilities offered by virtual fields in expressions)
 
 #. Proposed Solution
 --------------------
@@ -54,9 +55,10 @@ It offers the ability to expose internal data as an SQLite table. Then any opera
 A C API (as well as a [Python API](https://github.com/rogerbinns/apsw)) allows to create such a virtual table mechanism.
 
 It makes a perfect candidate for the implementation of virtual layers in QGIS:
-* the library is open source
-* Spatialite, as an extension to SQlite is already used as a spatial format, with growing support in GIS applications
-* it brings an embeddable powerful SQL engine
+
+*   the library is open source
+*   Spatialite, as an extension to SQlite is already used as a spatial format, with growing support in GIS applications
+*   it brings an embeddable powerful SQL engine
 
 This proposal is inspired by the [VirtualOGR](https://www.gaia-gis.it/fossil/libspatialite/wiki?name=VirtualOGR) driver for Spatialite that allows to open any OGR-supported format as a virtual table.
 
@@ -64,8 +66,9 @@ This proposal is inspired by the [VirtualOGR](https://www.gaia-gis.it/fossil/lib
 -------------
 
 A virtual layer in QGIS would thus be defined as a new type of (vector) layer with the following parameters:
-* a list of QGIS layers that are used as primary sources of data (including other virtual layers)
-* an SQL query on primary sources of data
+
+*   a list of QGIS layers that are used as primary sources of data (including other virtual layers)
+*   an SQL query on primary sources of data
 
 A virtual layer does not store data on its own, only references to other data
 
@@ -103,17 +106,21 @@ Since a virtual layer does not store data but only references to data sources, i
 -------------------------
 
 A new QgsVectorDataProvider will be developed to handle virtual layers.
+
   * parameters of the creation (URI of sources) will be passed as an URI, using a separator that is not used by other provider URIs
   * detail: should a new parameter be added to the QgsVectorLayer constructor (a map of settings) to avoid to find a new strange separator ?
+
 It will be based on the existing spatialite provider.
+
   * not sure yet if inheritance can be used or if a merge is possible.
 
 In link with this provider, a SQLite extension module able to handle virtual layer will be developed
+
   * offering a complete Spatialite geometric view from QGIS data sources implies to return a BLOB for geometries formatted with the internal Spatialite format for geometries. The Python API regarding virtual tables support is too limited to implement that.
 
 UI side, a first simple interface to the creation of a virtual layer will be provided.
 
-![Simple spatial layer creation UI](simple_spatial_layer.png)
+![Simple spatial layer creation UI](https://raw.githubusercontent.com/mhugo/QGIS-Enhancement-Proposals/master/simple_spatial_layer.png?raw=true)
 
 On new option will be added to automatically create a virtual layer for the list of selected layers (either by right click or via a menu entry).
 
@@ -123,12 +130,13 @@ On new option will be added to automatically create a virtual layer for the list
 
 Using the simple interface described above, the new provider will execute something similar to the following commands:
 
-```
-CREATE VIRTUAL TABLE point_layer_vl USING QgsVirtualVectorLayer('ogr','/path/to/point_layer.shp');
-CREATE VIRTUAL TABLE polygon_layer_vl USING QgsVirtualVectorLayer('postgis',"'dbname='countries' port=5432 user='gis' srid=3857 type=POINT table="public"."countries" (geom) sql='");
-CREATE VIEW virtual_layer AS SELECT b.id, b.geometry where Contains(b.geom, a.geom) FROM point_layer_vl AS a, polygon_layer_vl AS b;
-INSERT INTO geometry_columns ...
-```
+.. code-block:: SQL
+
+    CREATE VIRTUAL TABLE point_layer_vl USING QgsVirtualVectorLayer('ogr','/path/to/point_layer.shp');
+    CREATE VIRTUAL TABLE polygon_layer_vl USING QgsVirtualVectorLayer('postgis',"'dbname='countries' port=5432 user='gis' srid=3857 type=POINT table="public"."countries" (geom) sql='");
+    CREATE VIEW virtual_layer AS SELECT b.id, b.geometry where Contains(b.geom, a.geom) FROM point_layer_vl AS a, polygon_layer_vl AS b;
+    INSERT INTO geometry_columns ...
+
 
 #.# Python Bindings
 ...................
@@ -156,6 +164,7 @@ INSERT INTO geometry_columns ...
 From a end-user point of view, a first concrete application of the virtual layer mechanism is planned regarding the ability to filter a layer that has some 'joins' defined. Since filtering is not supported for joined fields, a virtual layer will be transparently created in that case.
 
 Open discussion :
+
 * should the "joins" properties of a layer be replaced by the use of a virtual layer underneath ? (without changing the existing UI)
 * same question with "relations" ?
 
