@@ -52,7 +52,7 @@ The proposed design is based on these different use cases for vector layers:
 
 SQLite provides a very useful feature designed to embed its database engine in a third party application: [virtual table](http://www.sqlite.org/vtab.html).
 It offers the ability to expose internal data as an SQLite table. Then any operations available on a regular table can also be applied to a virtual table. The implementation can then choose to apply or ignore some of the operations. For instance, QGIS virtual tables are seen for now as being read only, so UPDATE operations will be ignored.
-A C API (as well as a [Python API](https://github.com/rogerbinns/apsw)) allows to create such a virtual table mechanism.
+A C API (as well as a `Python API<https://github.com/rogerbinns/apsw>`_) allows to create such a virtual table mechanism.
 
 It makes a perfect candidate for the implementation of virtual layers in QGIS:
 
@@ -60,7 +60,7 @@ It makes a perfect candidate for the implementation of virtual layers in QGIS:
 *   Spatialite, as an extension to SQlite is already used as a spatial format, with growing support in GIS applications
 *   it brings an embeddable powerful SQL engine
 
-This proposal is inspired by the [VirtualOGR](https://www.gaia-gis.it/fossil/libspatialite/wiki?name=VirtualOGR) driver for Spatialite that allows to open any OGR-supported format as a virtual table.
+This proposal is inspired by the `VirtualOGR<https://www.gaia-gis.it/fossil/libspatialite/wiki?name=VirtualOGR>`_ driver for Spatialite that allows to open any OGR-supported format as a virtual table.
 
 #.# Data model
 -------------
@@ -82,7 +82,7 @@ Opening / creating a virtual layer will try to create each referenced layers.
 #.# Type handling
 -----------------
 
-SQLite uses [dynamic typing](http://www.sqlite.org/datatype3.html) for each value.
+SQLite uses `dynamic typing<http://www.sqlite.org/datatype3.html>`_ for each value.
 However, one may want to make sure a static type is ensured for columns of a virtual layer (for use in feature form widgets for instance).
 
 Some additional information are thus needed to carry typing information for columns of a virtual layer. They have to be defined during the construction of a virtual layer.
@@ -107,21 +107,21 @@ Since a virtual layer does not store data but only references to data sources, i
 
 A new QgsVectorDataProvider will be developed to handle virtual layers.
 
-  * parameters of the creation (URI of sources) will be passed as an URI, using a separator that is not used by other provider URIs
-  * detail: should a new parameter be added to the QgsVectorLayer constructor (a map of settings) to avoid to find a new strange separator ?
+* parameters of the creation (URI of sources) will be passed as an URI, using a separator that is not used by other provider URIs
+* detail: should a new parameter be added to the QgsVectorLayer constructor (a map of settings) to avoid to find a new strange separator ?
 
 It will be based on the existing spatialite provider.
 
-  * not sure yet if inheritance can be used or if a merge is possible.
+* not sure yet if inheritance can be used or if a merge is possible.
 
 In link with this provider, a SQLite extension module able to handle virtual layer will be developed
 
-  * offering a complete Spatialite geometric view from QGIS data sources implies to return a BLOB for geometries formatted with the internal Spatialite format for geometries. The Python API regarding virtual tables support is too limited to implement that.
+* offering a complete Spatialite geometric view from QGIS data sources implies to return a BLOB for geometries formatted with the internal Spatialite format for geometries. The Python API regarding virtual tables support is too limited to implement that.
 
 UI side, a first simple interface to the creation of a virtual layer will be provided.
 
-![Simple spatial layer creation UI](https://raw.githubusercontent.com/mhugo/QGIS-Enhancement-Proposals/master/simple_spatial_layer.png?raw=true)
-
+.. image:: simple_spatial_layer.png
+   
 On new option will be added to automatically create a virtual layer for the list of selected layers (either by right click or via a menu entry).
 
 
