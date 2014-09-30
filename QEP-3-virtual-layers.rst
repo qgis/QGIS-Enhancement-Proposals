@@ -183,7 +183,7 @@ There is no particular additional Python bindings needed.
 
 UI side, a first simple interface to the creation of a virtual layer will be provided.
 
-.. image:: simple_spatial_layer.png
+.. image:: qep3_img/simple_spatial_layer.png
    
 A new option will be added to automatically create a virtual layer for the list of selected layers (either by right click or via a menu entry).
 
