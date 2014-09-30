@@ -109,6 +109,7 @@ This implies user-defined SQL queries must take care of using spatial indexes as
 the spatial index like in:
 
 .. code-block:: SQL
+
     SELECT * 
     FROM t1, t2
     WHERE ST_CoveredBy(t1.geometry, t2.geometry) = 1 
@@ -117,7 +118,6 @@ the spatial index like in:
         FROM SpatialIndex
         WHERE f_table_name = 't1' 
             AND search_frame = t2.geometry);
-```
 
 For in-memory virtual layers, spatial indexes will be thus recreated for each loading.
 
@@ -140,26 +140,19 @@ It will be based on the existing spatialite provider.
 
 For the main methods of the QgsVectorDataProvider API, the following behaviour is planned:
 
-*   constructor: the constructor will create/open a Spatialite database (either on disk or in memory). If creation parameters are given, they will be used for the creation of VIRTUAL TABLEs from QGIS layers. A VIEW will carry the SQL query for reading. Other optional SQL queries will be used as TRIGGER ON UPDATE, ON INSERT, etc.
-*   getFeatures(): Execution of the SQL reading query
-*   fields(): use of SQLite introspection to get column types, or user-defined column types if any
-*   addFeatures(): Execution of the SQL INSERT TRIGGER. Field values that are passed to the function but not referenced in the TRIGGER will simply be ignored
-*   deleteFeatures(): Execution of the SQL DELETE TRIGGER
-*   addAttributes(): does not make much sense. It could be used to modify the list of fields retrieved from the VIEW (?)
-*   changeAttributeValues() / changeGeoemtryValues: Execution of the SQL UPDATE TRIGGER
-*   createSpatialIndex(): call to Spatialite's CreateSpatialIndex
-*   createAttributeIndex(): does nothing
+*   **constructor**: the constructor will create/open a Spatialite database (either on disk or in memory). If creation parameters are given, they will be used for the creation of VIRTUAL TABLEs from QGIS layers. A VIEW will carry the SQL query for reading. Other optional SQL queries will be used as TRIGGER ON UPDATE, ON INSERT, etc.
+*   **getFeatures()**: Execution of the SQL reading query
+*   **fields()**: use of SQLite introspection to get column types, or user-defined column types if any
+*   **addFeatures()**: Execution of the SQL INSERT TRIGGER. Field values that are passed to the function but not referenced in the TRIGGER will simply be ignored
+*   **deleteFeatures()**: Execution of the SQL DELETE TRIGGER
+*   **addAttributes()**: does not make much sense. It could be used to modify the list of fields retrieved from the VIEW (?)
+*   **changeAttributeValues()** / **changeGeoemtryValues**: Execution of the SQL UPDATE TRIGGER
+*   **createSpatialIndex()**: call to Spatialite's CreateSpatialIndex
+*   **createAttributeIndex()**: does nothing
 
 In link with this provider, a SQLite extension module able to handle virtual layer will be developed
 
 * offering a complete Spatialite geometric view from QGIS data sources implies to return a BLOB for geometries formatted with the internal Spatialite format for geometries. The Python API regarding virtual tables support is too limited to implement that.
-
-UI side, a first simple interface to the creation of a virtual layer will be provided.
-
-.. image:: simple_spatial_layer.png
-   
-On new option will be added to automatically create a virtual layer for the list of selected layers (either by right click or via a menu entry).
-
 
 #.# Example(s)
 ..............
@@ -185,9 +178,9 @@ There is no particular additional Python bindings needed.
 
 UI side, a first simple interface to the creation of a virtual layer will be provided.
 
-![Simple spatial layer creation UI](simple_spatial_layer.png)
-
-On new option will be added to automatically create a virtual layer for the list of selected layers (either by right click or via a menu entry).
+.. image:: simple_spatial_layer.png
+   
+A new option will be added to automatically create a virtual layer for the list of selected layers (either by right click or via a menu entry).
 
 Integration to the DB Manager is also planned.
 
