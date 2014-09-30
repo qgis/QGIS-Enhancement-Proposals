@@ -71,6 +71,7 @@ This proposal is inspired by the `VirtualOGR`_ driver for Spatialite that allows
 -------------
 
 A virtual layer in QGIS would thus be defined as a new type of (vector) layer with the following parameters:
+
 *   a list of QGIS layers that are used as primary sources of data (including other virtual layers)
 *   an SQL query for accessing data of primary sources
 *   an optional list of types for each column of the virtual layer
@@ -127,6 +128,7 @@ For in-memory virtual layers, spatial indexes will be thus recreated for each lo
 A virtual layer can be created in memory, through the use of the "memory" SQLite backend, or can be written to disk.
 The definitions of in-memory virtual layers can then be written directly as an XML string to a QGIS project file.
 
+For virtual layers written to disk, the file format used will be Spatialite, but a special case of a Spatialite database. In particular, a specific schema or set of conventions will be used to ensure a given virtual layer file is correctly defined, like the way Spatialite adds some particular metadata tables to a regular SQLite database.
 
 #. Implementation Details
 -------------------------
@@ -150,9 +152,11 @@ For the main methods of the QgsVectorDataProvider API, the following behaviour i
 *   **createSpatialIndex()**: call to Spatialite's CreateSpatialIndex
 *   **createAttributeIndex()**: does nothing
 
+SQL queries for updating / adding / deleting data could be set to some simple defaults for simple virtual layers.
+
 In link with this provider, a SQLite extension module able to handle virtual layer will be developed
 
-* offering a complete Spatialite geometric view from QGIS data sources implies to return a BLOB for geometries formatted with the internal Spatialite format for geometries. The Python API regarding virtual tables support is too limited to implement that.
+* offering a complete Spatialite geometric view from QGIS data sources implies to return a BLOB for geometries formatted with the internal Spatialite format for geometries. The Python API regarding virtual tables support is too limited to implement that for test purposes.
 
 #.# Example(s)
 ..............
@@ -165,6 +169,7 @@ Using the simple interface described above, the new provider will execute someth
     CREATE VIRTUAL TABLE polygon_layer_vl USING QgsVirtualVectorLayer('postgis',"'dbname='countries' port=5432 user='gis' srid=3857 type=POINT table="public"."countries" (geom) sql='");
     CREATE VIEW virtual_layer AS SELECT b.id, b.geometry where Contains(b.geom, a.geom) FROM point_layer_vl AS a, polygon_layer_vl AS b;
     INSERT INTO geometry_columns ...
+    CREATE TRIGGER ... INSTEAD OF UPDATE OF ...
 
 
 #.# Python Bindings
@@ -182,7 +187,7 @@ UI side, a first simple interface to the creation of a virtual layer will be pro
    
 A new option will be added to automatically create a virtual layer for the list of selected layers (either by right click or via a menu entry).
 
-Integration to the DB Manager is also planned.
+Integration to the DB Manager is also planned, where one could drag and drop a QGIS layer to create a virtual layer out of it.
 
 Virtual layers could be marked in the legend with some special icons (?)
 
@@ -204,12 +209,14 @@ Virtual layers could be marked in the legend with some special icons (?)
 #. Further Considerations/Improvements
 --------------------------------------
 
-From a end-user point of view, a first concrete application of the virtual layer mechanism is planned regarding the ability to filter a layer that has some 'joins' defined. Since filtering is not supported for joined fields, a virtual layer will be transparently created in that case.
+From a end-user point of view, a first concrete application of the virtual layer mechanism is planned regarding the ability to filter a layer that has some 'joins' defined. Since filtering is not supported for joined fields, a virtual layer will be transparently created in that case. This would allow the user to define SQL-WHERE filters on such joined layers.
 
 Open discussions :
 
-* Since update queries are possible on virtual layers, should the "joins" properties of a layer be replaced by the use of a virtual layer underneath ? (without changing the existing UI)
-* same question with "relations" ?
+* Should the "joins" properties of a layer be replaced by the use of a virtual layer underneath ? (without changing the existing UI)
+* Same question with "relations" ?
+* More generally, with such a virtual layer mechanism in place, the existing code of data providers could also be ported to SQLite modules. Any data source would then be seen as a virtual layer and could be easily joined to other sources.
+* Virtual layers are for now thought as views that do not store any data on their own. But since Spatialite allows to add tables and store data in them, a generalization of the concept could be discussed that would pave the way for a generic native format for QGIS.
 
 #. Restrictions
 ---------------
