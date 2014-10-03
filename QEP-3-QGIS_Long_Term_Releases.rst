@@ -34,17 +34,11 @@ Proposed Change
 
 It is proposed to adopt the following workflow for the release cycle:
 
-1. We will add a new branch 'stable' which will contain the current stable
-   release.
+1. We will add a new branch 'stable' which will contain the current stable release.
 1. The existing cadence of 3 releases per annum will be continued
-1. Each 3rd release will be designated a long term release (LTR), which will be
-   supported for the year that follows.
-1. The feature / freeze window for the LTR will be an inversion of the normal
-   release, with a 1 month feature addition window and a 3 month feature freeze
-   for documenting the new release and stabilising it.
-1. On a monthly basis a bug fix release will be made. This will be conditional
-   on there being one or more commits to the release branch within that
-   month period.
+1. Each 3rd release will be designated a long term release (LTR), which will be supported for the year that follows.
+1. The feature / freeze window for the LTR will be an inversion of the normal release, with a 1 month feature addition window and a 3 month feature freeze for documenting the new release and stabilising it.
+1. On a monthly basis a bug fix release will be made. This will be conditional on there being one or more commits to the release branch within that month period.
 1. Developers will be invited to backport bug fixes to the stable branch
 
 
