@@ -58,7 +58,7 @@ For a discussion of the different options, please see the slides of the presenta
 
 The proposed solution is to load Python plugins and start them when FCGI application starts.
 
-Server-enabled plugins will be created calling a ``serverClassFactory(iface)`` method with a ``serverInterface`` object as parameter.
+Server-enabled plugins will be created calling a ``serverClassFactory(iface)`` method with a ``QgsServerInterface`` object as parameter.
 
 The plugins will then listen to signals coming from the loop and will be able to manipulate input and output of existing core services and provide new services by calling methods of an ``QgsServerInterface`` object.
 
