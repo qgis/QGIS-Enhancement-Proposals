@@ -40,6 +40,7 @@ It is proposed to adopt the following workflow for the release cycle:
 * The feature / freeze window for the LTR will be an inversion of the normal release, with a 1 month feature addition window and a 3 month feature freeze for documenting the new release and stabilising it.
 * On a monthly basis a bug fix release will be made. This will be conditional on there being one or more commits to the release branch within that month period.
 * Developers will be invited to backport bug fixes to the stable branch
+* Documentation team will only release the documentation once per annum - for the LTR - and spend their time during the year documenting new features as they arrive in git, and then the three month freeze window polishing the documentation to be ready with the release.
 
 
 Further Considerations
