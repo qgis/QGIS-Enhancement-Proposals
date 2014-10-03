@@ -23,7 +23,7 @@ QGIS Enhancement 3: Long term releases
 Summary
 -------
 
-This proposal is aimed at providing more stable (as is seldom changing) releases
+This proposal is aimed at providing more stable (as in seldom changing) releases
 of QGIS for corporate and institutional users who prefer a slower release
 cycle with a more stable version of QGIS that receives bug fix updates
 over the life of the release.
