@@ -65,6 +65,8 @@ follows:
   broken and the patch fixes it.
 * The patch should not change the user interface except in cases where
   there is an error in the user interface and the patch fixes it.
+  
+.. note:: No new features will be allowed in the LRT after it is released.
 
 
 Documentation
