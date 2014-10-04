@@ -32,6 +32,9 @@ over the life of the release.
 Proposed Change
 ---------------
 
+General procedure
+.................
+
 It is proposed to adopt the following workflow for the release cycle:
 
 * We will add a new branch 'stable' which will contain the current stable release.
@@ -42,7 +45,20 @@ It is proposed to adopt the following workflow for the release cycle:
 * Developers will be invited to backport bug fixes to the stable branch
 * Documentation team will only release the documentation once per annum - for the LTR - and spend their time during the year documenting new features as they arrive in git, and then the three month freeze window polishing the documentation to be ready with the release.
 
-.. image:: https://cloud.githubusercontent.com/assets/178003/4515952/4ef9849a-4bda-11e4-9f1d-d4d7e60ea111.png
+
+
+Workflow implications
+.....................
+
+.. image:: https://cloud.githubusercontent.com/assets/178003/4516523/88f435d4-4bfb-11e4-803b-79b64fb8aa33.png
+
+The diagram above illustrates the proposed workflow. The major impact will be on packaging (which is described below) 
+but there will also be implications on the general git workflow. In particular we will need to maintain more branches
+and developers will need to be conscious of which branch fixes etc. need to be ported to.
+
+Packaging implications
+......................
+
 
 
 Further Considerations
