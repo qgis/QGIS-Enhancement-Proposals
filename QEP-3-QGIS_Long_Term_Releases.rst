@@ -116,7 +116,7 @@ follows:
 Documentation
 -------------
 
-This QEP serves as the documentation for the LRT procedure, and will be migrated
+This QEP serves as the documentation for the LTR procedure, and will be migrated
 to the project governance documentation.
 
 Issue Tracking ID(s)
