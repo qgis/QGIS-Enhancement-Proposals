@@ -56,6 +56,16 @@ The diagram above illustrates the proposed workflow. The major impact will be on
 but there will also be implications on the general git workflow. In particular we will need to maintain more branches
 and developers will need to be conscious of which branch fixes etc. need to be ported to.
 
+At any given time there will be three active branches:
+ 
+* *the master branch* - this is where all new code should arrive into the code base.
+* *the community release branch* - this will be branched from the master branch every four months. The community
+  releases will be for giving users early access to new features in a known version of QGIS. Bug fixes will be 
+  made against the community release branch for the duration of their validity.
+* *the long term release branch* - this will be branched from the community release branch after the first patch level
+  release or 1 month, whichever is the soonest.
+
+
 Packaging implications
 ......................
 
