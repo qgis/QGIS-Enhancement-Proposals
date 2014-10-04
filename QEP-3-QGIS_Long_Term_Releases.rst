@@ -61,13 +61,29 @@ At any given time there will be three active branches:
 * *the master branch* - this is where all new code should arrive into the code base.
 * *the community release branch* - this will be branched from the master branch every four months. The community
   releases will be for giving users early access to new features in a known version of QGIS. Bug fixes will be 
-  made against the community release branch for the duration of their validity.
+  made against the community release branch for the duration of their validity. The branch shall be named 
+  by the major and minor components of the release number e.g. **2.6**.
 * *the long term release branch* - this will be branched from the community release branch after the first patch level
-  release or 1 month, whichever is the soonest.
+  release or 1 month, whichever is the soonest. The branch shall be named based on the community branch from which
+  it is derived with an additional 'LTR' suffix e.g. **2.6LTR**. The branch shall exist for 1 year, wherapon the next
+  Long Term Release shall be made.
 
 
 Packaging implications
 ......................
+
+Unfortunately this rather simple proposal has rather large implications for packaging. 5 types of 
+packages will be made available as part of our official QGIS packaging effort:
+
+1) **Developer nightly packages.** These packages will be built on a nightly basis against the **master** branch.
+   They are intended to provide early adopters and testers with easy access to an installer that they can use
+   to test upcoming features and new fixes to issues in the development branch.
+2) **Community nightly packages.** These packages will be built on a nightly basis against the community release
+   branch. They are intended to provide testers and folks doing QA with a platform to test the upcoming community 
+   patch level release against the community branch.
+3)
+4)
+5)
 
 
 
