@@ -42,6 +42,8 @@ It is proposed to adopt the following workflow for the release cycle:
 * Developers will be invited to backport bug fixes to the stable branch
 * Documentation team will only release the documentation once per annum - for the LTR - and spend their time during the year documenting new features as they arrive in git, and then the three month freeze window polishing the documentation to be ready with the release.
 
+.. image:: https://cloud.githubusercontent.com/assets/178003/4515952/4ef9849a-4bda-11e4-9f1d-d4d7e60ea111.png
+
 
 Further Considerations
 ----------------------
