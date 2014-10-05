@@ -81,7 +81,7 @@ packages will be made available as part of our official QGIS packaging effort:
 2) **Latest Release nightly packages.** These packages will be built on a nightly basis against the latest release
    branch. They are intended to provide testers and folks doing QA with a platform to test the upcoming even numbered 
    patch level release against the latest release branch.
-3)**Latest Release packages.** These are release packages made at a fixed 4 month interval. They represent a snapshot
+3) **Latest Release packages.** These are release packages made at a fixed 4 month interval. They represent a snapshot
    of the development version with new features and an incremental feature release. The packages are released after a
    freeze period and in terms of stability reflect the second most stable packages we offer (after LTR packages).
 4) **LTR nightly packages.** These are preview packages for the impending LTR patch level release. They are intended
