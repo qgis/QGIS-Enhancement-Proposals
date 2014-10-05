@@ -50,7 +50,7 @@ It is proposed to adopt the following workflow for the release cycle:
 Workflow implications
 .....................
 
-.. image:: https://cloud.githubusercontent.com/assets/178003/4516523/88f435d4-4bfb-11e4-803b-79b64fb8aa33.png
+.. image:: https://cloud.githubusercontent.com/assets/178003/4518480/d3379e26-4c8f-11e4-864b-509a07968067.png
 
 The diagram above illustrates the proposed workflow. The major impact will be on packaging (which is described below) 
 but there will also be implications on the general git workflow. In particular we will need to maintain more branches
