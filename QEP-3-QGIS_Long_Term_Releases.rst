@@ -50,7 +50,7 @@ It is proposed to adopt the following workflow for the release cycle:
 Workflow implications
 .....................
 
-.. image:: https://cloud.githubusercontent.com/assets/178003/4518480/d3379e26-4c8f-11e4-864b-509a07968067.png
+.. image:: https://cloud.githubusercontent.com/assets/178003/4607065/ae1c0956-523e-11e4-95d9-cea1a3429faf.png
 
 The diagram above illustrates the proposed workflow. The major impact will be on packaging (which is described below) 
 but there will also be implications on the general git workflow. In particular we will need to maintain more branches
@@ -59,12 +59,12 @@ and developers will need to be conscious of which branch fixes etc. need to be p
 At any given time there will be three active branches:
  
 * *the master branch* - this is where all new code should arrive into the code base.
-* *the community release branch* - this will be branched from the master branch every four months. The community
+* *the release branch* - this will be branched from the master branch every four months. The non LTR
   releases will be for giving users early access to new features in a known version of QGIS. Bug fixes will be 
-  made against the community release branch for the duration of their validity. The branch shall be named 
+  made against the release branch for the duration of their validity. The branch shall be named 
   by the major and minor components of the release number e.g. **2.6**.
-* *the long term release branch* - this will be branched from the community release branch after the first patch level
-  release or 1 month, whichever is the soonest. The branch shall be named based on the community branch from which
+* *the long term release (LTR) branch* - this will be branched from the community release branch after the first patch level
+  release or 1 month, whichever is the soonest. The branch shall be named based on the branch from which
   it is derived with an additional 'LTR' suffix e.g. **2.6LTR**. The branch shall exist for 1 year, wherapon the next
   Long Term Release shall be made.
 
