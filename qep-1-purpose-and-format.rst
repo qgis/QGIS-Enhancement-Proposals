@@ -4,11 +4,11 @@
 QGIS Enhancement 1: QGIS QEP process definition
 ========================================================================
 
-:Date: 2014/08/26
+:Date: 2014/10/13
 :Author: Nathan Woodrow
 :Contact: woodrow dot nathan at gmail dot com
 :Author: Pirmin Kalberer
-:Status:  Draft
+:Status:  Final Draft
 :Version: QGIS All
 
 Summary
@@ -38,15 +38,29 @@ Process
 
 In brief the project team votes on proposals submitted as pull requests on this git repository.
 
+Once a pull request is open it will be assigned a number by the QEP manager. This number will be reflected in the QEP document, pull request header, and wiki list of past and current QEPs.
+
 Detailed Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Proposals are written up and submitted as pull requests on this git repository and announced on the qgis-developer mailing list.
-- Proposals are open for discussion and feedback by any interested party, not just committee members, however only votes by PSC members count for approval or denial of the proposal
+- Proposals are assigned a QEP number be the manager.
+- Proposals are open for discussion and feedback by any interested party, not just committee members (only votes by PSC members count for approval or denial of the proposal in the voting round)
 - While in `Draft` a QEP can be open with no time limit as the idea evolves.
 - Once in `Final Draft` no major changes should take place in the QEP.  Only final draft QEPs can be voted on.
 - Complex QEPs are recommended to stay in draft for longer then simple ones in order for community feedback and support to collected.
 - A QEP can **only** move from `Draft` to `Final Draft` via the QEP Manager
+
+Final Draft
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A QEP in final draft should not under go any major changes as it considered stable at this point. 
+
+Depending on the scale of the QEP it may sit in Final Draft mode for at least seven (7) days before being called for voting.
+
+If not comments are left, affecting the proposal, during the seven day period a QEP will be called for voting.
+
+Asking for more time to review and comment on a QEP, even if in draft and final draft mode, is acceptable. However it will be up to the QEP manager to decide if  something is dragging on with no meaningful feedback.
 
 Voting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -92,7 +106,7 @@ The community and PSC can also call on the manager to promote/demote a QEP.
 Miscellaneous
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The document is an adapted version of the GDAL/MapServer RFC process.
+The document is an partly adapted version of the GDAL/MapServer RFC process.
 
 .. note::
 
