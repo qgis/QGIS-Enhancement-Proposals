@@ -45,11 +45,14 @@ Detailed Process
 - Proposals are open for discussion and voting by any interested party, not just committee members, however votes by non PSC members only count as support for the idea not in the final score.
 - Anyone may comment on proposals on the pull request, but only members of the Project Steering Committee's votes will be counted.
 - While in a draft stage a QEP can be open with no time limit as the idea evolves.
- 
+- Complex QEPs are recommended to stay in draft for longer then simple ones in order for feedback to collected.
+- QEP's which jump to final draft and voting might risk rejecting if to complex or not detailed enough
+
 
 Voting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+- The QEP manager will make the offical call for voting on PSC list. 
 - Voting can only take place once the QEP is in final draft mode 
 - Voting is only open for seven days
 
@@ -61,9 +64,24 @@ Only the PSC can take a final vote on the proposal before it is accepted.  The v
 	- 0 indicates no opinion
 	- +0 indicate mild support, but has no effect.
 
-- A proposal will be accepted if it receives +3 (including the proposer) and no vetos (-1).
+- A proposal will be accepted if it receives +3 and no vetos (-1).
 - Upon completion of discussion and voting the proposer should announce whether they are proceeding (proposal accepted) or are withdrawing their proposal (vetoed).
-- The Chair adjudicates in cases of disputes about voting. 
+- The Chair adjudicates in cases of disputes about voting.
+
+QEP Manager
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Current Manager: Nathan Woodrow
+
+The QEP manager controls the flow of QEPs that are in the work and the overall system.
+
+The QEP manager has the following rights:
+
+- Make the offical call for voting on PSC list. 
+- Move a QEP from `Draft` to `Final Draft` (normally with support from community) [1]
+- Move a QEP from `Final Draft` to `Draft` if not enough information is provided [1]
+
+[1] The communith and PSC can also call on the manager to promote/demote a QEP 
 
 Miscellaneous
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
