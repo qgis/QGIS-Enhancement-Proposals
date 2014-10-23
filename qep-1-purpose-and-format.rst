@@ -64,6 +64,7 @@ Only the PSC can take a final vote on the proposal before it is accepted.  The v
 	- +0 indicate mild support, but has no effect.
 
 - A proposal will be accepted if it receives +3 and no vetos (-1).
+- If a QEP 
 - Upon completion of discussion and voting the proposer should announce whether they are proceeding (proposal accepted) or are withdrawing their proposal (vetoed).
 - The Chair adjudicates in cases of disputes about voting.
 
