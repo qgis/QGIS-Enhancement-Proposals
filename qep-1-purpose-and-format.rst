@@ -42,8 +42,7 @@ Detailed Process
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 - Proposals are written up and submitted as pull requests on this git repository and announced on the qgis-developer mailing list.
-- Proposals are open for discussion and voting by any interested party, not just committee members, however votes by non PSC members only count as support for the idea not in the final score.
-- Anyone may comment on proposals on the pull request, but only members of the Project Steering Committee's votes will be counted.
+- Proposals are open for discussion and feedback by any interested party, not just committee members, however only votes by PSC members count for approval or denial of the proposal
 - While in a draft stage a QEP can be open with no time limit as the idea evolves.
 - Complex QEPs are recommended to stay in draft for longer then simple ones in order for feedback to collected.
 - QEP's which jump to final draft and voting might risk rejecting if to complex or not detailed enough
