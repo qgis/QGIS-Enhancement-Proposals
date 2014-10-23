@@ -71,9 +71,9 @@ Voting
 
 Only the PSC can take a final vote on the proposal.  The voting weights are as follows:
 
-	- +1 to indicate support for the proposal.
-	- 0 indicates no opinion
-	- -1 to veto a proposal, but must provide clear reasoning.
+- +1 to indicate support for the proposal.
+- 0 indicates no opinion
+- -1 to veto a proposal, but must provide clear reasoning.
 
 - Accepted if it receives no more then -2
 - Back into `Draft` if all 0 votes are cast - all 0 votes in this case indicate no strong support, but no strong veto arguments.  This might indicate the QEP requires more changes for PSC acceptance.   
