@@ -43,31 +43,34 @@ Detailed Process
 
 - Proposals are written up and submitted as pull requests on this git repository and announced on the qgis-developer mailing list.
 - Proposals are open for discussion and feedback by any interested party, not just committee members, however only votes by PSC members count for approval or denial of the proposal
-- While in a draft stage a QEP can be open with no time limit as the idea evolves.
-- Complex QEPs are recommended to stay in draft for longer then simple ones in order for feedback to collected.
-- QEP's which jump to final draft and voting might risk rejecting if to complex or not detailed enough
-
+- While in `Draft` a QEP can be open with no time limit as the idea evolves.
+- Once in `Final Draft` no major changes should take place in the QEP.  Only final draft QEPs can be voted on.
+- Complex QEPs are recommended to stay in draft for longer then simple ones in order for community feedback and support to collected.
+- A QEP can **only** move from `Draft` to `Final Draft` via the QEP Manager
 
 Voting
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-- The QEP manager will make the offical call for voting on PSC list. 
+- The QEP manager will make the official call for voting on PSC list. 
 - Voting can only take place once the QEP is in final draft mode 
 - Voting is only open for seven days
 
-Only the PSC can take a final vote on the proposal before it is accepted.  The voting weights are as follows:
+Only the PSC can take a final vote on the proposal.  The voting weights are as follows:
 
-	- +1 to indicate support for the proposal and a willingness to support implementation.
+	- +1 to indicate support for the proposal.
 	- 0 indicates no opinion
-	- -1 to veto a proposal, but must provide clear reasoning and alternate approaches to resolving the problem within the seven days.
+	- -1 to veto a proposal, but must provide clear reasoning.
 
- No more then 2 * -1 votes
+- Accepted if it receives no more then -2
+- Back into `Draft` if all 0 votes are cast - all 0 votes in this case indicate no strong support, but no strong veto arguments.  This might indicate the QEP requires more changes for PSC acceptance.   
+- Back into `Draft` if more then -2 votes are cast. Comments should be taken on board when back in draft mode. 
+- A `Draft` QEP with more then -2 can be fully rejected at the discretion of the PSC e.g QEP to change licence would be fully rejected as it will not happen.  
 
-- A proposal will be accepted if it 
+Upon completion of discussion and voting the proposer should announce whether they are:
 
-- If a QEP 
-- Upon completion of discussion and voting the proposer should announce whether they are proceeding (proposal accepted) or are withdrawing their proposal (vetoed).
-- The Chair adjudicates in cases of disputes about voting.
+- proceeding (proposal accepted) 
+- fully withdrawing their proposal (vetoed).
+- reviewing their proposal (vetoed or all 0 votes).
 
 QEP Manager
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -78,11 +81,13 @@ The QEP manager controls the flow of QEPs that are in the work and the overall s
 
 The QEP manager has the following rights:
 
-- Make the offical call for voting on PSC list. 
-- Move a QEP from `Draft` to `Final Draft` (normally with support from community) [1]
-- Move a QEP from `Final Draft` to `Draft` if not enough information is provided [1]
+- Make the offical call for voting on PSC list on QEP.
+- Move a QEP from `Draft` to `Final Draft` 
+- Move a QEP from `Final Draft` to `Draft`
 
-[1] The community and PSC can also call on the manager to promote/demote a QEP 
+All actions are normally done when there is support from the community to do so.
+
+The community and PSC can also call on the manager to promote/demote a QEP. 
 
 Miscellaneous
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
