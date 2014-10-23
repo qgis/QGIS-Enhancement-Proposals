@@ -71,14 +71,19 @@ Voting
 
 Only the PSC can take a final vote on the proposal.  The voting weights are as follows:
 
-- +1 to indicate support for the proposal.
-- 0 indicates no opinion
-- -1 to veto a proposal, but must provide clear reasoning.
+   - +1 to indicate support for the proposal.
+   - 0 indicates no opinion
+   - -1 to veto a proposal, but must provide clear reasoning.
 
-- Accepted if it receives no more then -2
-- Back into `Draft` if all 0 votes are cast - all 0 votes in this case indicate no strong support, but no strong veto arguments.  This might indicate the QEP requires more changes for PSC acceptance.   
-- Back into `Draft` if more then -2 votes are cast. Comments should be taken on board when back in draft mode. 
+After voting the rules are as follows:
+
+- **Rejected** and back into `Draft` if more then -2 votes are cast
+- **Accepted** if majority of non zero votes are +1 and no more then -2 votes have been cast.
+- **Draft** if all 0 votes are cast - all 0 votes in this case indicate no strong support, but no strong veto arguments.  This might indicate the QEP requires more changes for PSC acceptance.   
+
 - A `Draft` QEP with more then -2 can be fully rejected at the discretion of the PSC e.g QEP to change licence would be fully rejected as it will not happen.  
+
+*Note:* Comments should be taken on board when back in draft mode. 
 
 Upon completion of discussion and voting the proposer should announce whether they are:
 
