@@ -81,7 +81,7 @@ The QEP manager has the following rights:
 - Move a QEP from `Draft` to `Final Draft` (normally with support from community) [1]
 - Move a QEP from `Final Draft` to `Draft` if not enough information is provided [1]
 
-[1] The communith and PSC can also call on the manager to promote/demote a QEP 
+[1] The community and PSC can also call on the manager to promote/demote a QEP 
 
 Miscellaneous
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
