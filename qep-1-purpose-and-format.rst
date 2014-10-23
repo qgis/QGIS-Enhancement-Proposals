@@ -48,7 +48,7 @@ Detailed Process
 - Proposals are open for discussion and feedback by any interested party, not just committee members (only votes by PSC members count for approval or denial of the proposal in the voting round)
 - While in `Draft` a QEP can be open with no time limit as the idea evolves.
 - Once in `Final Draft` no major changes should take place in the QEP.  Only final draft QEPs can be voted on.
-- Complex QEPs are recommended to stay in draft for longer then simple ones in order for community feedback and support to collected.
+- Complex QEPs are recommended to stay in draft for longer than simple ones in order for community feedback and support to collected.
 - A QEP can **only** move from `Draft` to `Final Draft` via the QEP Manager
 
 Final Draft
