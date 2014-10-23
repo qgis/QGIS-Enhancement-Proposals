@@ -10,7 +10,7 @@ QGIS Enhancement 3: Long term releases
 :Author: -
 :Contact: -
 :Last Edited: 2014/10/03
-:Status:  Draft
+:Status:  Final Draft
 :Supercedes: -
 :Version: QGIS 2.X
 :Sponsor:
