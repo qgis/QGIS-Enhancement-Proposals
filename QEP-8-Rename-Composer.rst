@@ -49,7 +49,7 @@ friendlier sounding names for these features.
 #. Implementation Details
 -------------------------
 
-- Rename user visible strings for 2.8:
+- User visible strings will be renamed:
 
     - "Composition" -> "Print Layout"
     - "Print Composer" -> either "Print Layout" or "Layout Designer",
@@ -57,20 +57,6 @@ depending on the context. Currently "Print Composer" is used inconsistently.
     - "Composer" -> "Layout Designer"
     - "Composer Manager" -> "Layout Manager"
    
-- For QGIS 3.0 and the next api break, rename internal classes and methods:
-
-    - QgsComposition -> QgsPrintLayout (inheriting from QgsLayout)
-    - QgsComposerItem (and subclasses) -> QgsLayoutItem
-    - QgsComposerView - > QgsLayoutView
-    - QgsComposer -> QgsLayoutDesigner
-
-#. Further Considerations/Improvements
---------------------------------------
-
-Feedback is requested as to whether or not the qgs project file format
-should also be updated to reflect this change for QGIS 3.0, which would
-break backwards compatibility with earlier QGIS versions.
-
 #. Documentation
 ----------------
 
