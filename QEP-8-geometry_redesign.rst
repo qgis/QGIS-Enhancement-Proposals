@@ -57,11 +57,13 @@ For geometry analysis and some edit methods, QGIS uses the geos library. As geos
 The UML diagram of the proposed solution contains the following elements:
 
 - QgsGeometry has the same API as the current class. Internally, it holds a pointer to the new geometry class and redirects calls to it. To avoid performance overhead, QgsGeometry uses implicitely sharing. 
-- QgsAbstractGeometryV2 is the base class of the new geometry classes.
+- QgsAbstractGeometryV2 is the base class of the new geometry classes. Instantiable classes are QgsPointV2, QgsLineStringV2, QgsCircularStringV2,QgsCompoundCurveV2, QgsCurvePolygonV2, QgsPolygonV2, QgsGeometryCollectionV2, QgsMultiPointV2, QgsMultiSurfaceV2, QgsMultiCurveV2
 - QgsVectorTopology / QgsGeos handles analytical operations like buffer/union/intersection, etc. as well as import/export between geometry classes and geos. All this code is separated from the geometry classes now.
 
-Changes in rendering: todo...
+4.1 Changes in rendering
+-------------------------
+To decouple the rendering from the geometry system, each geometry class provides the methods 'transform( QgsCoordinateTransform )', 'mapToPixel( QgsMapToPixel )', 'draw( QPainter )'. So normal symbol layers don't need to query / transform the geometry anymore. Symbol layers with a very special geometric behaviour can still call QgsGeometry::convertToStraightSegment() and work like now.
 
-
+One difference to the current code is that the geometry is changed in place during rendering. QgsFeatureRendererV2::renderFeature(...) transforms the geometry of a feature into pixel coordinates. I think this is ok, because QgsFeature is not a const argument. So the caller cannot assume there is no change to the feature.
 
 
