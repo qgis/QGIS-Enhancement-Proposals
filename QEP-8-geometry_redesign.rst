@@ -5,7 +5,7 @@ QGIS Enhancement 8: Geometry redesign
 ========================================================================
 
 :Date: 2014/10/30
-:Author: Marco Hugenobler
+:Author: Marco Hugentobler
 :Contact: marco at sourcepole.ch
 :Last Edited: 2014/10/30
 :Status:  Draft
@@ -21,8 +21,8 @@ QGIS Enhancement 8: Geometry redesign
 
 The mmsql geometry standard describes some features not supported by the current geometry class:
 
-- Curved geometries (circles)
-- Compound types (compoundcurve, geometrycollection)
+- Curved geometries (circular arcs
+- Compound types (compoundcurve, curvepolygon, geometrycollection)
 - Z-coordinates
 - M-coordinates (e.g. used for linear referencing)
 
@@ -37,7 +37,7 @@ The following examples come to my mind (surely there are more):
 
 2. It is common to have 3D data in PostGIS. Currently, depending on the edit method used, it can happen that QGIS converts a geometry to 2D during editing. QGIS should at least preserve the existing z-Values if possible (e.g. if a vertex is moved to a new position). To achieve that, it needs an internal geometry representation that supports z-values. Maybe we will see more 3D plugins if storing z-coordinates is supported by the core library.
 
-3. Linear referencing is an important feature to avoid redundancy for geographic data. Currently, it is done with a hack in shapefile reading and evaluated in the analysis library (using event layer plugin as GUI). If the geometry model supports m-values, linear referencing can be solved properly and for all datasources which support m-values.
+3. Linear referencing is an important feature to avoid redundancy for geographic data. Currently, it is done either with views on DB side or, for shapefiles, interpreting z-values as m and then doing the computations in the analysis library (using event layer plugin as GUI). If the geometry model supports m-values, linear referencing can be solved properly and for all datasources which support m-values.
 
 3. Proposed solution
 ------------------------
@@ -59,7 +59,6 @@ The UML diagram of the proposed solution contains the following elements:
 - QgsAbstractGeometryV2 is the base class of the new geometry classes. Instantiable classes are QgsPointV2, QgsLineStringV2, QgsCircularStringV2,QgsCompoundCurveV2, QgsCurvePolygonV2, QgsPolygonV2, QgsGeometryCollectionV2, QgsMultiPointV2, QgsMultiSurfaceV2, QgsMultiCurveV2
 - QgsVectorTopology / QgsGeos handles analytical operations like buffer/union/intersection, etc. as well as import/export between geometry classes and geos. All this code is separated from the geometry classes now. The API has been further extened to prepare a geometry for better performance in case of repeaded topological operations.
 - In QgsAbstractGeometryV2 and subclasses, methods like 'draw()', 'transform()', 'mapToPixel()' and (in future) 'vertices()' are provided. The idea is that code (e.g. for rendering) calls these methods instead of having a switch over the geometry types and pulling out the vertices. Old code (or code for very special rendering operations) can still call asPolygon(), asPolyline() etc. and receives a segmentized geometry in case of curves. 
-- QgsGeometryImport 
 
 5. Performance implications
 ----------------------------
