@@ -9,10 +9,8 @@ QGIS Enhancement 8: Geometry redesign
 :Contact: marco at sourcepole.ch
 :Last Edited: 2014/10/30
 :Status:  Draft
-:Supercedes:
 :Version: QGIS 2.7
 :Sponsor: Canton of Solothurn, Switzerland
-:Sponsor URL:
 
 .. note::
 
@@ -22,10 +20,11 @@ QGIS Enhancement 8: Geometry redesign
 ----------
 
 The mmsql geometry standard describes some features not supported by the current geometry class:
-* Curved geometries (circles)
-* Compound types (compoundcurve, geometrycollection)
-* Z-coordinates
-* M-coordinates (e.g. used for linear referencing)
+
+- Curved geometries (circles)
+- Compound types (compoundcurve, geometrycollection)
+- Z-coordinates
+- M-coordinates (e.g. used for linear referencing)
 
 This QEP proposes a redesign of the geometry system to support these features. As a positive side effect, the code should be more flexible and easier maintainable (e.g. possibility to add new geometry types likes splines).
 
@@ -59,14 +58,15 @@ The UML diagram of the proposed solution contains the following elements:
 - QgsGeometry has the same API as the current class. Internally, it holds a pointer to the new geometry class and redirects calls to it. To avoid performance overhead, QgsGeometry uses implicitely sharing. 
 - QgsAbstractGeometryV2 is the base class of the new geometry classes. Instantiable classes are QgsPointV2, QgsLineStringV2, QgsCircularStringV2,QgsCompoundCurveV2, QgsCurvePolygonV2, QgsPolygonV2, QgsGeometryCollectionV2, QgsMultiPointV2, QgsMultiSurfaceV2, QgsMultiCurveV2
 - QgsVectorTopology / QgsGeos handles analytical operations like buffer/union/intersection, etc. as well as import/export between geometry classes and geos. All this code is separated from the geometry classes now. The API has been further extened to prepare a geometry for better performance in case of repeaded topological operations.
-
-4.1 Changes in rendering
--------------------------
-To decouple the rendering from the geometry system, each geometry class provides the methods 'transform( QgsCoordinateTransform )', 'mapToPixel( QgsMapToPixel )', 'draw( QPainter )'. So normal symbol layers don't need to query / transform the geometry anymore. Symbol layers with a very special geometric behaviour can still call QgsGeometry::convertToStraightSegment() and work like now.
-
-One difference to the current code is that the geometry is changed in place during rendering. QgsFeatureRendererV2::renderFeature(...) transforms the geometry of a feature into pixel coordinates. I think this is ok, because QgsFeature is not a const argument. So the caller cannot assume there is no change to the feature.
+- In QgsAbstractGeometryV2 and subclasses, methods like 'draw()', 'transform()', 'mapToPixel()' and (in future) 'vertices()' are provided. The idea is that code (e.g. for rendering) calls these methods instead of having a switch over the geometry types and pulling out the vertices. Old code (or code for very special rendering operations) can still call asPolygon(), asPolyline() etc. and receives a segmentized geometry in case of curves. 
+- QgsGeometryImport 
 
 5. Performance implications
 ----------------------------
 
-First tests indicate that the rendering performance can be similar to the current state (2.6). It is planned to do some testing with qgis_bench to avoid performance regressions. It will however be impossible to test all possible rendering option.
+First tests indicate that the rendering performance can be similar to the current state (2.6). It is planned to do some testing with qgis_bench to avoid significant performance regressions. It will however be impossible to test all possible rendering option.
+
+6. Test implementation
+----------------------------
+
+A test implementation is in the branch https://github.com/mhugent/Quantum-GIS/tree/geometry_mmsql . At the moment, it is incomplete, not fully tested and editing of geometries is completely disabled. It should however already give a hint about the direction of development.
