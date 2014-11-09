@@ -1,7 +1,7 @@
 .. _qep#[.#]:
 
 ========================================================================
-QGIS Enhancement 1: QGIS QEP process definition
+QGIS Enhancement 1: QEP process definition
 ========================================================================
 
 :Date: 2014/10/13
