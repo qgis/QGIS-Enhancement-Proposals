@@ -124,3 +124,14 @@ The document is an partly adapted from of the GDAL/MapServer RFC process.
 Voting history
 ------------------------------------------
 
+**+1**
+
+Gary Sherman
+Marco Hugentobler
+Tim Sutton
+Otto Dassau 
+Paolo Cavallini
+Anita Graser
+Richard Duivenvoorde
+Jürgen Fischer
+
