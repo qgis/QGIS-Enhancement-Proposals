@@ -126,12 +126,12 @@ Voting history
 
 **+1**
 
-Gary Sherman
-Marco Hugentobler
-Tim Sutton
-Otto Dassau 
-Paolo Cavallini
-Anita Graser
-Richard Duivenvoorde
-Jürgen Fischer
+- Gary Sherman
+- Marco Hugentobler
+- Tim Sutton
+- Otto Dassau 
+- Paolo Cavallini
+- Anita Graser
+- Richard Duivenvoorde
+- Jürgen Fischer
 
