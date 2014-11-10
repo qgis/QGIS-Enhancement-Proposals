@@ -1,14 +1,14 @@
 .. _qep#[.#]:
 
 ========================================================================
-QGIS RFC 2: QGIS Server Python Plugins
+QEP #2: QGIS Server Python Plugins
 ========================================================================
 
 :Date: 2014/09/04
 :Author: Alessandro Pasotti
 :Contact: apasotti at itopen dot it
-:Last Edited: 2014/09/05
-:Status:  Draft
+:Last Edited: 2014/11/10
+:Status:  Final
 :Version: QGIS 2.5
 
 .. note::
