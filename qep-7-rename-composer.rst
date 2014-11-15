@@ -59,11 +59,11 @@ Implementation Details
 -----------------------
 
 
-* User visible strings will be renamed:
+* User visible strings will be renamed for QGIS 3.0:
 
     * "Composition" -> "Print Layout"
-    * "Print Composer" -> either "Print Layout" or "Layout Designer",
-depending on the context. Currently "Print Composer" is used inconsistently.
+    * "Print Composer" -> either "Print Layout" or "Layout Designer", depending
+    on the context. Currently "Print Composer" is used inconsistently.
     * "Composer" -> "Layout Designer"
     * "Composer Manager" -> "Layout Manager"
    
