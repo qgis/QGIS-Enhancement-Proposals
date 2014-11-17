@@ -48,7 +48,7 @@ For editing, it is planned to adapt the 'add feature' tool with the possibility 
 
 For geometry analysis and some edit methods, QGIS uses the geos library. As geos does not support circular arcs, curved geometries are segmentised if using one of those methods.
 
-4. Implementation details
+4. Class design
 --------------------------
 
 .. image:: uml.png 
@@ -60,12 +60,32 @@ The UML diagram of the proposed solution contains the following elements:
 - QgsVectorTopology / QgsGeos handles analytical operations like buffer/union/intersection, etc. as well as import/export between geometry classes and geos. All this code is separated from the geometry classes now. The API has been further extened to prepare a geometry for better performance in case of repeaded topological operations.
 - In QgsAbstractGeometryV2 and subclasses, methods like 'draw()', 'transform()', 'mapToPixel()' and (in future) 'vertices()' are provided. The idea is that code (e.g. for rendering) calls these methods instead of having a switch over the geometry types and pulling out the vertices. Old code (or code for very special rendering operations) can still call asPolygon(), asPolyline() etc. and receives a segmentized geometry in case of curves. 
 
-5. Performance implications
+5. QgsAbstractGeometryV2 interface
+----------------------------------
+
+- Geometry access: code should, wherever possible, call methods of QgsAbstractGeometryV2 (e.g. call QgsAbstractGeometryV2::transform() instead of retrieving the coordinates and transform them). In cases the content of the geometry really needs to be retrieved, there are the following access methods:
+
+  - QgsPointV2::x(), QgsPointV2::y(), QgsPointV2::z(), QgsPointV2::m() to get the coordinates of a point. 
+  - QgsAbstractGeometryV2::is3D(), QgsAbstractGeometryV2::isMeasure() to test, if a geometry has z/m values.
+  - QgsAbstractGeometryV2::coordinateSequence( QList< QList< QList< QgsPointV2 > > >& coord ) retrieves the vertices for all geometry types
+  - QgsCurveV2::points( QList<QgsPointV2>& pt ) retrieves vertices of curves.
+  - QgsCurvePolygonV2::exteriorRing() and QgsCurvePolygonV2::exteriorRing() gets the rings for polygons
+  - QgsGeometryCollectionV2::geometryN( int i ) accesses the parts of multigeometries
+  
+- Geometry construction
+
+  - QgsPointV2( double x, double y, double m, double z )
+  - QgsLineStringV2::setPoints( const QList<QgsPointV2>& points ), QgsCircularStringV2::setPoints( const QList<QgsPointV2>& points )
+  - QgsCompoundCurveV2::addCurve( QgsCurveV2* c )
+  - QgsCurvePolygonV2::setExteriorRing( QgsCurveV2* ring ), QgsCurvePolygonV2::setInteriorRings( QList<QgsCurveV2*> rings )
+  - QgsGeometryCollectionV2::addGeometry( QgsAbstractGeometryV2* g )
+
+6. Performance implications
 ----------------------------
 
 First tests indicate that the rendering performance can be similar to the current state (2.6). It is planned to do some testing with qgis_bench to avoid significant performance regressions. It will however be impossible to test all possible rendering option.
 
-6. Test implementation
+7. Test implementation
 ----------------------------
 
 A test implementation is in the branch https://github.com/mhugent/Quantum-GIS/tree/geometry_mmsql . At the moment, it is incomplete, not fully tested and editing of geometries is completely disabled. It should however already give a hint about the direction of development.
