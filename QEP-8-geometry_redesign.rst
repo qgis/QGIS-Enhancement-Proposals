@@ -57,7 +57,7 @@ The UML diagram of the proposed solution contains the following elements:
 
 - QgsGeometry has the same API as the current class. Internally, it holds a pointer to the new geometry class and redirects calls to it. To avoid performance overhead, QgsGeometry uses implicitely sharing. 
 - QgsAbstractGeometryV2 is the base class of the new geometry classes. Instantiable classes are QgsPointV2, QgsLineStringV2, QgsCircularStringV2,QgsCompoundCurveV2, QgsCurvePolygonV2, QgsPolygonV2, QgsGeometryCollectionV2, QgsMultiPointV2, QgsMultiSurfaceV2, QgsMultiCurveV2
-- QgsVectorTopology / QgsGeos handles analytical operations like buffer/union/intersection, etc. as well as import/export between geometry classes and geos. All this code is separated from the geometry classes now. The API has been further extened to prepare a geometry for better performance in case of repeaded topological operations.
+- QgsGeometryEngine / QgsGeos handles analytical operations like buffer/union/intersection, etc. as well as import/export between geometry classes and geos. All this code is separated from the geometry classes now. The API has been further extened to prepare a geometry for better performance in case of repeaded topological operations.
 - In QgsAbstractGeometryV2 and subclasses, methods like 'draw()', 'transform()', 'mapToPixel()' and (in future) 'vertices()' are provided. The idea is that code (e.g. for rendering) calls these methods instead of having a switch over the geometry types and pulling out the vertices. Old code (or code for very special rendering operations) can still call asPolygon(), asPolyline() etc. and receives a segmentized geometry in case of curves. 
 
 5. QgsAbstractGeometryV2 interface
