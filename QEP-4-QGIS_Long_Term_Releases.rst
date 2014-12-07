@@ -1,7 +1,7 @@
 .. _qep3:
 
 
-QGIS Enhancement 3: Long term releases
+QGIS Enhancement 4: Long term releases
 ======================================
 
 :Date: 2014/10/03
