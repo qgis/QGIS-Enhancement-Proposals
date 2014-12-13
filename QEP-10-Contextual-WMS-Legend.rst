@@ -32,9 +32,10 @@ Mapserver: http://www.mapserver.org/development/rfc/ms-rfc-101.html
 Users shall be allowed to specify if they want to enable contextual
 legend in the WMS Layer configuration.
 
-Legend items for layers where contextual legend is enabled should be
-updated whenever the map setting changes.
-
+Legend items for WMS layers where contextual legend is enabled should
+be updated whenever the map setting changes, but only if their legend
+is visible and map-based filtering is also active for the whole
+layertree.
 
 #. Implementation Details
 -------------------------
