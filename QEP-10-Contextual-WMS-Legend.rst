@@ -56,8 +56,12 @@ the cache if the layer is configured to enable contextual wms legend support.
 
 The QgsLayerTreeModel will invoke invalidateMapBasedData() for each legend
 node left after filtering due to QgsLayerTreeModel::setLegendFilterByMap.
+(this part is not strictly related to the new feature, but would be a
+possible optimization).
 
-TODO: specify where layer configuration happens (tree or layer?)
+Layer configuration for enabling/disabling contextual WMS legend
+will be implemented at the provider level, similarly to configuration
+for tile size and image format.
 
 #.# Python Bindings
 ...................
