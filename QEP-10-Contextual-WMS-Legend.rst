@@ -41,11 +41,23 @@ layertree.
 #. Implementation Details
 -------------------------
 
+A new QgsLayerTreeModelLegendNode subclass specific to WMS legend
+will be added (QgsWMSLegendNode).
 
-#.# Example(s)
-..............
+The default raster layer legend tree model constructor will create an instance
+of the new QgsWMSLegendNode class when asked to create the legend nodes for
+raster layers using the WMS provider
+(QgsDefaultRasterLayerLegend::createLayerTreeModelLegendNodes).
 
-(optional)
+The QgsWMSLegendNode instances will lazily request the WMS legend when first
+asked for and cache it.
+The invalidateMapBasedData() virtual method of QgsWMSLegendNode will clear
+the cache if the layer is configured to enable contextual wms legend support.
+
+The QgsLayerTreeModel will invoke invalidateMapBasedData() for each legend
+node left after filtering due to QgsLayerTreeModel::setLegendFilterByMap.
+
+TODO: specify where layer configuration happens (tree or layer?)
 
 #.# Python Bindings
 ...................
