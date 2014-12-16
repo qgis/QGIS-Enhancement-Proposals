@@ -48,3 +48,59 @@ linear search to logarithmic). This should enable more interactive GUI functiona
 such as mouse over effects for various tools or continuous mode for identify tool
 (like Value Tool, not having to click on each feature).
 
+Detailed Design
+-----------------
+
+1. new class QgsPointLocator [core lib]
+
+   - operates on one vector layer, watches the layer for changes (added/changed/removed features)
+   - defines Match class for retrieving results
+   - builds data structures for efficient point location queries (R trees)
+   - supports queries for matches within tolerance (vertex/edge), k-nearest neighbors (vertex/edge), point in polygon
+   - supports reprojection (i.e. data may be indexed in different CRS)
+   - supports lazy indexing (unless needed for a request, data are not indexes)
+   - replacement for QgsSnapper
+
+2. new class QgsSnappingUtils [core lib]
+
+   - keeps a cache of QgsPointLocator classes
+   - snapToMap method: combine results from several QgsPointLocator instances according to setup
+   - two modes for snapToMap
+   
+       1. snap to current layer (with default snapping type and tolerance)
+       2. snap to all layers from configuration
+   - not directly connected to map canvas - need map settings and current layer to be explicitly set
+   - optional snapping on intersections
+   - client code can access locators
+   - configuration can be read from project (but does not need to be)
+   - replacement for QgsMapCanvasSnapper
+
+3. new class QgsMapCanvasSnappingUtils [gui lib]
+
+   - convenience class derived from QgsSnappingUtils
+   - keeps settings always updated from canvas
+
+4. new class QgsDigitizingUtils [core lib]
+
+   - routines for topological editing
+
+5. access to snapping utils in QgsMapCanvas
+
+   - new method snappingUtils() which returns associated snapping utils instance
+   - new method setSnappingUtils() for association of snapping utils
+   - main canvas in QGIS will come with pre-associated snapping utils that use the snapping config from QgsProject
+
+
+Indexing Strategy
+-----------------
+
+The plan is to index the whole layer. This can be done very efficiently with bulk loading of R-tree
+(with STR algorithm) compared to interative insertions - and the resulting structure is also more efficient.
+
+When layer is modified, the changes are detected with signal/slot mechanism and the indexes are updated.
+
+For each type of query (vertex / edge / area) there is a separate R-tree for more efficient lookups.
+
+- R-tree for vertices/edges stores individual points / edge's bounding boxes
+- R-tree for areas stores bounding boxes of individual polygons and their GEOS geometry
+
