@@ -10,6 +10,7 @@ QGIS Enhancement 10: Support for contextual WMS legend
 :Last Edited: 2014/12/13
 :Status:  Draft
 :Version: QGIS 2.7+
+:Sponsor: Regione Toscana, settore sistema informativo territoriale ed ambientale, Italy
 
 .. note::
 
