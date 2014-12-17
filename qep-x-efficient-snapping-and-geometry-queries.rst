@@ -48,8 +48,8 @@ linear search to logarithmic). This should enable more interactive GUI functiona
 such as mouse over effects for various tools or continuous mode for identify tool
 (like Value Tool, not having to click on each feature).
 
-Detailed Design
------------------
+Implementation Details
+----------------------
 
 1. new class QgsPointLocator [core lib]
 
@@ -90,6 +90,19 @@ Detailed Design
    - new method setSnappingUtils() for association of snapping utils
    - main canvas in QGIS will come with pre-associated snapping utils that use the snapping config from QgsProject
 
+The current snapping classes (QgsSnapper, QgsMapCanvasSnapper) will continue to exist for API compatibility
+until next major QGIS version, but QGIS code will not actively use them. With the new major version of QGIS
+the class QgsGeometryCache (used by snapping code) will be removed. (Note: the QgsGeometryCache class is
+used to speed up snapping by caching geometries in a map with feature IDs as keys and geometries as values.
+The cache is used only when a layer is in editing mode. On every re-render of map canvas the cache is regenerated
+based on current map view. It has very limitied use due to the used data structure and the way it is built.)
+
+The increased performance of queries makes it possible to simplify the code. The current snapping implementation
+recognizes few special modes (SnapWithResultsWithinTolerances, SnapWithResultsForSamePosition) that are necessary
+for extra functionality (topological editing, snapping on intersections) as they force the snapper to potentially
+add further results used for processing later. The new implementation does not use such modes - instead it is
+preferred to do another query when necessary for the processing. This keeps the code complexity low.
+
 
 Indexing Strategy
 -----------------
@@ -104,3 +117,42 @@ For each type of query (vertex / edge / area) there is a separate R-tree for mor
 - R-tree for vertices/edges stores individual points / edge's bounding boxes
 - R-tree for areas stores bounding boxes of individual polygons and their GEOS geometry
 
+
+Examples
+--------
+
+TODO
+
+Performance Implications
+------------------------
+
+It is expected that snapping performance will be sped up significantly.
+From some quick tests, the current snapping took ~30ms to find the closest vertex, while with new implementation
+needed only less than 1ms. This is because current snapping needs to hit data provider (if the layer is not in editing mode).
+
+There is some cost in initial indexing in QgsPointLocator. For a layer with ~50K points this took about 100ms.
+This is just one-time cost to build the index from data provider's features when queries are first needed.
+No extra cost when map is rendered.
+
+
+Test Coverage
+-------------
+
+New classes are designed in a way that they can be used in automatic tests easily. Core classes will have unit tests.
+
+
+Further Considerations
+----------------------
+
+TODO
+
+Backwards Compatibility
+-----------------------
+
+TODO
+
+
+Voting History
+--------------
+
+(required)
