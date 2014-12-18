@@ -4,10 +4,10 @@
 QGIS Enhancement #: Efficient Snapping and Geometry Queries
 ========================================================================
 
-:Date: 2014/12/03
+:Date: 2014/12/18
 :Author: Martin Dobias
 :Contact: wonder.sk at gmail dot com
-:Last Edited: 2014/12/03
+:Last Edited: 2014/12/18
 :Status:  Draft
 :Version: QGIS 2.8
 
