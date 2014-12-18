@@ -34,10 +34,10 @@ and leave extra features for higher level - to keep the querying core simple and
 
 The aim is to simplify the implementation to the following structure:
 
-1. low-level querying - for a set of geometries (typically one vector layer), find out the nearest
+1. **low-level querying** - for a set of geometries (typically one vector layer), find out the nearest
    vertex/segment or all near vertices/segments within tolerance.
-2. high-level querying - operates on top of several layers, combines results from lower level
-3. extra functionality - routines that are not directly related to querying, but are useful in context of snapping
+2. **high-level querying** - operates on top of several layers, combines results from lower level
+3. **extra functionality** - routines that are not directly related to querying, but are useful in context of snapping
    and are provided for user's convenience
 
 Currently the snapping uses either simple geometry cache or iterates over layers if cache is not available.
@@ -127,59 +127,54 @@ Examples
 
 1. snap to a point according to project's snapping settings::
 
-  ``
-  m = iface.mapCanvas().snappingUtils().snapToMap(QgsPoint(11,22))
+    m = iface.mapCanvas().snappingUtils().snapToMap(QgsPoint(11,22))
   
-  if not m.isValid():
-    print "no match!"
-    return
+    if not m.isValid():
+      print "no match!"
+      return
 
-  print "match: ", m.point(), m.distance(), m.layer(), m.featureId()
-  ``
+    print "match: ", m.point(), m.distance(), m.layer(), m.featureId()
 
-2. do queries on a particular layer
 
-```
-# get the point locator: uses map units
-locator = iface.mapCanvas().snappingUtils().locatorForLayer(layer)
+2. do queries on a particular layer::
 
-# find the nearest vertex and edge (no maximum tolerance)
-mV = locator.nearestVertex(QgsPoint(11,22))
-mE = locator.nearestEdge(QgsPoint(11,22))
+      # get the point locator: uses map units
+      locator = iface.mapCanvas().snappingUtils().locatorForLayer(layer)
+      
+      # find the nearest vertex and edge (no maximum tolerance)
+      mV = locator.nearestVertex(QgsPoint(11,22))
+      mE = locator.nearestEdge(QgsPoint(11,22))
+      
+      # find 5 nearest vertices and edges (no maximum tolerance)
+      lstV = locator.nearestVertices(QgsPoint(11,22), 5)
+      lstE = locator.nearestEdges(QgsPoint(11,22), 5)
+      
+      # find the nearest vertex within tolerance
+      lstV = locator.verticesInTolerance(QgsPoint(33,44), 10)
+      lstE = locator.edgesInTolerance(QgsPoint(33,44), 10)
+      
+      # find out in which polygons the point is located
+      for m in locator.pointInPolygon(QgsPoint(33,44)):
+        print "pt in polygon: ", m.featureId()
 
-# find 5 nearest vertices and edges (no maximum tolerance)
-lstV = locator.nearestVertices(QgsPoint(11,22), 5)
-lstE = locator.nearestEdges(QgsPoint(11,22), 5)
 
-# find the nearest vertex within tolerance
-lstV = locator.verticesInTolerance(QgsPoint(33,44), 10)
-lstE = locator.edgesInTolerance(QgsPoint(33,44), 10)
+3. custom point locator - useful for analytic tools working without map canvas::
 
-# find out in which polygons the point is located
-for m in locator.pointInPolygon(QgsPoint(33,44)):
-  print "pt in polygon: ", m.featureId()
-```
+      locator = QgsPointLocator(layer)
+      
+      m = locator.nearestVertex(QgsPoint(1,1))
 
-3. custom point locator - useful for analytic tools working without map canvas
+4. custom snapping utils - useful for analytic tools working without map canvas::
 
-```
-locator = QgsPointLocator(layer)
+      utils = QgsSnappingUtils()
+      utils.setMapSettings(settings)
+      utils.setSnapToMapMode(QgsSnappingUtils.SnapAdvanced)
+      cfg1 = QgsSnappingUtils.LayerConfig(layer1, QgsPointLocator.Vertex, 0.1, QgsTolerance.MapUnits)
+      cfg2 = QgsSnappingUtils.LayerConfig(layer2, QgsPointLocator.Edge, 0.2, QgsTolerance.MapUnits)
+      utils.setLayers([cfg1, cfg2])
+      
+      m = utils.snapToMap(QgsPoint(11,22))
 
-m = locator.nearestVertex(QgsPoint(1,1))
-```
-
-4. custom snapping utils - useful for analytic tools working without map canvas
-
-```
-utils = QgsSnappingUtils()
-utils.setMapSettings(settings)
-utils.setSnapToMapMode(QgsSnappingUtils.SnapAdvanced)
-cfg1 = QgsSnappingUtils.LayerConfig(layer1, QgsPointLocator.Vertex, 0.1, QgsTolerance.MapUnits)
-cfg2 = QgsSnappingUtils.LayerConfig(layer2, QgsPointLocator.Edge, 0.2, QgsTolerance.MapUnits)
-utils.setLayers([cfg1, cfg2])
-
-m = utils.snapToMap(QgsPoint(11,22))
-```
 
 Performance Implications
 ------------------------
