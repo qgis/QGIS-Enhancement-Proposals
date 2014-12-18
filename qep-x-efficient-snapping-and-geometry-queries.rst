@@ -197,12 +197,23 @@ New classes are designed in a way that they can be used in automatic tests easil
 Further Considerations
 ----------------------
 
-TODO
+Some notes for the possible future improvements:
+
+- it would be nice to support out of the box also ``QgsVectorLayerCache`` or any other object that can provide features
+
+- it may be useful to build the index data structures in a background thread so the main thread is not blocked
+
+- identify tool could make use of snapping utils for quick identification of features (on mouse hover)
+
+- it may be useful to have indexing limited to a particular extent for very large layers
+
+
 
 Backwards Compatibility
 -----------------------
 
-TODO
+The existing classes used for snapping (``QgsSnapper``, ``QgsMapCanvasSnapper``) are left unmodified.
+The new class ``QgsSnappingUtils`` is able to read the snapping configuration as used in existing project files.
 
 
 Voting History
