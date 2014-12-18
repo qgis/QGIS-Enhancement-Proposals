@@ -50,9 +50,8 @@ raster layers using the WMS provider
 (QgsDefaultRasterLayerLegend::createLayerTreeModelLegendNodes).
 
 The QgsWMSLegendNode instances will lazily request the WMS legend when first
-asked for and cache it.
-The invalidateMapBasedData() virtual method of QgsWMSLegendNode will clear
-the cache if the layer is configured to enable contextual wms legend support.
+asked for and cache it.  The invalidateMapBasedData() virtual method of
+QgsWMSLegendNode will clear the cache.
 
 The QgsLayerTreeModel will invoke invalidateMapBasedData() for each legend
 node left after filtering due to QgsLayerTreeModel::setLegendFilterByMap.
@@ -62,6 +61,13 @@ possible optimization).
 Layer configuration for enabling/disabling contextual WMS legend
 will be implemented at the provider level, similarly to configuration
 for tile size and image format.
+
+A virtual method to asynchronously fetch legend graphic will be added to
+the QgsRasterDataProvider class. The method will accept an optional pointer
+to a QgsMapSetting to fetch scale and (if supported) extent from. The
+method will return a newly created QgsImageFetcher object that will signal
+events on complete download, error and progress. The legend node will
+handle those events to update the legend item accordingly.
 
 #.# Python Bindings
 ...................
