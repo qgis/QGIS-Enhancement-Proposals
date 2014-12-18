@@ -69,7 +69,7 @@ Implementation Details
    - two modes for snapToMap
    
        1. snap to current layer (with default snapping type and tolerance)
-       2. snap to all layers from configuration
+       2. snap to all layers from configuration (advanced)
    - not directly connected to map canvas - need map settings and current layer to be explicitly set
    - optional snapping on intersections
    - client code can access locators
@@ -174,6 +174,16 @@ Examples
       utils.setLayers([cfg1, cfg2])
       
       m = utils.snapToMap(QgsPoint(11,22))
+
+
+GUI Changes
+-----------
+
+The snapping settings dialog will be updated to support the new mode "snap to current layer".
+The new mode will be the default.
+The user will be able to choose snapping type and tolerance.
+The existing snapping settings (with a table listing individual layers) will be marked as "advanced" mode.
+
 
 
 Performance Implications
