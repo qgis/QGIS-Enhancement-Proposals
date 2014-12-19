@@ -64,50 +64,37 @@ for tile size and image format.
 
 A virtual method to asynchronously fetch legend graphic will be added to
 the QgsRasterDataProvider class. The method will accept an optional pointer
-to a QgsMapSetting to fetch scale and (if supported) extent from. The
-method will return a newly created QgsImageFetcher object that will signal
-events on complete download, error and progress. The legend node will
-handle those events to update the legend item accordingly.
-
-#.# Python Bindings
-...................
-
-(required if applicable)
+to a QgsMapSetting and return a newly created QgsImageFetcher object that
+will signal events on complete download, error and progress.
+The legend node will handle those events to update the legend item accordingly.
 
 #.# Affected Files
 ..................
 
-(required if applicable)
-
-#. Test Coverage
-----------------
-
-(required for technical solutions/changes if applicable)
+ src/app/qgisapp.cpp                                |   4 +-
+ src/core/layertree/qgslayertreemodel.cpp           |  10 ++-
+ src/core/layertree/qgslayertreemodel.h             |   2 +-
+ src/core/layertree/qgslayertreemodellegendnode.cpp | 121 ++++++++++++++++++++++++++++
+ src/core/layertree/qgslayertreemodellegendnode.h   |  45 +++++++++++
+ src/core/qgsmaplayerlegend.cpp                     |   7 +-
+ src/core/raster/qgsrasterdataprovider.h            |  58 +++++++++++++-
+ src/providers/wms/qgswmscapabilities.cpp           |   3 +
+ src/providers/wms/qgswmscapabilities.h             |   2 +
+ src/providers/wms/qgswmsprovider.cpp               | 382 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++------------------------
+ src/providers/wms/qgswmsprovider.h                 | 103 ++++++++++++++++++++++--
+ src/providers/wms/qgswmssourceselect.cpp           |   2 +
+ src/ui/qgswmssourceselectbase.ui                   |  12 ++-
 
 #. Performance Implications
 ---------------------------
 
-(required if applicable)
-
-#. Further Considerations/Improvements
---------------------------------------
-
-(optional)
-
-#. Restrictions
----------------
-
-(optional)
+Having WMS layers with contextual legend enabled and visible
+would trigger a new legend download on every pan/zoom operation.
 
 #. Backwards Compatibility
 --------------------------
 
-(required)
-
-#. Documentation
-----------------
-
-(required if applicable)
+Backward compatibility will be retained.
 
 #. Issue Tracking ID(s)
 -----------------------
