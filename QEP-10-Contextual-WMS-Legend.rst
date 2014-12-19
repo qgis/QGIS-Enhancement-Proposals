@@ -71,19 +71,18 @@ The legend node will handle those events to update the legend item accordingly.
 #.# Affected Files
 ..................
 
- src/app/qgisapp.cpp                                |   4 +-
- src/core/layertree/qgslayertreemodel.cpp           |  10 ++-
- src/core/layertree/qgslayertreemodel.h             |   2 +-
- src/core/layertree/qgslayertreemodellegendnode.cpp | 121 ++++++++++++++++++++++++++++
- src/core/layertree/qgslayertreemodellegendnode.h   |  45 +++++++++++
- src/core/qgsmaplayerlegend.cpp                     |   7 +-
- src/core/raster/qgsrasterdataprovider.h            |  58 +++++++++++++-
- src/providers/wms/qgswmscapabilities.cpp           |   3 +
- src/providers/wms/qgswmscapabilities.h             |   2 +
- src/providers/wms/qgswmsprovider.cpp               | 382 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++------------------------
- src/providers/wms/qgswmsprovider.h                 | 103 ++++++++++++++++++++++--
- src/providers/wms/qgswmssourceselect.cpp           |   2 +
- src/ui/qgswmssourceselectbase.ui                   |  12 ++-
+ - src/app/qgisapp.cpp                                |   4 +-
+ - src/core/layertree/qgslayertreemodel.cpp           |  10 ++-
+ - src/core/layertree/qgslayertreemodel.h             |   2 +-
+ - src/core/layertree/qgslayertreemodellegendnode.cpp | 121 ++++++++++++++++++++++++++++
+ - src/core/layertree/qgslayertreemodellegendnode.h   |  45 +++++++++++
+ - src/core/qgsmaplayerlegend.cpp                     |   7 +-
+ - src/core/raster/qgsrasterdataprovider.h            |  58 +++++++++++++-
+ - src/providers/wms/qgswmscapabilities.cpp           |   3 +
+ - src/providers/wms/qgswmscapabilities.h             |   2 +
+ - src/providers/wms/qgswmsprovider.h                 | 103 ++++++++++++++++++++++--
+ - src/providers/wms/qgswmssourceselect.cpp           |   2 +
+ - src/ui/qgswmssourceselectbase.ui                   |  12 ++-
 
 #. Performance Implications
 ---------------------------
