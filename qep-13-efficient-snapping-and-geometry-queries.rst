@@ -7,8 +7,8 @@ QGIS Enhancement 13: Efficient Snapping and Geometry Queries
 :Date: 2014/12/18
 :Author: Martin Dobias
 :Contact: wonder.sk at gmail dot com
-:Last Edited: 2014/12/18
-:Status:  Draft
+:Last Edited: 2015/01/05
+:Status:  Final Draft
 :Version: QGIS 2.8
 
 Summary
