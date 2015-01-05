@@ -1,7 +1,7 @@
 .. _qep#[.#]:
 
 ========================================================================
-QGIS Enhancement #: Efficient Snapping and Geometry Queries
+QGIS Enhancement 13: Efficient Snapping and Geometry Queries
 ========================================================================
 
 :Date: 2014/12/18
