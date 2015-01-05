@@ -54,11 +54,12 @@ Implementation Details
 1. new class ``QgsPointLocator`` [core lib]
 
    - operates on one vector layer, watches the layer for changes (added/changed/removed features)
-   - defines Match class for retrieving results
+   - defines ``Match`` class for retrieving results
    - builds data structures for efficient point location queries (R trees)
    - supports queries for matches within tolerance (vertex/edge), k-nearest neighbors (vertex/edge), point in polygon
    - supports reprojection (i.e. data may be indexed in different CRS)
    - supports lazy indexing (unless needed for a request, data are not indexes)
+   - supports filtering of matches (e.g. accept matches only from a particular feature ID) with ``MatchFilter``
    - replacement for ``QgsSnapper``
 
 
@@ -73,6 +74,7 @@ Implementation Details
    - not directly connected to map canvas - need map settings and current layer to be explicitly set
    - optional snapping on intersections
    - client code can access locators
+   - supports filtering of matches (e.g. accept matches only from a particular feature ID) with ``MatchFilter``
    - configuration can be read from project (but does not need to be)
    - replacement for ``QgsMapCanvasSnapper``
 
