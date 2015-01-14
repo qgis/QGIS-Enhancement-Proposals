@@ -231,4 +231,16 @@ The new class ``QgsSnappingUtils`` is able to read the snapping configuration as
 Voting History
 --------------
 
-(required)
+**+1**
+
+- Gary
+- Marco
+- Tim
+- Otto
+- Paolo
+- Anita
+- Jürgen
+
+**No vote**
+
+- Richard
