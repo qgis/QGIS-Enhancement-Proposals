@@ -261,7 +261,71 @@ QCA 2.1.0 *is already* `compatible with Qt5`_, while QCA 2.0.3 is not.
    .. figure:: figures/auth-system/auth-resetpass.png
       :align: center
 
-3.3 Python Bindings
+3.3 Authentication Providers
+............................
+
+In the `PR`_ there are three auth providers and auth system integration
+with OWS services. The current providers are:
+
+**Basic**
+
+* Basic username/password/realm for HTTP[S] connections
+
+**PKI-Paths**
+
+* Pure Qt SSL code, does not use QCA (CryptoPP was going to be lib supporting
+  crypto functions in original implementation)
+* Supports CA and client certificate/key in PEM or DER format (PEM is Qt native)
+* Client key can be passphrase-protected
+* Querying of the user's OS root CA cert store is NOT done, so any CA or CA
+  chain must be included in the CA provided in the form
+
+**PKI-PKCS#12**
+
+* Uses QCA
+* Supports client certificate/key bundles in .p12 or .pfx formats
+* Bundle should not include any signing (CA) cert chain (this can be supported)
+* Bundle can be passphrase-protected
+* Querying of the user's OS root CA cert store is done by QCA, so any CA or CA
+  chain *can* be installed at the OS level first
+
+Adding more providers requires subclassing an existing base or provider and
+adding any new virtual functions to the base class that will handle new means of
+applying authentication to integrated code elsewhere in the code base. Any new
+virtual functions will need a single, similar marshaling function in the auth
+manager to provide an abstracted call based solely upon the ``authid``.
+
+3.4 TLS/SSL Connection Authentication
+.....................................
+
+QGIS leverages `QNetworkAccessManager`_ via a custom subclass
+``QgsNetworkAccessManager`` for managing most network connections. This is a
+higher level manager and does not offer a good means of responding to a TLS/SSL
+server when it requests that a client provide a certificate for authentication,
+e.g. like when Firefox prompts you to select a client cert from its embedded
+cert manager in the middle of a connection.
+
+A better TLS/SSL connection solution might be to use Qt's `QSslSocket`_ or
+`QCA's TLS class`_. ``QCA::TLA`` has a nice ``certificateRequested`` signal.
+However, implementing a new TLS/SSL client socket is beyond the scope of this
+QEP/PR.
+
+Instead, I chose to take a 'pre-configure' approach, where users need to define
+auth configs for TLS/SSL connections *prior* to a server asking for the client
+cert. This should generally not be an issue, though QGIS will not act
+Web-browser-like in this regard.
+
+Auth configs currently have an unused 'resource URI' property, which was
+designed to be utilized later via a custom user-selected auth config type, e.g.
+"Select configuration based upon URI", once support for that is
+implemented. Such a feature would mitigate some of the annoyance of the
+'pre-configure' approach.
+
+.. _QNetworkAccessManager: http://qt-project.org/doc/qt-4.8/qnetworkaccessmanager.html
+.. _QSslSocket: http://qt-project.org/doc/qt-4.8/qsslsocket.html
+.. _QCA's TLS class: http://delta.affinix.com/docs/qca/classQCA_1_1TLS.html
+
+3.5 Python Bindings
 ...................
 
 All classes and public functions have sip bindings, except ``QgsAuthCrypto``,
@@ -323,6 +387,12 @@ General auth system improvements to be considered:
 * Integrate auth system into QGIS Server, where user prompts are not supported
 * Finish implementation of auth config 'resource' (auto-auth via matched
   resource URI)
+* Refactor auth provider and config classes to add a connection group type, e.g.
+  HTTP, DB, etc. (so filters can be applied to auth config selection widgets to
+  show only relevant configs to the connection type)
+* Try moving auth system integration code (when authid has been assigned) into
+  ``QgsNetworkAccessManager`` instead of within individual data providers and
+  pass authid to network manager
 * Warn user when secure parts of auth system are accessed by Python (see
   above)
 * Add conversion button, to convert existing plain auth to auth config
