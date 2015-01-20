@@ -7,7 +7,7 @@ QGIS Enhancement ##: Authentication configuration system with master password
 :Date: 2015/01/01
 :Author: Larry Shaffer
 :Contact: lshaffer at boundlessgeo dot com
-:Last Edited: 2015/01/18
+:Last Edited: 2015/01/20
 :Status: Draft
 :Version: QGIS 2.8
 :Sponsor: Boundless - New York, NY  USA
