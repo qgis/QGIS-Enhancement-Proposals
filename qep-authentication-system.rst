@@ -1,15 +1,15 @@
-.. _qep#[.#]:
+.. _qep14:
 
 =============================================================================
-QGIS Enhancement ##: Authentication configuration system with master password
+QGIS Enhancement 14: Authentication configuration system with master password
 =============================================================================
 
 :Date: 2015/01/01
 :Author: Larry Shaffer
 :Contact: lshaffer at boundlessgeo dot com
-:Last Edited: 2015/01/20
+:Last Edited: 2015/01/26
 :Status: Draft
-:Version: QGIS 2.8
+:Version: QGIS 2.10
 :Sponsor: Boundless - New York, NY  USA
 :Sponsor URL: http://boundlessgeo.com/
 
@@ -365,6 +365,11 @@ Another option may be to track which plugins the user has specifically allowed
 to access the auth system, though it may be tricky to deduce which plugin is
 actually making the call.
 
+Sandboxing plugins, possibly in their own virtual environments, would reduce
+'cross-plugin' hacking of auth configs from another plugin that is authorized.
+This might mean limiting cross-plugin communication as well, but maybe only
+between third-party plugins.
+
 Alternatively, access to sensitive auth system data from Python could *never* be
 allowed, and only the use of QGIS core widgets, or duplicating auth system
 integrations, would allow the plugin to work with resources that have an
@@ -378,13 +383,16 @@ Python.
 6. Further Improvements
 -----------------------
 
-General auth system improvements to be considered:
+General auth system improvements to be considered (no particular order):
 
 * Have security guru/firm audit implementation (I'm no guru)
 * Integrate auth system with database connection configs
 * Integrate auth system with Plugin Manager connections
 * Integrate auth system with all HTTP connection classes
 * Integrate auth system into QGIS Server, where user prompts are not supported
+* Integrate master password entry with platform-specific password managers, so
+  user does not need to enter it and automated pre-population scripts are easier
+  to code
 * Finish implementation of auth config 'resource' (auto-auth via matched
   resource URI)
 * Refactor auth provider and config classes to add a connection group type, e.g.
@@ -395,6 +403,13 @@ General auth system improvements to be considered:
   pass authid to network manager
 * Warn user when secure parts of auth system are accessed by Python (see
   above)
+* PyQGIS plugins may need sandboxed to protect against, and selectively allow,
+  access to auth configs
+* Migrate all 'core' PyQGIS plugins that need to manage their own connections to
+  using core auth system calls and/or core connections (which would auto-manage
+  auth system calls), or isolate them from third-party plugins, if possible
+* Switch master password memory allocation from QString (insecure) to
+  ``QCA::SecureArray``
 * Add conversion button, to convert existing plain auth to auth config
 * Add optional ability to edit the auth id for a configuration (user must
   confirm before operation)
