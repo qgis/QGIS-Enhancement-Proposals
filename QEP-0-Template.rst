@@ -15,8 +15,6 @@ QGIS Enhancement #: Title Case Short Description of Proposed Enhancement
           Abandoned (YYYY/MM/DD) | Withdrawn (YYYY/MM/DD)
 :Supercedes: (optional) :ref:`QEP #[.#] <qep#[.#]>`
 :Version: QGIS X.X
-:Sponsor: (optional) Sponsor Name - State/Province/Region, Country
-:Sponsor URL: (optional)
 
 .. note::
 
