@@ -126,15 +126,21 @@ Documentation
 This QEP serves as the documentation for the LTR procedure, and will be migrated
 to the project governance documentation.
 
-Issue Tracking ID(s)
---------------------
-
-(required)
-
-
-
 
 Voting History
 --------------
 
-(required)
+**+1**
+
+- Gary
+- Marco
+- Tim
+- Otto
+- Paolo
+- Anita
+- Richard
+
+**No vote**
+
+- Jürgen
+
