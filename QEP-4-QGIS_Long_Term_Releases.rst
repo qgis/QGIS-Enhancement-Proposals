@@ -7,14 +7,9 @@ QGIS Enhancement 4: Long term releases
 :Date: 2014/10/03
 :Author: Tim Sutton
 :Contact: tim@kartoza.com
-:Author: -
-:Contact: -
 :Last Edited: 2014/10/03
 :Status:  Final Draft
-:Supercedes: -
 :Version: QGIS 2.X
-:Sponsor:
-:Sponsor URL:
 
 .. note::
 
