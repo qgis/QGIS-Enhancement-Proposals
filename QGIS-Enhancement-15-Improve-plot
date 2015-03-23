@@ -1,0 +1,47 @@
+.. _qep#[15]:
+
+========================================================================
+QGIS Enhancement 15: Improve plot/graphs creation
+========================================================================
+
+:Date: 2015/03/19
+:Author: Matteo Ghetta
+:Contact: matteo.ghetta@gmail.com
+:Status:  Draft 
+:Supercedes: (optional) :ref:`QEP #[.#] <qep#[.#]>`
+:Version: QGIS 3.0
+
+.. note::
+
+    See :ref:`QEP 1 <qep1>` for description of QEP process.
+
+#. Summary
+----------
+
+Right now the creation of high level plots and graphs is limited. **Statist** plugin and some **Processing** tools 
+(QGIS geoalgorithms, R scripts, shell scrips..) are able to produce some usable plot, but not high level ones.
+
+
+#. Proposed Change
+-----------------------------------------
+
+Thanks to Processing one can add R scripts in order to produce high level plots, but it is worth to use some core
+python library to create those plots (matplotlib, numpy, scipy...).
+
+This enhancement proposal is for adding and additional menu (also embed it in Processing) so the user can create
+high level plots with the attribute table fields.
+
+Plots options:
+
+* standard plots (histogram, scatterplots, pie charts, dnsity plots...)
+* add trend lines
+* add *value* lines based on statistical computation of the attribute fields (median, mean, standard deviation...)
+* plot custiomization (color, size, title, axes name)
+* axes options (logaritm, flip axes..)
+* interaction plot - layer (e.g. click on the point of the scatterplot and see the point on the map)
+* plot exportation (jpeg, png, svg...)
+
+#. Further Considerations/Improvements
+--------------------------------------
+
+It is also worth to include the possibility to visualize the plots in the print layout.
