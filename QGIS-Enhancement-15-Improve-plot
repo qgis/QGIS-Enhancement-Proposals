@@ -8,12 +8,8 @@ QGIS Enhancement 15: Improve plot/graphs creation
 :Author: Matteo Ghetta
 :Contact: matteo.ghetta@gmail.com
 :Status:  Draft 
-:Supercedes: (optional) :ref:`QEP #[.#] <qep#[.#]>`
 :Version: QGIS 3.0
 
-.. note::
-
-    See :ref:`QEP 1 <qep1>` for description of QEP process.
 
 #. Summary
 ----------
