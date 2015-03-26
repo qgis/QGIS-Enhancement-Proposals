@@ -4,14 +4,14 @@
 QGIS Enhancement #XXX: MetaSearch Publishing Enhancements
 =========================================================
 
-:Date: 2014/09/19
+:Date: 2015/03/26
 :Author: Tom Kralidis
 :Contact: tomkralidis at gmail dot com
-:Last Edited: 2014/09/19
+:Last Edited: 2015/03/26
 :Status:  Draft | Adopted (YYYY/MM/DD) | Completed (YYYY/MM/DD) |
           Superseded by :ref:`QEP #[.#] <qep#[.#]>` (YYYY/MM/DD) |
           Abandoned (YYYY/MM/DD) | Withdrawn (YYYY/MM/DD)
-:Version: QGIS 2.8
+:Version: QGIS 2.10
 
 .. note::
 
@@ -89,7 +89,7 @@ Given this enhancement there will be no impact on backwards compatibility. There
 Documentation
 -------------
 
-Documentation will be enhanced accordingly in http://geopython.github.io/MetaSearch/
+Documentation will be enhanced accordingly in https://github.com/qgis/QGIS-Documentation/blob/master/source/docs/user_manual/plugins/plugins_metasearch.rst
 
 Issue Tracking ID(s)
 --------------------
