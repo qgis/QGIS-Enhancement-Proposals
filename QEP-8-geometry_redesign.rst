@@ -89,3 +89,67 @@ First tests indicate that the rendering performance can be similar to the curren
 ----------------------------
 
 A test implementation is in the branch https://github.com/mhugent/Quantum-GIS/tree/geometry_mmsql . At the moment, it is incomplete, not fully tested and editing of geometries is completely disabled. It should however already give a hint about the direction of development.
+
+8. Questions and Answers
+----------------------------
+
+Q: Will the segmentising be done automatically so that plugins which also work on geometries but not with geos can also use this solution?
+
+A: Yes, it will be done automatically with QgsGeometry::intersection(), QgsGeometry::asPolyline, etc. The only case where it is not automatically done is if the plugin calls asWkb() and parses the binary itself. In that case, the plugin still has the possibility to convert the geometry to a linear one (QgsGeometry::convertToStraightSegments)
+
+Q: Looking at your branch I don't see any unit testing implemented for this work. Is this something which is planned? I strongly believe that something as fundamental as the geometry classes must be accompanied by a comprehensive test suite. 
+
+A: There are some tests in testqgsgeometryimport.cpp. It is indeed planned
+to add much, much more tests once the architecture is stable.
+
+Q: Why not reusing the existing classes to make the geometry hierarchy?
+
+A: More flexibility and backward compatibility
+
+Q: 'QgsGeometryEngine' is a more descriptive name than 'QgsVectorTopolgy'
+
+A: Agreed, changed the class name
+
+Q: The methods which are delegated to geos do not have to be in the geometry class interface
+
+A: Agreed. The code is changed such that QgsAbtractGeometryV2 does not have a relation to QgsGeometryEngine
+
+Q: there is a naming clash between QgsPoint and QgsPointV2 - they are meant for completely different purpose, yet QgsPointV2 looks like "improved" QgsPoint which is confusing. Especially, what will happen if we get rid of old QgsGeometry and the V2 suffix will be dropped?
+
+A: The current QgsPoint will be removed and QgsPointV2 becomes QgsPoint
+
+Q: Will the new geometry classes have implicitely sharing?
+
+A: It is not planned. However it can be added to the new classes (needs to be done separately for each one)
+
+Q: May I suggest to use iterator pattern for various methods that currently return (possily nested) containers? I mean methods like
+QgsAbstractGeometryV2::coordinateSequence()
+
+A: Added QgsAbstractGeometryV2::nextVertex to iterate over the vertices of a geometry
+
+Q: Regarding the geometry access from QgsFeature - are the geometries still going to be accessed via f.geometry() or will there be a new method to get access directly to QgsAbstractGeometryV2 ?
+
+A: Added QgsFeature.geometryV2()
+
+Q: would it be possible to have a code examples in Python demonstrating the new geometry API? e.g. code that reads features and dumps geometry contents
+
+A: Here are some examples (hope to add more in future):
+
+QgsFeature::geometryV2(). So to dump the geometry content (in python), use code like this:
+
+print feature.geometryV2().asWkt()
+
+To create geometries in Python, do e.g. (for a linestring)
+
+lineCoords = [QgsPointV2(100,100), QgsPointV2( 110, 100 ), QgsPointV2( 110, 110 )]
+lineString = QgsLineStringV2()
+lineString.setPoints( lineCoords )
+
+A zm-Geometry can be created by having zm points in the coordinate list:
+
+lineCoords = []
+lineCoords.append( QgsPointV2( QgsWKBTypes.LineStringZM, 100, 100, 23, 1.0 ) )
+lineCoords.append( QgsPointV2( QgsWKBTypes.LineStringZM, 110, 100, 33, 2.0 ) )
+lineCoords.append( QgsPointV2( QgsWKBTypes.LineStringZM, 110, 110, 43, 3.0 ) )
+lineString = QgsLineStringV2()
+lineString.setPoints(lineCoords)
