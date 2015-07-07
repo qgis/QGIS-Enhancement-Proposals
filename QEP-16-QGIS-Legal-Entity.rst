@@ -1,7 +1,7 @@
 .. _qep3:
 
 
-QGIS Enhancement 14: QGIS Legal Entity
+QGIS Enhancement 16: QGIS Legal Entity
 ======================================
 
 :Date: 2015/7/07
