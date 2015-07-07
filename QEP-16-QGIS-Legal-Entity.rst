@@ -171,5 +171,5 @@ Voting History
 
 **No vote**
 
-- Jürgen
+- None
 
