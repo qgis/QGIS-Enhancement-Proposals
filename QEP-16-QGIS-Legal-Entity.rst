@@ -119,7 +119,7 @@ Composition of the Board
   chair shall be appointed for a minimum of three years at a time.
 * **Honorary member:** Gary Sherman will retain a lifetime honorary seat on the
   board.
-* **PSC:** The PSC will transform into the board of QGIS.OGR
+* **PSC:** The PSC will transform into the board of QGIS.ORG
 * **SWISS Member:** There will be at least one Swiss board member in order to fulfil the
   requirements of the Verein legal entity.
 
