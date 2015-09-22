@@ -7,14 +7,25 @@ QGIS Enhancement 14: Authentication configuration system with master password
 :Date: 2015/01/01
 :Author: Larry Shaffer
 :Contact: lshaffer at boundlessgeo dot com
-:Last Edited: 2015/01/26
+:Last Edited: 2015/09/20
 :Status: Draft
-:Version: QGIS 2.10
+:Version: QGIS 2.12
 :Sponsor: Boundless - New York, NY  USA
 :Sponsor URL: http://boundlessgeo.com/
 
 1. Summary
 ----------
+
+See `Pull Request (PR) #2330 <https://github.com/qgis/QGIS/pull/2330>`_
+
+.. note::
+
+  The PR is already a completely functional core implementation of this
+  proposal, with Python bindings, unit tests, integration with PostGIS and OWS
+  service connections using username/password and support for PKI client
+  certificates (in PEM, DER or PKCS#12 format) for OWS HTTPS connections. In
+  addition, it has been built and run on most major platforms and has received
+  *extensive* functional testing over several months.
 
 Currently, QGIS lacks any facility to store/retrieve authentication credentials
 in a secure manner. Users either choose to save credentials insecurely in
@@ -49,20 +60,19 @@ until the app is quit, or the cached master password is cleared mid-session.
 Utilize an auth config's ID (a hash-like 7-character string, e.g. ``j2r5tvq``),
 generated during initial storage to the auth database, to abstractly represent
 the config as a parameter in data source URIs and in application and plugin
-settings, thereby allowing auth configs to be securely stored in plain text
+settings; thereby allowing auth configs to be securely stored in plain text
 application components, e.g. project and settings files, without disclosure of
 credentials.
 
-Add a variety of common authentication providers, e.g. HTTP Basic, SSL/PKI,
-etc.; and, integrate resource access routines with calls to the auth manager,
-which marshals an appropriate call to the provider linked to any auth config ID
-assigned to the resource.
+Add a variety of common authentication methods *as plugins*, e.g. HTTP Basic,
+SSL/PKI, etc., and integrate resource access routines with calls to the auth
+manager, which marshals an appropriate call to the method plugin associated to
+any auth config ID assigned to the resource.
 
-For example, if a WMS data source URI string contains ``authid=j2r5tvq`` and
-such an auth config's provider type was related to HTTP[S] connections, then
-calls to the manager might update the connection's ``QNetworkRequest`` and maybe
-handle parts of ``QNetworkReply`` (e.g. override expected SSL errors), as
-necessary. The details on how or why the provider handles the update to network
+For example, if a WMS data source URI string contains ``authcfg=j2r5tvq`` and
+such an auth config's method type was related to HTTP[S] connections, then
+calls to the manager might update the connection's ``QNetworkRequest`` as
+necessary. The details on how or why the method handles the update to network
 objects are abstracted, with regards to the integrated routine creating the
 network connection. Such a routine merely calls the manager when any updates to
 network objects *might* need to happen.
@@ -74,17 +84,10 @@ User interaction with the auth system would be done via GUI widgets for:
 * *creating/editing* individual auth configs, based upon ID
 * *selecting* existing auth config IDs to associate with resources/servers
 
-See `Pull Request (PR) #1838 <https://github.com/qgis/QGIS/pull/1838>`_
+Here is `example user documentation (from Boundless) for a PKI workflow, with an overview of the
+authentication system <https://github.com/dakcarto/QGIS-Enhancement-Proposals/blob/auth-system/extras/auth-system/pkiuser.rst>`_.
 
-Note about PR:
-
-  The PR is a completely functional core implementation, with Python bindings,
-  unit tests, integration with OWS service connections and support for PKI
-  client certificates (in PEM, DER or PKCS#12 format) for HTTPS connections. In
-  addition, it has been built and run on most major platforms and has received
-  extensive functional testing over several months.
-
-.. _PR: https://github.com/qgis/QGIS/pull/1838
+.. _PR: https://github.com/qgis/QGIS/pull/2330
 
 3. Implementation Details
 -------------------------
@@ -102,7 +105,7 @@ another for auth configs. This is generated upon authentication manager's
 
 Upon command line launch of ``qgis``, the user can define::
 
-  --authdbdirectory | -a  "directory for authentication database"
+  --authdbdirectory | -a  "path to directory for authentication database"
 
 into which a ``qgis-auth.db`` will be created, if it does not already exist.
 
@@ -128,18 +131,17 @@ QCA 2.1.0 *is already* `compatible with Qt5`_, while QCA 2.0.3 is not.
 .. _source repo browser: http://quickgit.kde.org/?p=qca.git
 .. _compatible with Qt5: https://projects.kde.org/projects/kdesupport/qca/repository/revisions/master/entry/README
 
-3.1. Added Classes/Files
-........................
+3.1. Main Added Classes/Files
+.............................
 
-1. ``QgsAuthManager`` [core/qgsauthenticationmanager.h]
+1. ``QgsAuthManager`` [src/core/auth/qgsauthmanager.h]
 
    - Singleton that oversees all master password and auth database functions and
-     marshalling of auth providers
-   - Inherits from new ``QgsSingleton<type>`` template setup
+     marshalling of auth methods
    - Instantiates in ``QgsApplication::initQgis()`` and cleans up in
      ``QgsApplication::exitQgis()``
 
-2. ``QgsAuthCrypto`` [core/qgsauthenticationcrypto.h]
+2. ``QgsAuthCrypto`` [src/core/auth/qgsauthcrypto.h]
 
    - Simple interface for hashing/verifying master password and encrypt/decrypt
      operations on auth configs with master password.
@@ -150,10 +152,10 @@ QCA 2.1.0 *is already* `compatible with Qt5`_, while QCA 2.0.3 is not.
    .. _CryptoPP: http://www.cryptopp.com/
    .. _build on Windows: http://www.codeproject.com/Articles/16388/Compiling-and-Integrating-Crypto-into-the-Microsof
 
-3. ``QgsAuthConfigBase``, ``QgsAuthConfig*`` [core/qgsauthenticationconfig.h]
+3. ``QgsAuthMethodConfig*`` [src/core/auth/qgsauthmethodconfig.h]
 
-   - Base and subclasses for representing auth configs
-   - Has public properties that can generally be queried without requiring the
+   - Class representing auth method configs
+   - Has public properties that can generally be queried *without* requiring the
      user to input the master password
    - Has sensitive properties that become semi-public once the master password
      is set/verified and the config has been retrieved and decrypted from the
@@ -161,115 +163,128 @@ QCA 2.1.0 *is already* `compatible with Qt5`_, while QCA 2.0.3 is not.
    - Has sensitive properties that can be set and then encrypted and stored in
      the auth database by the auth manager
 
-4. ``QgsAuthProvider``, ``QgsAuthProvider*`` [core/qgsauthenticationprovider.h]
+4. ``QgsAuthMethod`` [src/core/auth/qgsauthmethod.h] and ``QgsAuthMethodEdit``
 
-   - Base and subclasses for representing auth config providers
-   - Each provider accepts marshaled calls from the auth manager to update
+   - Class and edit widget that comprise an auth config method plugin
+   - Each method accepts marshaled calls from the auth manager to update
      authentication-specific objects when needed, e.g. ``QNetworkRequest`` and
-     ``QNetworkReply`` during HTTP[S] connections.
-   - Each provider has an in-memory cache of authentication objects, generated
+     ``DataSourceURI``, during resource connections
+   - Each method has an in-memory cache of authentication objects, generated
      during the processing of an auth config, that are stored upon first
      access/load of the config. Subsequent calls use the cached resource, e.g.
      generated SSL certificate, key and CA chain objects.
 
-5. ``QgsAuthType`` [core/qgsauthenticationconfig.h]
+5. ``QgsAuthMethodRegistry`` [src/core/auth/qgsauthmethodregistry.h]  and
+   ``QgsAuthMethodMetadata``
 
-   - Utility class for handling mapping between textual and enum representation
-     of a authentication type (for both config and provider)
+   - Singleton plugin registry modeled after ``QgsProviderRegistry``
+   - Loads plugins with ``lib*authmethod.(so|dll)`` name pattern
 
-6. ``QgsAuthUtils`` [gui/qgsauthenticationutils.h]
+3.2 Main Added GUI Classes
+..........................
 
-   - Utility functions for managing the auth database and master password, and
-     passing any messages to user via ``QgsMessageBar``
-
-3.2 Added Widgets
-.................
-
-1. Master password input dialog [gui/qgscredentialdialog.h]
+1. Master password input dialog [src/gui/qgscredentialdialog.h]
 
    User is prompted whenever accessing the auth system, or whenever a layer is
-   loaded/dragged/programmatically added that has an associated ``authid``.
+   loaded/dragged/programmatically added that has an associated ``authcfg``.
 
-   .. figure:: figures/auth-system/masterpass_new.png
+   .. figure:: extras/auth-system/img/auth-password-new_enter.png
       :align: center
 
       When master password has not been set, nor its hash stored in auth
       database. **The master password can NOT be retrieved if the user looses
       it.**
 
-   .. figure:: figures/auth-system/masterpass_current.png
+   .. figure:: extras/auth-system/img/auth-password-invalid-3times.png
       :align: center
 
-      After master password has been configured
+      After master password has been configured and 3 incorrect attempts
 
-2. ``QgsAuthConfigEditor`` [gui/qgsauthenticationconfigeditor.h]
+2. ``QgsAuthConfigEditor`` [src/gui/auth/qgsauthconfigeditor.h]
 
    - An embeddable or standalone widget for directly managing auth configs in
      the auth database
    - Uses ``QSqlTableModel`` for its ``QTableView`` model
    - Offers utility functions for managing the auth database and master password
 
-   .. figure:: figures/auth-system/auth-editor.png
+   .. figure:: extras/auth-system/img/auth-editor.png
       :align: center
 
-3. ``QgsAuthConfigWidget`` [gui/qgsauthenticationconfigwidget.h]
+3. ``QgsAuthConfigEdit`` [src/gui/auth/qgsauthconfigedit.h]
 
    - An embeddable or standalone widget for creating/editing auth configs
      directly in the auth database
-   - Depending upon provider, does lightweight validation, e.g. cert issue dates
+   - Depending upon method, does lightweight validation, e.g. cert issue dates
 
-   .. figure:: figures/auth-system/auth-configwidget_create.png
+   .. figure:: extras/auth-system/img/auth-configwidget_create.png
       :align: center
 
       Standalone config creation
 
-   .. figure:: figures/auth-system/auth-configwidget_edit.png
+   .. figure:: extras/auth-system/img/auth-config-create_pkcs12-paths.png
       :align: center
 
       Standalone with existing config in edit mode
 
-4. ``QgsAuthConfigSelect`` [gui/qgsauthenticationconfigselect.h]
+4. ``QgsAuthConfigSelect`` [src/gui/auth/qgsauthconfigselect.h]
 
-   - An embeddable or standalone widget for selecting/adding/removing auth
-     configs in the auth database
+   - An embeddable or standalone widget for selecting/adding/editing/removing
+     auth configs in the auth database
 
-   .. figure:: figures/auth-system/auth-selector_noselection.png
+   .. figure:: extras/auth-system/img/auth-selector_noselection.png
       :align: center
 
       Standalone with no selection defined
 
-   .. figure:: figures/auth-system/auth-selector_wms-integration.png
+   .. figure:: extras/auth-system/img/auth-selector_wms-integration.png
       :align: center
 
       Integrated in WMS connection dialog, with config defined
 
-5. Settings -> Authentication menu actions [gui/qgsauthenticationutils.h]
+5. Sundry GUI classes
 
-   - Utility functions for managing the auth database and master password
+   - ``QgsMasterPasswordResetDialog`` Embeddable or standalone widget for
+     resetting master password and re-encrypting auth configs into a new auth
+     database, with optional backup of old database (no Python binding)
+   - ``QgsAuthGuiUtils`` Utility functions for managing the auth database and
+     master password, and passing any messages to user via ``QgsMessageBar``
 
-   .. figure:: figures/auth-system/settings-menu_auth.png
-      :align: center
+3.3 PKI/SSL-related Added Classes
+.................................
 
-6. ``QgsMasterPasswordResetDialog`` [gui/qgsauthenticationutils.h]
+There are several editor widgets and included functionalities within QgsAuthManger
+that support PKI and SSL authentication and configuration.
 
-   - An embeddable or standalone widget for resetting master password and
-     re-encrypting auth configs into a new auth database, with optional backup
-     of old database (no Python binding)
-   - Redundant validation of master password input is required, regardless of
-     whether master password has already been entered.
+1. ``QgsAuthAuthoritiesEditor`` [src/gui/auth/qgsauthauthoritieseditor.h]
 
-   .. figure:: figures/auth-system/auth-resetpass.png
-      :align: center
+   - Manager for system Certificate Authorities and their trust policies
+   - Offers ability to add new CAs from file or load into database
 
-3.3 Authentication Providers
-............................
+2. ``QgsAuthIdentitiesEditor`` [src/gui/auth/qgsauthidentitieseditor.h]
 
-In the `PR`_ there are three auth providers and auth system integration
-with OWS services. The current providers are:
+   - Manager for personal certificate/key PKI components stored in the database
+
+3. ``QgsAuthSslErrorsDialog`` [src/gui/auth/qgsauthsslerrorsdialog.h]
+
+   - New SSL errors dialog that allows saving of server certificate exceptions
+   - User can review the SSL certificates associated with the error's connection
+
+4. ``QgsAuthServersEditor`` [src/gui/auth/qgsauthserverseditor.h]
+
+   - Manager for SSL server certificate configurations, e.g exceptions.
+
+3.4 Authentication Methods Plugins
+..................................
+
+In the `PR`_ there are three auth method plugins. Additional plugins are now
+easy to make and add. The system *can* also be updated to allow methods to be
+registered via general application plugins (C++ or PyQGIS).
+
+The current plugins in [src/auth] are:
 
 **Basic**
 
-* Basic username/password/realm for HTTP[S] connections
+* Basic username/password for HTTP[S] connections and database credentials
 
 **PKI-Paths**
 
@@ -277,8 +292,6 @@ with OWS services. The current providers are:
   crypto functions in original implementation)
 * Supports CA and client certificate/key in PEM or DER format (PEM is Qt native)
 * Client key can be passphrase-protected
-* Querying of the user's OS root CA cert store is NOT done, so any CA or CA
-  chain must be included in the CA provided in the form
 
 **PKI-PKCS#12**
 
@@ -286,16 +299,19 @@ with OWS services. The current providers are:
 * Supports client certificate/key bundles in .p12 or .pfx formats
 * Bundle should not include any signing (CA) cert chain (this can be supported)
 * Bundle can be passphrase-protected
-* Querying of the user's OS root CA cert store is done by QCA, so any CA or CA
-  chain *can* be installed at the OS level first
 
-Adding more providers requires subclassing an existing base or provider and
+**Identity-Cert**
+
+* Uses PKI cert/key imported from PEM or PKCS#12 files into Identities table
+* Uses QCA for importing PKCS#12
+
+Adding more methods requires subclassing an existing base or method and
 adding any new virtual functions to the base class that will handle new means of
 applying authentication to integrated code elsewhere in the code base. Any new
 virtual functions will need a single, similar marshaling function in the auth
-manager to provide an abstracted call based solely upon the ``authid``.
+manager to provide an abstracted call based solely upon the ``authcfg``.
 
-3.4 TLS/SSL Connection Authentication
+3.5 TLS/SSL Connection Authentication
 .....................................
 
 QGIS leverages `QNetworkAccessManager`_ via a custom subclass
@@ -325,7 +341,7 @@ implemented. Such a feature would mitigate some of the annoyance of the
 .. _QSslSocket: http://qt-project.org/doc/qt-4.8/qsslsocket.html
 .. _QCA's TLS class: http://delta.affinix.com/docs/qca/classQCA_1_1TLS.html
 
-3.5 Python Bindings
+3.6 Python Bindings
 ...................
 
 All classes and public functions have sip bindings, except ``QgsAuthCrypto``,
@@ -348,11 +364,14 @@ QGIS Server via FCGI.
 
 Once the master password is entered, the API is open to access auth configs in
 the auth database, similar to how Firefox works. However, in the initial
-implementation, *no* wall against PyQGIS access has been defined. This will lead
+implementation, *no* wall against PyQGIS access has been defined. This may lead
 to issues where a user downloads/installs a malicious PyQGIS plugin or
 standalone app that gains access to auth credentials.
 
-A simple, though not robust, fix is to add a combobox in
+The quick solution for initial release of feature is to just not include most
+PyQGIS bindings for the auth system.
+
+Another simple, though not robust, fix is to add a combobox in
 ``Options -> Authentication`` (defaults to "never")::
 
   "Allow Python access to authentication system"
@@ -370,10 +389,15 @@ Sandboxing plugins, possibly in their own virtual environments, would reduce
 This might mean limiting cross-plugin communication as well, but maybe only
 between third-party plugins.
 
+Another good solution is to issue code-signing certificates to vetted plugin
+authors. Then validate the plugin's certificate upon loading. If need be the
+user can also directly set an untrusted policy for the certificate associated
+with the plugin using existing certificate management dialogs.
+
 Alternatively, access to sensitive auth system data from Python could *never* be
 allowed, and only the use of QGIS core widgets, or duplicating auth system
 integrations, would allow the plugin to work with resources that have an
-``authid``, while keeping master password and auth config loading in the realm
+``authcfg``, while keeping master password and auth config loading in the realm
 of the main app.
 
 The same security concerns apply to C++ plugins, though it will be harder to
@@ -386,7 +410,7 @@ Python.
 General auth system improvements to be considered (no particular order):
 
 * Have security guru/firm audit implementation (I'm no guru)
-* Integrate auth system with database connection configs
+* Integrate auth system with more database connection configs
 * Integrate auth system with Plugin Manager connections
 * Integrate auth system with all HTTP connection classes
 * Integrate auth system into QGIS Server, where user prompts are not supported
@@ -395,12 +419,9 @@ General auth system improvements to be considered (no particular order):
   to code
 * Finish implementation of auth config 'resource' (auto-auth via matched
   resource URI)
-* Refactor auth provider and config classes to add a connection group type, e.g.
-  HTTP, DB, etc. (so filters can be applied to auth config selection widgets to
-  show only relevant configs to the connection type)
-* Try moving auth system integration code (when authid has been assigned) into
+* Try moving auth system integration code (when authcfg has been assigned) into
   ``QgsNetworkAccessManager`` instead of within individual data providers and
-  pass authid to network manager
+  pass authcfg to network manager
 * Warn user when secure parts of auth system are accessed by Python (see
   above)
 * PyQGIS plugins may need sandboxed to protect against, and selectively allow,
@@ -413,18 +434,18 @@ General auth system improvements to be considered (no particular order):
 * Add conversion button, to convert existing plain auth to auth config
 * Add optional ability to edit the auth id for a configuration (user must
   confirm before operation)
-* Add ability to change, edit or remove authid from existing layer in
+* Add ability to change, edit or remove authcfg from existing layer in
   properties dialog
 * Add simple read-only text field in layer properties dialog to quickly copy
-  authid
-* Add copy/paste/add/edit/remove of authid in layer contextual menu in Legend
+  authcfg
+* Add copy/paste/add/edit/remove of authcfg in layer contextual menu in Legend
   panel
-* On layer load, notify user if any associated authid is missing in auth
+* On layer load, notify user if any associated authcfg is missing in auth
   database
-* Add layer authid (re)assignment in Handle Bad Layers dialog (can currently
+* Add layer authcfg (re)assignment in Handle Bad Layers dialog (can currently
   edit URI)
-* Add authid as attribute of base QgsMapLayer class, so it can be queried
-* Add checkValidity(bool verbose = false) to auth providers that emits
+* Add authcfg as attribute of base QgsMapLayer class, so it can be queried
+* Add checkValidity(bool verbose = false) to auth methods that emits
   messages
 * Add Test Connection functions/buttons and connection debug dialog
 * Add support for no-master-password encryption (or never add this?)
@@ -433,18 +454,10 @@ General auth system improvements to be considered (no particular order):
 
 Specific to PKI and SSL certificate management:
 
-* Add certificate manager (like Firefox's) to store personal, server and CA
-  certs
-* Store certificates (input via manager) in new table in auth database
-* Add auth provider to work with certificates in auth database
-* Allow user-created auth config and provider subclasses to be registered with
-  auth manager (necessary? browsers don't do it; currently hard-coded)
-* Add auth provider for directly accessing user's OS-specific cert store
+* Add auth method for directly accessing user's OS-specific cert store
   (problematic if client key has passphrase on Windows)
 * Better cert/key/trust chain validation in edit widget
-* Add cert/key/trust chain detailed info dialogs
 * Check for expired/invalid cert/chain prior to connection
-* Add access to peer cert and local cert info in error dialogs
 
 7. Restrictions
 ---------------
@@ -469,10 +482,10 @@ run-time.
 --------------------------
 
 The proposed auth system causes no regressions nor backwards incompatibility.
-With its initial OWS connection support it is side-by-side with the previous
+With its initial PostGIS and OWS connection support it is side-by-side with the previous
 username/password form widget in connection setup forms, allowing any existing,
 older configurations to continue to work. Likewise, in the ``QNetworkRequest``
-and ``QNetworkReply`` updates, the new auth system configuration is only
+and ``DataSourceURI`` updates, the new auth system configuration is only
 prioritized once it has been utilized.
 
 9. References
