@@ -147,7 +147,7 @@ For the main methods of the QgsVectorDataProvider API, the following behaviour i
 *   **fields()**: use of SQLite introspection to get column types, or user-defined column types if any
 *   **addFeatures()**: Execution of the SQL INSERT TRIGGER. Field values that are passed to the function but not referenced in the TRIGGER will simply be ignored
 *   **deleteFeatures()**: Execution of the SQL DELETE TRIGGER
-*   **addAttributes()**: does not make much sense. It could be used to modify the list of fields retrieved from the VIEW (?)
+*   **addAttributes()**: Used to modify the list of fields retrieved from the VIEW or to add virtual fields.
 *   **changeAttributeValues()** / **changeGeoemtryValues**: Execution of the SQL UPDATE TRIGGER
 *   **createSpatialIndex()**: call to Spatialite's CreateSpatialIndex
 *   **createAttributeIndex()**: does nothing
@@ -171,6 +171,14 @@ Using the simple interface described above, the new provider will execute someth
     INSERT INTO geometry_columns ...
     CREATE TRIGGER ... INSTEAD OF UPDATE OF ...
 
+
+#.# Relation to expressions
+...........................
+
+Using the SQL language to create views on data might seem a bit counter-intuitive for end users, since they are used to filter data based on "expressions".
+The syntax of QGIS expressions is the same as the syntax of the SQL WHERE clause. Some difference still exist regarding functions. SQLite offers mechanisms to create or overload user-defined functions. So that the virtual layer provider module can implement the same set of user-defined functions that the one found in QGIS expressions.
+
+Then the SQL "dialect" of QGIS can be seen as an extension of QGIS expressions (dealing with SQL parsing, nested queries, CTE and so on), not something different.
 
 #.# Python Bindings
 ...................
