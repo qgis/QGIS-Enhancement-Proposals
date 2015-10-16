@@ -14,14 +14,14 @@ QGIS Enhancement ??: Auxiliary storage
 Summary
 -------
 
-This proposal aims at proposing an evolution of QGIS in order to be able to store auxiliary data
+This proposal is about an evolution of QGIS aiming at storing auxiliary data
 in a layer. Such auxiliary data are data used mostly for the needs of QGIS (symbology) and have no real
 interest in being stored with the native raw geospatial data.
 
 With the current (2.11) version of QGIS, adding "side" data to a vector layer requires either to
 add new columns to the souce layer or, when not possible or not desirable, to store these data
 in a new vector layer and form a join between the source layer and the "secondary" layer.
-Synchronization between the two layers is not easy to maintain.
+Synchronization between the two layers is then not easy to maintain.
 
 We propose here a more integrated solution where the creation of auxiliary columns or layers
 are brought more transparently to the user by storing them in a global registry carried by the
@@ -36,7 +36,7 @@ The proposed solution have the following requirements :
 Beside usual types (string, real, integer), we may also think of geometry types. We only consider types that can be converted to atomic types (string for WKT or WKB)
 The user should be able to edit values in these columns when the layer is in editing mode.
 
-- These values should not be stored in the source, and should be carried by the project, i.e.
+- These values should not be stored with the source data, and should be carried by the project, i.e.
 when the project file is moved or copied, the auxiliary data are still there.
 
 - Adding a new row to the layer also adds a new row for each auxiliary field (with a null or default value)
@@ -85,7 +85,7 @@ Auxiliary fields
 An auxiliary field is defined for a given layer. It is a new type of field: a new enum value for QgsFields::FieldOrigin (OriginAuxiliary). The code
 of QgsVectorLayer and QgsVectorLayerFeatureIterator will be changed to reflect this new type, so that they will appear in the list of fields of a layer (alongside native fields and virtual fields).
 
-Since an auxiliary field is conceptually a join (a left join) on an external database table, auxiliary fields may only be added to vector layers with
+Since an auxiliary field is conceptually a (left) join on an external database table, auxiliary fields may only be added to vector layers with
 a primary key.
 
 Auxiliary fields are defined as a table in the central SQLite database.
@@ -114,6 +114,8 @@ In the menu that can be found for each data-defined property, a new entry could 
 and link it as the source of the data-defined property.
 
 Similar GUI shortcuts could be added in order to automate the creation of a group of data-defined properties.
+
+It will be possible to save auxiliary data of a layer to a plain vector layer, by selection of a set of auxiliary fields in the attribute table or layer's properties dialog.
 
 
 Performance Implications
