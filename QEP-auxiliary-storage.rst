@@ -9,7 +9,7 @@ QGIS Enhancement ??: Auxiliary storage
 :Contact: hugo dot mercier at oslandia dot com
 :Last Edited: 
 :Status:  
-:Version: QGIS 2.14
+:Version:
 
 Summary
 -------
@@ -18,10 +18,12 @@ This proposal is about an evolution of QGIS aiming at storing auxiliary data
 in a layer. Such auxiliary data are data used mostly for the needs of QGIS (symbology) and have no real
 interest in being stored with the native raw geospatial data.
 
-With the current (2.11) version of QGIS, adding "side" data to a vector layer requires either to
-add new columns to the souce layer or, when not possible or not desirable, to store these data
-in a new vector layer and form a join between the source layer and the "secondary" layer.
-Synchronization between the two layers is then not easy to maintain.
+The need arises from the restrictions existing in the manual placement of labels.
+Manual placement of labels are possible in QGIS by setting some labeling properties (X and Y position,
+and rotation angle optionaly) as being "data-defined", meaning that values come from a column (or an expression).
+But setting this up on an existing layer requires either to add new columns to the source layer, while it is
+not always possible or desirable. Creating another table and using join to it is possible but the synchronisation
+between the two tables is not possible, leading to a solution not satisfactory.
 
 We propose here a more integrated solution where the creation of auxiliary columns or layers
 are brought more transparently to the user by storing them in a global registry carried by the
@@ -54,7 +56,7 @@ when the project file is moved or copied, the auxiliary data are still there.
 Proposed solution
 -----------------
 
-We propose to add a new type of field, closed to the existing "virtual field" (where a field can be defined as an expression).
+We propose to add a new type of field, close to the existing "virtual field" (where a field can be defined as an expression).
 Here a new type of field, "materialized field", will points to a central data storage.
 
 The central data storage should allow to store any kind of auxiliary column definition and date for any layer. And it should
@@ -68,22 +70,24 @@ Core changes
 Project file
 ------------
 
-The current project file format (XML) is too limited to carry an efficient storage of such auxiliary date. It should somehow be evolved
-to include a binary indexable format (SQLite).
+The current project file format (XML) is too limited to carry an efficient storage of such auxiliary data. It should somehow be evolved
+to include a binary indexable format. SQLite is chosen as a first candidate for this data format. But it might evolve if performance issues
+are detected.
 
 Given the current state of the core code where lots of classes assume the project file is an XML file (everything that is saved to the project file
 has a writeXML method), it seems hard to completely refactor the project file format to a format based on SQLite.
 
-We propose to add a new layer to the project file: a SQLite database file with a special cell that stores the entire XML project file as a string.
-This way, the "old" project file format is wrapped in a SQLite file. It only adds a step before actually saving the XML tree: exporting it to a string
-and writing it as a row in a SQLite file. Symetrically during the loading, the first step would be to extract the string XML tree and pass it to the
+We propose to use a ZIP file as the root of the new project file format. A Zip file exposes a filesystem-like structure.
+The original XML-based project file will then be embedded in the zip file. And additional files could de added, and in particular
+an SQLite file.
+It only adds a step after actually saving the XML tree: including it in a zip file. Symetrically during the loading, the first step would be to extract the XML file and pass it to the
 existing readXML methods.
 
 Auxiliary fields
 -------------------
 
 An auxiliary field is defined for a given layer. It is a new type of field: a new enum value for QgsFields::FieldOrigin (OriginAuxiliary). The code
-of QgsVectorLayer and QgsVectorLayerFeatureIterator will be changed to reflect this new type, so that they will appear in the list of fields of a layer (alongside native fields and virtual fields).
+of QgsVectorLayer, QgsVectorLayerFeatureIterator and QgsVectorLayerEditBuffer will be changed to reflect this new type, so that they will appear in the list of fields of a layer (alongside native fields and virtual fields).
 
 Since an auxiliary field is conceptually a (left) join on an external database table, auxiliary fields may only be added to vector layers with
 a primary key.
@@ -102,6 +106,16 @@ An auxiliary table is added when the first auxiliary field of a layer is created
 An auxiliary table is removed and data are lost when the origin layer is closed. The closing of a layer should explicitly warn the user about the loss of auxiliary data.
 An auxiliary table is also removed when every auxiliary fields of a layer are removed.
 
+Auxiliary field as cache for expression
+---------------------------------------
+
+For data providers that do not support on-the-fly computation of values virtual fields allow to agument a virtual layer by a field computed on-the-fly by an expression.
+
+For some particular use cases (computing geometries by expressions), such computations may be slow. Evaluating the expression that defines a virtual field is needed only when
+the fields it refers change. We then propose to allow auxiliary fields to store values that are initially defined as expressions.
+
+An expression-defined auxiliary field can only be accessed for reading. The underlying fields refered to by the expression will be listed and when attributes of the vector layer
+is updated, linked expression-defined auxiliary fields will be updated.
 
 GUI Changes
 -----------
