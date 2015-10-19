@@ -18,12 +18,6 @@ A high level of refinement for manual label placement maybe required for some us
 
 We propose to rely on label paths (see QEP on label paths) to implement this feature.
 
-FIXME:
-
-How is it passed to the labeling engine ??
-=> not really a label, since it is always of fixed size.
-=> QGIS annotations with fixed size
-
 Proposed solution
 -----------------
 
