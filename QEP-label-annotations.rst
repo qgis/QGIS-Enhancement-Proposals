@@ -35,6 +35,8 @@ may be placed.
 
 Each segment of a linestring represents a position and angle for one glyph of the label letters.
 
+.. image:: label_annotation.png
+
 Since such representation is very low-level and hard to handle for the end users, tools will help to create lines where the final label
 will be drawn for common scenarios (a multi-line paragraph). For more advanced uses, the underlying multi-linestring will be available
 for modification by the end user.
