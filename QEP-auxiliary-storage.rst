@@ -47,9 +47,7 @@ when the project file is moved or copied, the auxiliary data are still there.
 
 - GUI elements should ease the creation of auxiliary fields
   - on each "data-defined" property
-  - possibly on groups of "data-defined"
-    - manual label placement
-    - label connector
+  - possibly on groups of "data-defined": for manual label placement or label connectors
 
 - It should be possible to save auxiliary data to a new layer
 
@@ -116,6 +114,11 @@ the fields it refers change. We then propose to allow auxiliary fields to store 
 
 An expression-defined auxiliary field can only be accessed for reading. The underlying fields refered to by the expression will be listed and when attributes of the vector layer
 is updated, linked expression-defined auxiliary fields will be updated.
+
+Custom properties
+-----------------
+
+The auxiliary database could optionaly be used to store custom properties of the project, since it may be more suited than XML for the storage of large data like geometries.
 
 GUI Changes
 -----------
