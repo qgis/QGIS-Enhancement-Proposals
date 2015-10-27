@@ -26,6 +26,10 @@ does not automatically fix bugs, but it does help drastically reduce the potenti
 This QEP describes a middle-ground approach to requiring compulsory unit tests for certain areas
 of the codebase without placing too much additional burden on developers.
 
+It is based on a well-defined minimal required test suite, and does not prevent
+developers from writing additional tests or requiring tests for classes not
+covered by this QEP.
+
 2. Proposal
 -------------
 
@@ -70,7 +74,7 @@ Accordingly, a class can only be categorised as CRITICAL when it already has
 3. Proposed Technical Solution
 ------------------------------
 
-When a class is categoriesd as CRITICAL, comments will be added to the source
+When a class is categorised as CRITICAL, comments will be added to the source
 code to warn developers that all changes must be accompanied by unit tests.
 These would take the form of the line:
 
@@ -79,6 +83,11 @@ These would take the form of the line:
 placed within the header, and between each function definition in the class cpp file.
 
 The contributor guidelines would be updated to reflect this requirement.
+
+For a class to be categorised as CRITICAL, a pull request will be opened which
+includes the CRITICAL comment blocks for the class. The PR can then be used
+for discussion regarding whether or not the class satisfies the requirements
+for a critical class, specifically whether it satisfies 2.1.1.
 
 
 4. Implementation Details
@@ -91,6 +100,7 @@ classes be prioritised to bring them up to CRITICAL status ASAP:
 - all geometry classes
 - QgsExpression
 - QgsDistanceArea
+- QgsStatisticalSummary
 
 #. Voting History
 -----------------
