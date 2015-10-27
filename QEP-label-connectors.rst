@@ -25,7 +25,7 @@ The current (2.11) version of QGIS allows to manually place labels when the outp
 It relies on "data defined" properties. Indeed, the X and Y positions of a label as well as its rotation angle can be defined by a data column or any
 expression.
 
-Some graphical controls allow then to manually manipulate these properties. The state of a label can changed from being automatically placed by being
+Some graphical controls allow then to manually manipulate these properties. The state of a label can be changed from being automatically placed to being
 manually placed (pinning/unpinning). When they are pinned, labels can then be moved or rotated by interaction of the user. Positions and rotations
 data are then updated in columns of the layer.
 
@@ -48,7 +48,7 @@ Possible types of connectors:
 
 .. image:: connector_types.jpg
 
-To draw the connectors additional properties (aside X and Y position) are needed like:
+To actually draw the connectors, additional properties (aside X and Y position) are needed like:
 - style of the line (plain, dotted, dashed, etc.)
 - thickness of the line
 - color of the line
