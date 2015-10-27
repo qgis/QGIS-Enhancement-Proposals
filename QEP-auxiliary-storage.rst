@@ -112,6 +112,10 @@ the fields it refers to change. We then propose to allow auxiliary fields to sto
 An expression-defined auxiliary field can only be accessed for reading. The underlying fields refered to by the expression will be listed and when attributes of the vector layer
 is updated, linked expression-defined auxiliary fields will be updated.
 
+The value of an expression of complex type may need a serialization step before being cached. For instance, values of type QgsGeometry will be stored as WK(B|T).
+
+(Actually this cache mechanism for virtual fields is not specific to auxiliary fields and could be generalized to any tpyes of providers)
+
 Custom properties
 -----------------
 
