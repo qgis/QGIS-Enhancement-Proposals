@@ -20,7 +20,7 @@ QGIS Enhancement #: Title Case Short Description of Proposed Enhancement
 
     See :ref:`QEP 1 <qep1>` for description of QEP process.
 
-#. Summary
+Summary
 ----------
 
 (required)
