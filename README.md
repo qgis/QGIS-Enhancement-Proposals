@@ -14,3 +14,5 @@ QEP's should generally be craeted for (only examples):
 - Community process and policys (e.g 3.0 release)
 
 Generally smaller features do no require a QEP unless they can have large knock on effect.
+
+QEP numbers will be assigned by [@NathanW2](https://github.com/NathanW2) when issues is created. Ping him if one is not assigned.  
