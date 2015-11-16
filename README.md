@@ -27,3 +27,10 @@ QEP numbers will be assigned by [@NathanW2](https://github.com/NathanW2) when is
 - Others can assign themselves as interested e.g I might be interested in Processing but can't comment on the code.  Mainly just to provide feedback.
 - If no maintainer for a area of code, requires at least 2 +1s from from code developers.
 - If -1 votes are received (for code based QEPs) then the proposal should be amended or further discussion conducted to satisfy all interested parties. If consensus cannot be reached, the QEP can be raised to the PSC for voting.
+
+
+## FAQ
+
+### Do I need a QEP for a bug fix?
+
+Nope. Just open a PR or push directly if you have commit rights
