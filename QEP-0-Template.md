@@ -1,4 +1,4 @@
-# QGIS Enhancement: Title Case Short Description of Proposed Enhancement
+# QGIS Enhancement: Title
 
 **Date** YYYY/MM/DD
 
