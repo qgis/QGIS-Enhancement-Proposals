@@ -1,111 +1,47 @@
-.. _qep#[.#]:
+# QGIS Enhancement ### Title Case Short Description of Proposed Enhancement
 
-========================================================================
-QGIS Enhancement #: Title Case Short Description of Proposed Enhancement
-========================================================================
+**Date** YYYY/MM/DD
+**Author** FirstName SurName (@user)
+**Contact** user at domain dot tld
+**maintainer ** @user
+**Version** QGIS X.X
 
-:Date: YYYY/MM/DD
-:Author: FirstName SurName
-:Contact: user at domain dot tld
-:Author: (optional, for each additional author)
-:Contact: (optional, for each additional author)
-:Last Edited: YYYY/MM/DD
-:Status:  Draft | Adopted (YYYY/MM/DD) | Completed (YYYY/MM/DD) |
-          Superseded by :ref:`QEP #[.#] <qep#[.#]>` (YYYY/MM/DD) |
-          Abandoned (YYYY/MM/DD) | Withdrawn (YYYY/MM/DD)
-:Supercedes: (optional) :ref:`QEP #[.#] <qep#[.#]>`
-:Version: QGIS X.X
+# Summary
 
-.. note::
+**(required)**
 
-    See :ref:`QEP 1 <qep1>` for description of QEP process.
-
-Summary
-----------
-
-(required)
-
-#. My Section
--------------
+## My Section
 
 (optional) Insert custom sections wherever needed
 
-#.# My Subsection
-.................
-
-(optional) Insert custom subsections into any section wherever needed
-
-#. Proposed [Technical] Solution | Change
------------------------------------------
-
-(required if applicable)
-
-#. Implementation Details
--------------------------
-
-(required for technical solutions/changes)
-
-#.# Example(s)
-..............
-
-(optional)
-
-#.# Python Bindings
-...................
-
-(required if applicable)
-
-#.# Affected Files
-..................
-
-(required if applicable)
-
-#. Test Coverage
-----------------
-
-(required for technical solutions/changes if applicable)
-
-#. Performance Implications
----------------------------
-
-(required if applicable)
-
-#. Further Considerations/Improvements
---------------------------------------
-
-(optional)
-
-#. Restrictions
----------------
-
-(optional)
-
-#. Backwards Compatibility
---------------------------
+## Proposed Solution
 
 (required)
 
-#. Documentation
-----------------
+### Example(s)
+
+(optional)
+
+### Affected Files
 
 (required if applicable)
 
-#. Issue Tracking ID(s)
------------------------
+## Performance Implications
 
-(required)
+**(required if known at design time)**
 
-#. References
--------------
+## Further Considerations/Improvements
 
-(optional)
+*(optional)*
 
-#. Miscellaneous
-----------------
+## Backwards Compatibility
 
-(optional)
+**(required)**
 
-#. Voting History
------------------
+## Issue Tracking ID(s)
+
+*(optional)*
+
+## Votes
 
 (required)
