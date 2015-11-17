@@ -3,7 +3,7 @@
 **Date** YYYY/MM/DD
 **Author** FirstName SurName (@user)
 **Contact** user at domain dot tld
-**maintainer ** @user
+**maintainer** @user
 **Version** QGIS X.X
 
 # Summary
