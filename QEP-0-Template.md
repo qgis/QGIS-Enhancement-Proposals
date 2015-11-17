@@ -1,9 +1,13 @@
 # QGIS Enhancement: Title Case Short Description of Proposed Enhancement
 
 **Date** YYYY/MM/DD
+
 **Author** FirstName SurName (@user)
+
 **Contact** user at domain dot tld
+
 **maintainer** @user
+
 **Version** QGIS X.X
 
 # Summary
