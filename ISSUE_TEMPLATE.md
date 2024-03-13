@@ -6,8 +6,6 @@
 
 **Contact** user at domain dot tld
 
-**maintainer** @user
-
 **Version** QGIS X.X
 
 # Summary
@@ -16,19 +14,19 @@
 
 ## My Section
 
-(optional) Insert custom sections wherever needed
+*(optional)* Insert custom sections wherever needed
 
 ## Proposed Solution
 
-(required)
+*(required)*
 
 ### Example(s)
 
-(optional)
+*(optional)*
 
 ### Affected Files
 
-(required if applicable)
+*(optional)*
 
 ## Performance Implications
 
@@ -40,12 +38,8 @@
 
 ## Backwards Compatibility
 
-**(required)**
+**(required if applicable)**
 
 ## Issue Tracking ID(s)
 
 *(optional)*
-
-## Votes
-
-(required)
