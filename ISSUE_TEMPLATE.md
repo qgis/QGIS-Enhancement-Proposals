@@ -20,6 +20,10 @@
 
 *(required)*
 
+## Deliverables
+
+*(required for QGIS grant submissions)*
+
 ### Example(s)
 
 *(optional)*
@@ -27,6 +31,10 @@
 ### Affected Files
 
 *(optional)*
+
+## Risks
+
+*(required)*
 
 ## Performance Implications
 
