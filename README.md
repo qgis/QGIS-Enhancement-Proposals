@@ -33,4 +33,4 @@ QEP numbers will be assigned by [@NathanW2](https://github.com/NathanW2) when is
 
 ### Do I need a QEP for a bug fix?
 
-Nope. Just open a PR or push directly if you have commit rights
+Nope. Just open a PR
