@@ -13,21 +13,14 @@ QEP's should generally be created for (only examples):
 
 Generally smaller features do not require a QEP unless they can have large knock on effect.
 
-QEP numbers will be assigned by [@NathanW2](https://github.com/NathanW2) when issues are created. Ping him if one is not assigned.  
-
-
 ## Process
 
-- Must be open for at least one week
-- PR can also be opened at the same time - however **not** recommend if something is still in planning stage and changing, or chance of rejection e.g don't update all the code headers with MIT and then open a QEP because it wouldn't happen.
-- Code based QEPs require at least 2 +1's from core developers. Including +1 from maintainer of that area of code (e.g Nyall for composer work, Martin for rendering thread)
-- Project QEPs require majority PSC vote
-- May be extended upon request (eg, I'm on holidays but have feedback to give)
-- May be extended if required 
-- Others can assign themselves as interested e.g I might be interested in Processing but can't comment on the code. Mainly just to provide feedback.
-- If no maintainer for a area of code, requires at least 2 +1s from core developers.
-- If -1 votes are received (for code based QEPs) then the proposal should be amended or further discussion conducted to satisfy all interested parties. If consensus cannot be reached, the QEP can be raised to the PSC for voting.
-
+- A QEP must be open for at least two weeks. This may be extended upon request (eg, "I'm on holidays but have feedback to give").
+- Newly submitted QEPs should be announced to the community via a message to the [QGIS Developer Mailing List](https://www.qgis.org/community/organisation/mailinglists/#qgis-developers-list). The [QGIS User Mailing List](https://www.qgis.org/community/organisation/mailinglists/#qgis-users-list) should also be messaged if the changes impact on QGIS end-users.
+- Comments from the **whole** community are invited and valuable! You do not need any special permissions or status in order to give feedback. We welcome feedback from all parties, whether you're a developer, a documenter, a translator or an end-user.
+- For acceptance, a QEP requires at least 2 +1's from core QGIS developers
+- If -1 votes are received from core QGIS developers, then the proposal should be amended or further discussion conducted to satisfy all interested parties. If consensus cannot be reached, the QEP can be raised to the PSC for voting.
+- A PR can also be opened at the same time - *this is done at the developer's own risk as the proposal may be rejected and the development effort wasted*
 
 ## FAQ
 
