@@ -50,29 +50,29 @@ Code Documentation
 - Avoid repetitive documentation. Eg:
 
   ```
-  /**
-   * Sets the line width in centimeters.
-   * \param width line width in centimeters
-   */
+/**
+ * Sets the line width in centimeters.
+ * \param width line width in centimeters
+ */
   ```
   
   instead:
 
-  ```
-  /**
-   * Sets the line \a width in centimeters.
-   */
-  ```
+```
+/**
+ * Sets the line \a width in centimeters.
+ */
+```
 
   or:
 
-  ```
-  /**
-   * Sets the line width.
-   *
-   * \param width line width, specified in centimeters.
-   */
-  ```
+```
+/**
+ * Sets the line width.
+ *
+ * \param width line width, specified in centimeters.
+ */
+```
 
 - All methods should have a ``\since QGIS 3.xx`` annotation added, describing the QGIS version when
   that method was added. If the method is to be backported to a stable branch, ensure that the ``\since``
