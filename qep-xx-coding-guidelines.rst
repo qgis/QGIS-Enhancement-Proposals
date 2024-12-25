@@ -16,13 +16,11 @@ Summary
 
 This proposal is meant address several issues with snapping in QGIS:
 
-#. Develop easier to use snapping API and clean up the snapping code
-#. Allow querying to be more efficient with optimized data structures
-#. Allow "point in polygon" queries for identify tool
-#. GUI improvements to make snapping easier to use
+#. Spacing and indentation rules are automatically applied by the QGIS pre-commit hooks, and accordingly are not covered here
+#. These guidelines describe QGIS specific coding practices only. Following "best practice" for modern c++ coding is assumed, and only referred to here when QGIS coding requires certain variances from this.
 
 
-Proposed Solution
+Coding Guidelines
 --------------------
 
 Naming
