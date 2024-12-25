@@ -40,8 +40,8 @@ Naming
   this can increase the lengths of names it ensures that naming is consistent across the API and
   is clearer for those of a non-native English speaking background. This applies to function names,
   variable names, and argument names.
-- Getters and setters should use Qt naming conventions, eg `setLineWidth` for a setter and
-  `lineWidth()` for the getter.
+- Getters and setters should use Qt naming conventions, eg ``setLineWidth()`` for a setter and
+  ``lineWidth()`` for the getter.
 
 Code Documentation
 ==================
@@ -49,12 +49,13 @@ Code Documentation
 - All public and protected fields must include Doxygen documentation.
 - Avoid repetitive documentation. Eg:
 
-  ```
+
+```
 /**
  * Sets the line width in centimeters.
  * \param width line width in centimeters
  */
-  ```
+```
   
   instead:
 
