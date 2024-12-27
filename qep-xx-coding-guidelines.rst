@@ -23,6 +23,7 @@ Naming
 - Variable and function naming should be camel case.
 
   - Local variables should have no name prefix (eg do not prefix variable names with ``my``)
+  - [Hungarian notation](https://en.m.wikipedia.org/wiki/Hungarian_notation) is NOT used
   - Member variables should have a ``m`` prefix (eg ``mLineWidth``)
   - Static variables should have a ``s`` prefix (eg ``sMutex``)
   - constexpr or static constants should be named in all uppercase, with underscore separators (eg
