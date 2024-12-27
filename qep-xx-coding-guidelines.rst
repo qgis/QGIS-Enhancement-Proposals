@@ -1,24 +1,18 @@
 .. _qep#[.#]:
 
 ========================================================================
-QGIS Enhancement 13: Efficient Snapping and Geometry Queries
+QGIS Enhancement 13: Code style and practice guidelines
 ========================================================================
-
-:Date: 2014/12/18
-:Author: Martin Dobias
-:Contact: wonder.sk at gmail dot com
-:Last Edited: 2015/01/05
-:Status:  Final Draft
-:Version: QGIS 2.8
 
 Summary
 ----------
 
-This proposal is meant address several issues with snapping in QGIS:
+This QEP documents coding standards and conventions used throughout the QGIS code base. Developers are required to follow these standards when submitting code to QGIS.
 
-#. Spacing and indentation rules are automatically applied by the QGIS pre-commit hooks, and accordingly are not covered here
-#. These guidelines describe QGIS specific coding practices only. Following "best practice" for modern c++ coding is assumed, and only referred to here when QGIS coding requires certain variances from this.
+Notes:
 
+- Spacing and indentation rules are automatically applied by the QGIS pre-commit hooks, and accordingly are not covered here
+- These guidelines describe QGIS specific coding practices only. Following "best practice" for modern c++ coding is assumed, and only referred to here when QGIS coding requires certain variances from this.
 
 Coding Guidelines
 --------------------
