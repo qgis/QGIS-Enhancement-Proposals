@@ -1,5 +1,4 @@
-QGIS Enhancement 13: Code style and practice guidelines
-===================================
+# QGIS Enhancement 13: Code style and practice guidelines
 
 ## Summary
 
@@ -20,9 +19,7 @@ Notes:
   - [Hungarian notation](https://en.m.wikipedia.org/wiki/Hungarian_notation) is NOT used
   - Member variables should have a ``m`` prefix (eg ``mLineWidth``)
   - Static variables should have a ``s`` prefix (eg ``sMutex``)
-  - constexpr or static constants should be named in all uppercase, with underscore separators (eg
-    ``DEFAULT_LINE_WIDTH``
-
+  - constexpr or static constants should be named in all uppercase, with underscore separators (eg ``DEFAULT_LINE_WIDTH``)
 - Classes should be named with a ``Qgs`` prefix, eg ``QgsGeometry``
 - Avoid abbreviations in naming (eg use ``maximum`` instead of ``max``, ``width`` instead of ``w``). While
   this can increase the lengths of names it ensures that naming is consistent across the API and
@@ -31,8 +28,7 @@ Notes:
 - Getters and setters should use Qt naming conventions, eg ``setLineWidth()`` for a setter and
   ``lineWidth()`` for the getter.
 
-Code Documentation
-==================
+### Code Documentation
 
 - All public and protected fields must include Doxygen documentation.
 - Avoid repetitive documentation. Eg:
@@ -75,8 +71,7 @@ Code Documentation
 
 
 
-Language features
-=================
+### Language features
 
 - For readability and ease of code review, avoid use of ``auto``. The following exceptions are permitted:
 
@@ -84,8 +79,7 @@ Language features
   
 - If ``enums`` are to be used outside of a single .h/.cpp file, they should be placed inside the ``Qgis`` namespace.
 
-Memory safety
-=============
+### Memory safety
 
 - "Factory" methods should return a std::unique_ptr (not a raw pointer), unless Qt parent/child
   ownership is in place
