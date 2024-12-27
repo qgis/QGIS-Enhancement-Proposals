@@ -13,19 +13,19 @@ Notes:
 
 ### 1. Naming
 
-1.1. Variable and function naming should be camel case.
+- 1.1 Variable and function naming should be camel case.
 
-  1.1.1. Local variables should have no name prefix (eg do not prefix variable names with ``my``)
-  - [Hungarian notation](https://en.m.wikipedia.org/wiki/Hungarian_notation) is NOT used
-  1.1.2. Member variables should have a ``m`` prefix (eg ``mLineWidth``)
-  1.1.3. Static variables should have a ``s`` prefix (eg ``sMutex``)
-  1.1.4. constexpr or static constants should be named in all uppercase, with underscore separators (eg ``DEFAULT_LINE_WIDTH``)
-1.2. Classes should be named with a ``Qgs`` prefix, eg ``QgsGeometry``
-1.3. Avoid abbreviations in naming (eg use ``maximum`` instead of ``max``, ``width`` instead of ``w``). While
+  - 1.1.1 Local variables should have no name prefix (eg do not prefix variable names with ``my``)
+  - 1.1.2 [Hungarian notation](https://en.m.wikipedia.org/wiki/Hungarian_notation) is NOT used
+  - 1.1.3 Member variables should have a ``m`` prefix (eg ``mLineWidth``)
+  - 1.1.4 Static variables should have a ``s`` prefix (eg ``sMutex``)
+  - 1.1.5 constexpr or static constants should be named in all uppercase, with underscore separators (eg ``DEFAULT_LINE_WIDTH``)
+- 1.2 Classes should be named with a ``Qgs`` prefix, eg ``QgsGeometry``
+- 1.3 Avoid abbreviations in naming (eg use ``maximum`` instead of ``max``, ``width`` instead of ``w``). While
   this can increase the lengths of names it ensures that naming is consistent across the API and
   is clearer for those of a non-native English speaking background. This applies to function names,
   variable names, and argument names.
-1.4. Getters and setters should use Qt naming conventions, eg ``setLineWidth()`` for a setter and
+- 1.4 Getters and setters should use Qt naming conventions, eg ``setLineWidth()`` for a setter and
   ``lineWidth()`` for the getter.
 
 ### Code Documentation
