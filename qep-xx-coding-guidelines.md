@@ -60,10 +60,11 @@ Notes:
 ```
 
 - Qt style grammar and wording should be used. eg "Returns the line width" instead of "getter for line width", "Sets the line width" instead of "setter for line width", etc.
-- All methods should have a ``\since QGIS 3.xx`` annotation added, describing the QGIS version when
+- Ensure that the first line in the documentation is a concise sentence describing the method or class. This first line is interpreted as a brief summary of the object, and is used in table of contents in the c++ and PyQGIS documentation. The first line must be followed by a blank line, before any detailed explanations are described.
+- All methods and classes must have a ``\since QGIS 3.xx`` annotation added, describing the QGIS version when
   that method was added. If the method is to be backported to a stable branch, ensure that the ``\since``
   version correctly describes version at which that method is guaranteed to be accessible. (eg ``\since QGIS 3.34.8``
-  instead of ``\since QGIS 3.34``)
+  instead of ``\since QGIS 3.34``). Methods introduced in the same version as their class do not require an explicit since annotation.
 - Avoid re-documenting overridden methods, unless there is **specific** behavior differences in the override
   which added extra useful information over the base virtual method documentation.
 - Use ``\see otherMethod()`` to link getters and setters (and other related methods)
