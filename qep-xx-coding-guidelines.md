@@ -29,6 +29,7 @@ Naming
   - constexpr or static constants should be named in all uppercase, with underscore separators (eg
     ``DEFAULT_LINE_WIDTH``
 
+- Classes should be named with a ``Qgs`` prefix, eg ``QgsGeometry``
 - Avoid abbreviations in naming (eg use ``maximum`` instead of ``max``, ``width`` instead of ``w``). While
   this can increase the lengths of names it ensures that naming is consistent across the API and
   is clearer for those of a non-native English speaking background. This applies to function names,
