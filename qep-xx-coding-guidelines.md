@@ -1,8 +1,7 @@
 QGIS Enhancement 13: Code style and practice guidelines
 ===================================
 
-Summary
-----------
+## Summary
 
 This QEP documents coding standards and conventions used throughout the QGIS code base. Developers are required to follow these standards when submitting code to QGIS.
 
@@ -11,11 +10,9 @@ Notes:
 - Spacing and indentation rules are automatically applied by the QGIS pre-commit hooks, and accordingly are not covered here
 - These guidelines describe QGIS specific coding practices only. Following "best practice" for modern c++ coding is assumed, and only referred to here when QGIS coding requires certain variances from this.
 
-Coding Guidelines
---------------------
+## Coding Guidelines
 
-Naming
-======
+### Naming
 
 - Variable and function naming should be camel case.
 
