@@ -69,15 +69,15 @@ Code Documentation
  */
 ```
 
+- Qt style grammar and wording should be used. eg "Returns the line width" instead of "getter for line width", "Sets the line width" instead of "setter for line width", etc.
 - All methods should have a ``\since QGIS 3.xx`` annotation added, describing the QGIS version when
   that method was added. If the method is to be backported to a stable branch, ensure that the ``\since``
   version correctly describes version at which that method is guaranteed to be accessible. (eg ``\since QGIS 3.34.8``
   instead of ``\since QGIS 3.34``)
 - Avoid re-documenting overridden methods, unless there is **specific** behavior differences in the override
   which added extra useful information over the base virtual method documentation.
-- Qt style grammar and wording should be used. eg "Returns the line width" instead of "getter for line width", "Sets the line width" instead of "setter for line width", etc.
 - Use ``\see otherMethod()`` to link getters and setters (and other related methods)
-- The literal values ``true``, ``false`` and ``nullptr`` should be written in documentation as ``TRUE``, ``FALSE`` and ``NULLPTR`` respectively. (Preprocessing macros correctly replace these with ``true``, ``false`` and ``nullptr`` for the c++ documentation, and ``True``, ``False`` and ``None`` for the PyQgis documenatation)
+- The literal values ``true``, ``false`` and ``nullptr`` should be written in documentation as ``TRUE``, ``FALSE`` and ``NULLPTR`` respectively. (Preprocessing macros correctly replace these with ``true``, ``false`` and ``nullptr`` for the c++ documentation, and ``True``, ``False`` and ``None`` for the PyQgis documentation)
 
 
 
