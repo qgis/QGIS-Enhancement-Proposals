@@ -79,7 +79,7 @@ Notes:
 
   - 3.1.1. ``auto`` should be used for complex types, such as iterators. Eg ``for ( auto it = object.begin(); ...)``
   
-- 3.2. If ``enums`` are to be used outside of a single .h/.cpp file, they should be placed inside the ``Qgis`` namespace.
+- 3.2. If ``enums`` are to be used outside of a single .h/.cpp file (or there is a reasonable chance that they will be in future!), they should be placed inside the ``Qgis`` namespace.
 
 ### 4. Memory safety
 
