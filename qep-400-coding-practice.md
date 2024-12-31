@@ -70,7 +70,7 @@ Notes:
   which added extra useful information over the base virtual method documentation.
 - 2.7. Use ``\see otherMethod()`` to link getters and setters (and other related methods)
 - 2.8. The literal values ``true``, ``false`` and ``nullptr`` should be written in documentation as ``TRUE``, ``FALSE`` and ``NULLPTR`` respectively. (Preprocessing macros correctly replace these with ``true``, ``false`` and ``nullptr`` for the c++ documentation, and ``True``, ``False`` and ``None`` for the PyQGIS documentation)
-- 2.9. Include explicit details of memory ownership in the documentation. Eg "ownership of the symbol is transferred to the renderer", "caller takes ownership of thr returned object".
+- 2.9. Include explicit details of memory ownership in the documentation. Eg "ownership of the symbol is transferred to the renderer", "caller takes ownership of the returned object".
 
 
 ### 3. Language features
