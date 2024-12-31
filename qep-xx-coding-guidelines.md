@@ -13,7 +13,7 @@ Notes:
 
 ### 1. Naming
 
-- 1.1. Variable and function naming should be camel case.
+- 1.1. Variable and function naming should be camel case. Generally Qt's approach to capitalising only the first letter in acronyms is used (eg ``QgsGpsDetector``, not ``QgsGPSDetector``), with the exception of ``3D`` (eg ``Qgs3DMapCanvas``).
 
   - 1.1.1. Local variables should have no name prefix (eg do not prefix variable names with ``my``)
   - 1.1.2. [Hungarian notation](https://en.m.wikipedia.org/wiki/Hungarian_notation) is NOT used, except in some exceptional circumstances (eg variable names used with the gdal c API)
