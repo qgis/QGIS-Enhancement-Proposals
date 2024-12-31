@@ -81,6 +81,7 @@ Notes:
   
 - 3.2. If ``enums`` are to be used outside of a single .h/.cpp file (or there is a reasonable chance that they will be in future!), they should be placed inside the ``Qgis`` namespace.
 
+- 3.3. Checking if a pointer is null should be done with ``if ( !ptr )``, omitting explicit comparison with the ``nullptr`` constant.
 ### 4. Memory safety
 
 - 4.1. "Factory" methods should return a std::unique_ptr (not a raw pointer), unless Qt parent/child
