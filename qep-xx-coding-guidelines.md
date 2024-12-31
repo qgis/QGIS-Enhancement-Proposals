@@ -60,6 +60,7 @@ Notes:
 ```
 
 - 2.3. Qt style grammar and wording should be used. eg "Returns the line width" instead of "getter for line width", "Sets the line width" instead of "setter for line width", etc.
+  - 2.3.1. Use full sentences with correct punctuation (capitalisation and full stops) to ensure the documentation conveys professionality.
 - 2.4. Ensure that the first line in the documentation is a concise sentence describing the method or class. This first line is interpreted as a brief summary of the object, and is used in table of contents in the c++ and PyQGIS documentation. The first line must be followed by a blank line, before any detailed explanations are described.
 - 2.5. All methods and classes must have a ``\since QGIS 3.xx`` annotation added, describing the QGIS version when
   that method was added. If the method is to be backported to a stable branch, ensure that the ``\since``
@@ -69,7 +70,7 @@ Notes:
   which added extra useful information over the base virtual method documentation.
 - 2.7. Use ``\see otherMethod()`` to link getters and setters (and other related methods)
 - 2.8. The literal values ``true``, ``false`` and ``nullptr`` should be written in documentation as ``TRUE``, ``FALSE`` and ``NULLPTR`` respectively. (Preprocessing macros correctly replace these with ``true``, ``false`` and ``nullptr`` for the c++ documentation, and ``True``, ``False`` and ``None`` for the PyQGIS documentation)
-
+- 2.9. Include explicit details of memory ownership in the documentation. Eg "ownership of the symbol is transferred to the renderer", "caller takes ownership of thr returned object".
 
 
 ### 3. Language features
