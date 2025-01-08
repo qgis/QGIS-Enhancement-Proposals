@@ -81,7 +81,18 @@ Notes:
   
 - 3.2. If ``enums`` are to be used outside of a single .h/.cpp file (or there is a reasonable chance that they will be in future!), they should be placed inside the ``Qgis`` namespace.
 
-- 3.3. Checking if a pointer is null should be done with ``if ( !ptr )``, omitting explicit comparison with the ``nullptr`` constant.
+- 3.3. Checking if a pointer is null should be done with ``if ( !ptr )`` or ``if (ptr )`` alone, omitting explicit comparison with the ``nullptr`` constant.
+  
+- 3.4. Always use ``std::as_const`` to wrap the iterated container when iterating over non-const Qt containers (ie QList, QVector, QHash, ...). E.g.
+
+```
+QList< int > someList;
+for ( int value : std::as_const( someList ))
+{
+ ...
+}
+```
+
 ### 4. Memory safety
 
 - 4.1. "Factory" methods should return a std::unique_ptr (not a raw pointer), unless Qt parent/child
