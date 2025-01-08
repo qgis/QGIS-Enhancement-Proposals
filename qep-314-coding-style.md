@@ -101,7 +101,7 @@ if ( s == QLatin1String( "another string" ) )
     ...
 ```
 
-- 3.6. Don't use qDebug(), qWarn() or other Qt debug print functions. Instead use ``QgsDebugError`` for unexcepted error logging only, or ``QgsDebugMsgLevel`` (with a level of 2 or higher, depending on how "noisy" the logging will be) for debug outputs which occur in normal operations.
+- 3.6. Don't use ``qDebug()``, ``qWarn()`` or other Qt debug print functions. Instead use ``QgsDebugError`` for unexcepted error logging only, or ``QgsDebugMsgLevel`` (with a level of 2 or higher, depending on how "noisy" the logging will be) for debug outputs which occur in normal operations.
 
 ### 4. Memory safety
 
