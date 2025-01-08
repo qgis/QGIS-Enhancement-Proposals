@@ -93,6 +93,14 @@ for ( int value : std::as_const( someList ))
 }
 ```
 
+- 3.5. Use ``QStringLiteral`` for untranslated literals, and ``QLatin1String`` for string comparisons. E.g.
+
+```
+const QString s = QStringLiteral( "my string" );
+if ( s == QLatin1String( "another string" ) )
+    ...
+```
+
 ### 4. Memory safety
 
 - 4.1. "Factory" methods should return a std::unique_ptr (not a raw pointer), unless Qt parent/child
