@@ -100,3 +100,9 @@ for ( int value : std::as_const( someList ))
 - 4.2. Methods which take ownership of an object should default to taking a unique_ptr argument, **UNLESS**
   these methods are to be exposed to Python, in which case a raw pointer with the ``SIP_TRANSFER`` annotation
   is required.
+
+### 5. File structure 
+
+- 5.1. Includes should be at the top of the .h or .cpp files. Group QGIS includes together, and where possible, include QGIS headers before Qt or other external library headers.
+- 5.2. When including Qt headers, use ``#include <QString>`` instead of ``#include qstring.h``.
+- 5.3. Avoid module wide Qt imports, i.e. don't ``#include <QtGui>``.
