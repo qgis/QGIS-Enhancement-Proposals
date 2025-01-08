@@ -1,4 +1,4 @@
-# QGIS Enhancement 400: Code style and practice guidelines
+# QGIS Enhancement 314: Code style and practice guidelines
 
 ## Summary
 
