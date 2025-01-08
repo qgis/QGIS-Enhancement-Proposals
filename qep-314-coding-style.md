@@ -103,6 +103,7 @@ if ( s == QLatin1String( "another string" ) )
 
 - 3.6. Don't use ``qDebug()``, ``qWarn()`` or other Qt debug print functions. Instead use ``QgsDebugError`` for unexcepted error logging only, or ``QgsDebugMsgLevel`` (with a level of 2 or higher, depending on how "noisy" the logging will be) for debug outputs which occur in normal operations.
 - 3.7. Member variables should normally be in the private section and made available via getters and setters. This ensures full compatibility with the PyQGIS bindings and allows refactoring in future without API breakage.
+- 3.8. Avoid use of Qt "auto connect slots" (i.e. those named ``void on_mSpinBox_valueChanged``). Auto connect slots are fragile and prone to breakage without warning if UI files are refactored.
 
 ### 4. Memory safety
 
