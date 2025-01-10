@@ -33,18 +33,8 @@ This work includes the graphic design of almost 20 icons for widget types, as we
 #### Other UI/UX enhancements
 
  + **Filter/search box**, taking advantage of the model-based tree view.
-
  + **Form preview**, to give users the option to see what they'll get easily and in the right place, i.e., without having to follow additional steps like closing Layer properties, enabling editing and adding a feature just to see what they've just configured in action. The preview will be opened in a new window, parented to the Vector Layer Properties dialog.
-
  + In the form layout panel, users will have the possibility to **switch between aliases and item names**, depending on their needs. This is particularly handy to easily find form layout items as they will be displayed in the generated input form, which may be cumbersome nowadays.
-
- + The widget configuration panel (i.e., the right-hand side panel) currently shows display, field and widget associated configurations in a single page. We'll separate them in **three tabs**:
-
-    + Display: display group;
-    + Field: general group, constraints, default values;
-    + Widget: widget type.
-
-     To ease association, the Field tab could get the focus when a user selects an available item in the left-hand side panel, whereas the Widget tab would get the focus when a user selects an item in the form layout panel (i.e., the one in the middle).
 
 ## Deliverables
 
@@ -53,8 +43,11 @@ Pull request(s) in QGIS repo implementing the enhancements listed and described 
 ### Affected Files
 
 `src/gui/attributeformconfig/*`
+
 `src/gui/vector/qgsattributesformproperties.cpp`
+
 `src/gui/vector/qgsattributesformproperties.h`
+
 ...
 
 ## Risks
