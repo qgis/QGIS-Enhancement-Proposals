@@ -55,7 +55,7 @@ When the discussion and voting period ends, one of the following actions are tak
 
 ### Policy/process related QEPs
 
-- [Code style and practice guidelines](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-314-coding-style.md). This
+- [#314 Code style and practice guidelines](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-314-coding-style.md). This
   QEP documents coding standards and conventions used throughout the QGIS code base. Developers are required to follow these standards
   when submitting code to QGIS.
 
