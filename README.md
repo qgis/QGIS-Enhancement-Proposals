@@ -51,6 +51,14 @@ When the discussion and voting period ends, one of the following actions are tak
   outcome of the proposal.
 - **If the proposal was rejected**: the Pull Request should be closed
 
+## List of approved QEPs
+
+### Policy/process related QEPs
+
+- [Code style and practice guidelines](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-314-coding-style.md). This
+  QEP documents coding standards and conventions used throughout the QGIS code base. Developers are required to follow these standards
+  when submitting code to QGIS.
+
 ## FAQ
 
 ### Do I need a QEP for a bug fix?
