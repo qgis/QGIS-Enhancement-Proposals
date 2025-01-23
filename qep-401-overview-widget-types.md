@@ -33,7 +33,7 @@ This work includes the graphic design of almost 20 icons for widget types, as we
 #### Other UI/UX enhancements
 
  + **Filter/search box**, taking advantage of the model-based tree view.
- + **Form preview**, to give users the option to see what they'll get easily and in the right place, i.e., without having to follow additional steps like closing Layer properties, enabling editing and adding a feature just to see what they've just configured in action. The preview will be opened in a new window, parented to the Vector Layer Properties dialog.
+ + **Form preview**, to give users the option to see what they'll get easily and in the right place, i.e., without having to follow additional steps like closing Layer properties, enabling editing and adding a feature just to see what they've just configured in action. The preview will be opened in a new window, parented to the Vector Layer Properties dialog, and will display sample data from the layer's data source, in the same way as it's currently done to evaluate expressions in the Expression Editor.
  + In the form layout panel, users will have the possibility to **switch between aliases and item names**, depending on their needs. This is particularly handy to easily find form layout items as they will be displayed in the generated input form, which may be cumbersome nowadays.
 
 ## Deliverables
