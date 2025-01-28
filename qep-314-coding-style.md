@@ -77,7 +77,7 @@ Notes:
 
 - 3.1. For readability and ease of code review, avoid use of ``auto``. The following exceptions are permitted:
 
-  - 3.1.1. ``auto`` should be used for complex types, such as iterators and lambda functions. Eg ``for ( auto it = object.begin(); ...)``
+  - 3.1.1. ``auto`` should be used for complex types, such as iterators and lambda functions. Eg ``for ( auto it = object.constBegin(); ...)``
   - 3.1.2. ``auto`` may be used for ``std::unique_ptr`` and ``std::shared_ptr`` types if the pointer type is explicit during variable initialization. Eg
 
 ```
