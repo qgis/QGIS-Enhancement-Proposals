@@ -24,6 +24,7 @@ Notes:
   - 1.4.2. API modifications and additions which are suitably "low risk"
   - 1.4.3. Test case additions
   - 1.4.4. Documentation fixes and improvements
+  - 1.4.5. Performance optimizations
 - 1.5. Changes which are NOT permissible for backporting include:
   - 1.5.1 New features
 - 1.6. Try to avoid backporting changes which introduce new strings for translation,
