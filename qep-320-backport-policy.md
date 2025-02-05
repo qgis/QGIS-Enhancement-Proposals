@@ -21,7 +21,7 @@ Notes:
    their own backported changes.
 - 1.4. Changes which are permissible for backporting are:
   - 1.4.1. Bug fixes
-  - 1.4.2. API modifications and additions which are suitably "low risk"
+  - 1.4.2. API modifications and additions which have a low risk of introducing regressions
   - 1.4.3. Test case additions
   - 1.4.4. Documentation fixes and improvements
   - 1.4.5. Performance optimizations
