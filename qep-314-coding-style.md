@@ -77,8 +77,18 @@ Notes:
 
 - 3.1. For readability and ease of code review, avoid use of ``auto``. The following exceptions are permitted:
 
-  - 3.1.1. ``auto`` should be used for complex types, such as iterators. Eg ``for ( auto it = object.begin(); ...)``
-  
+  - 3.1.1. ``auto`` should be used for complex types, such as iterators and lambda functions. Eg ``for ( auto it = object.constBegin(); ...)``
+  - 3.1.2. ``auto`` may be used for ``std::unique_ptr`` and ``std::shared_ptr`` types if the pointer type is explicit during variable initialization. Eg
+
+```
+// allowed, as the std::unique_ptr< QgsPoint >, std::shared_ptr< QgsPoint > types are explicit during initialization:
+auto pointUniquePointer = std::make_unique< QgsPoint >( 3, 4 );
+auto pointSharedPointer = std::make_shared< QgsPoint >( 3, 4 );
+
+// NOT allowed, the unique_ptr type is not explicit:
+auto myUniquePtr = createObjectFunction( 0, 5 );
+```
+
 - 3.2. If ``enums`` are to be used outside of a single .h/.cpp file (or there is a reasonable chance that they will be in future!), they should be placed inside the ``Qgis`` namespace.
 
 - 3.3. Checking if a pointer is null should be done with ``if ( !ptr )`` or ``if ( ptr )`` alone, omitting explicit comparison with the ``nullptr`` constant.
