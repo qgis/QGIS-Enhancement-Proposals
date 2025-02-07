@@ -45,6 +45,9 @@ Notes:
     after one point release cycle delay. This ensures that the changes have been included
     in a stable release for at least one cycle prior to inclusion in the LTR, significantly
     reducing risk of mid-LTR regressions.
+    - 3.1.1.1. In the case that a regression is identified in a queued LTR backport, either
+      the backport should be reverted from the LTR branch OR case taken to ensure a regression
+      fix is merged for the same LTR release the original buggy backport.
   - 3.1.2. Exceptions are made for the following backports, which are permissible for 
     immediate backporting into the LTR branch:
     - 3.1.2.1. Crash fixes
