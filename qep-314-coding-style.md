@@ -34,30 +34,30 @@ Notes:
 - 2.2. Avoid repetitive documentation. Eg:
 
 
-```
-/**
- * Sets the line width in centimeters.
- * \param width line width in centimeters
- */
-```
+  ``` h
+  /**
+   * Sets the line width in centimeters.
+   * \param width line width in centimeters
+   */
+  ```
   
   instead:
 
-```
-/**
- * Sets the line \a width in centimeters.
- */
-```
+  ``` h
+  /**
+   * Sets the line \a width in centimeters.
+   */
+  ```
 
   or:
 
-```
-/**
- * Sets the line width.
- *
- * \param width line width, specified in centimeters.
- */
-```
+  ``` h
+  /**
+   * Sets the line width.
+   *
+   * \param width line width, specified in centimeters.
+   */
+  ```
 
 - 2.3. Qt style grammar and wording should be used. eg "Returns the line width" instead of "getter for line width", "Sets the line width" instead of "setter for line width", etc.
   - 2.3.1. Use full sentences with correct punctuation (capitalisation and full stops) to ensure the documentation conveys professionality.
@@ -80,14 +80,14 @@ Notes:
   - 3.1.1. ``auto`` should be used for complex types, such as iterators and lambda functions. Eg ``for ( auto it = object.constBegin(); ...)``
   - 3.1.2. ``auto`` may be used for ``std::unique_ptr`` and ``std::shared_ptr`` types if the pointer type is explicit during variable initialization. Eg
 
-```
-// allowed, as the std::unique_ptr< QgsPoint >, std::shared_ptr< QgsPoint > types are explicit during initialization:
-auto pointUniquePointer = std::make_unique< QgsPoint >( 3, 4 );
-auto pointSharedPointer = std::make_shared< QgsPoint >( 3, 4 );
+  ``` cpp
+  // allowed, as the std::unique_ptr< QgsPoint >, std::shared_ptr< QgsPoint > types are explicit during initialization:
+  auto pointUniquePointer = std::make_unique< QgsPoint >( 3, 4 );
+  auto pointSharedPointer = std::make_shared< QgsPoint >( 3, 4 );
 
-// NOT allowed, the unique_ptr type is not explicit:
-auto myUniquePtr = createObjectFunction( 0, 5 );
-```
+  // NOT allowed, the unique_ptr type is not explicit:
+  auto myUniquePtr = createObjectFunction( 0, 5 );
+  ```
 
 - 3.2. If ``enums`` are to be used outside of a single .h/.cpp file (or there is a reasonable chance that they will be in future!), they should be placed inside the ``Qgis`` namespace.
 
@@ -95,21 +95,21 @@ auto myUniquePtr = createObjectFunction( 0, 5 );
   
 - 3.4. Always use ``std::as_const`` to wrap the iterated container when iterating over non-const Qt containers (ie QList, QVector, QHash, ...). E.g.
 
-```
-QList< int > someList;
-for ( int value : std::as_const( someList ))
-{
- ...
-}
-```
+  ``` cpp
+  QList< int > someList;
+  for ( int value : std::as_const( someList ))
+  {
+   ...
+  }
+  ```
 
 - 3.5. Use ``QStringLiteral`` for untranslated literals, and ``QLatin1String`` for string comparisons. E.g.
 
-```
-const QString s = QStringLiteral( "my string" );
-if ( s == QLatin1String( "another string" ) )
-    ...
-```
+  ``` cpp
+  const QString s = QStringLiteral( "my string" );
+  if ( s == QLatin1String( "another string" ) )
+      ...
+  ```
 
 - 3.6. Don't use ``qDebug()``, ``qWarn()`` or other Qt debug print functions. Instead use ``QgsDebugError`` for unexcepted error logging only, or ``QgsDebugMsgLevel`` (with a level of 2 or higher, depending on how "noisy" the logging will be) for debug outputs which occur in normal operations.
 - 3.7. Member variables should normally be in the private section and made available via getters and setters. This ensures full compatibility with the PyQGIS bindings and allows refactoring in future without API breakage.
