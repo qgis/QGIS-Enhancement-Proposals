@@ -21,7 +21,7 @@ In order to be eligible, a developer must have:
 (While the project recognises the **immense** value in non-code contributions to QGIS, this status is designed exclusively for
 contributors of code.)
 
-## 1.1. Process for nomination
+## 1.1. Process for Nomination
 
 TODO
 
@@ -73,7 +73,7 @@ Active committers agree to:
 
 The QGIS PSC reserves the right to:
 
-- 2.4.1 Remove commit rights immediately in cases of security concerns or code of conduct violations
+- 2.4.1. Remove commit rights immediately in cases of security concerns or code of conduct violations
 - 2.4.2. Grant exceptions to this policy in special cases, documented with clear justification
 - 2.4.3. Review and update this policy as needed to maintain project security and vitality
 - 2.4.4. In recognition of the project's history, Gary Sherman is considered an extraordinary exception to these policies and
