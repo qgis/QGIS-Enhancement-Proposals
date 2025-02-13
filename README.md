@@ -58,6 +58,8 @@ When the discussion and voting period ends, one of the following actions are tak
 - [#314 Code style and practice guidelines](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-314-coding-style.md). This
   QEP documents coding standards and conventions used throughout the QGIS code base. Developers are required to follow these standards
   when submitting code to QGIS.
+- [#323 Change submission and merge policies](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-323-code-submission-policy.md). This QEP documents policies for submission of changes to the main QGIS code repository.
+  Developers are required to follow these standards when submitting code to QGIS.
 - [#320 Backport policies](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-320-backport-policy.md). This
   QEP documents the standards and requirements for backporting changes from the ``master`` branch to Long Term Release (LTR)
   and current stable release branches in QGIS. Developers must follow these guidelines when submitting backports.
