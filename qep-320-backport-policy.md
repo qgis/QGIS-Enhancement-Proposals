@@ -54,3 +54,4 @@ Notes:
     - 3.1.2.2. Data corruption fixes
     - 3.1.2.3. Regression fixes
     - 3.1.2.4. Security related fixes
+    - 3.1.2.5. Changes that have been included in a stable release for at least one cycle, but were not backported.
