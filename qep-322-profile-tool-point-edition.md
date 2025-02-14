@@ -19,6 +19,7 @@ The main challenge of this feature is ensuring that these new functionalities do
 - Add a new editing section to the toolbar within the elevation profile panel.
 - Display the editing icon for the layer currently selected in the elevation profile tree view.
 - Synchronize edition state between the main canvas and the elevation profile: enabling edition on a layer from the elevation profile will activate it in the main canvas, and vice versa.
+- Synchronize selection: it is the same between the elevation plots and the main layer.
 
 Tolerance will not be handled when adding or moving points. This means that the points will always be placed on the profile line.  
 This editing toolbox will not be enabled if the selected layer is not a point layer.
