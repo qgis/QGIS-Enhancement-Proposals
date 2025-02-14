@@ -21,17 +21,40 @@ The main challenge of this feature is ensuring that these new functionalities do
 - Synchronize edition state between the main canvas and the elevation profile: enabling edition on a layer from the elevation profile will activate it in the main canvas, and vice versa.
 - Synchronize selection: it is the same between the elevation plots and the main layer.
 
-Tolerance will not be handled when adding or moving points. This means that the points will always be placed on the profile line.  
+The different operations (Add, Delete, Move, Select) will be implemented by creating new tools that inherit from `QgsPlotTool`. 
+
 This editing toolbox will not be enabled if the selected layer is not a point layer.
 
-The different operations (Add, Delete, Move, Select) will be implemented by creating new tools that inherit from `QgsPlotTool`.
+### Selection
 
-This branch already contains a rough implementation: https://github.com/ptitjano/QGIS/tree/capture-profile-points
+Select features by clicking on them or with a rectangle selection. keyboard modifiers will allow to select points more precisely:
+
+ - Shift to add to current selection
+ - Control to remove from current selection
+
+### Add features
+
+In editing mode, activate it by clicking the "Add Point Feature" button in the elevation profile panel. then click on the elevation profile to add a new point. If necessary, the attribute form will immediately open. Snapping will be handled.
+
+### Move features
+
+In editing mode, activate it by clicking the "Move Points Feature" button in the elevation profile panel. Select a point by clicking on it and then click on its new location. Moving points will have a special "lock abscissa" keyboard modifier to avoid changing x/y coordinate while moving. It will also handle snapping. 
+
+### Delete features
+
+Deletion of features will work on selection. First, select features by clicking on them or using a rectangle selection. Then delete them by clicking the "Delete Features" button from the elevation profile toolbar.
+
+### Tolerance
+
+ - added points will be placed on the profile line
+ - points can be picked/selected in the tolerance zone to be moved or deleted but moved points are reprojected on the profile line (x/y are changed when z is moved)
 
 ## Deliverables
 
 - A new editing toolbox in the profile tool
 - Add / Move / Delete / Select points from the profile tool
+
+This branch already contains a rough implementation: https://github.com/ptitjano/QGIS/tree/capture-profile-points
 
 ### Affected Files
 
