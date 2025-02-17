@@ -20,6 +20,11 @@ Developers are required to follow these standards when submitting code to QGIS.
       CI checks on pull requests is prohibitive, or where there is a need to repair
       CI environment in order to allow normal pull request activity.
     - Release and packaging related commits, such as version tagging.
+    - In extremely rare cases, a significantly experienced QGIS developer may self-approve
+      their own PR in the situation that they are fixing a bug in their own code or when changes
+      are minor/trivial, and where they are absolutely sure there is no risk of danger or
+      regressions from the change, **if and only if** their original pull request had no
+      activity or discussion after at least one week. *This is discouraged, but permissible.*
   - 1.1.3. All Pull Requests should be accompanied by a descriptive title and explanatory text.
     Linking to existing issues, feature requests or external discussion are encouraged
     for reviewer context. 
