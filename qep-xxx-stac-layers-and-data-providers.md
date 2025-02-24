@@ -1,6 +1,6 @@
 # QGIS Enhancement: STAC layers/data providers
 
-**Date** 2025/02/11
+**Date** 2025/02/24
 
 **Author** Jan Dalheimer (@02JanDal)
 
