@@ -18,6 +18,9 @@ The screenshot below shows the current DB Manager history panel:
 
 ![db_manager_version.png](images/qep332/db_manager_version.png)
 
+_**This is the last feature available in DB Manager's SQL window which is not yet available
+via the QGIS Browser panel.**_
+
 ## Proposed Solution
 
 The existing "Execute SQL" dialog (``QgsQueryResultWidget``) will be modified to add support
