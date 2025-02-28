@@ -1,4 +1,4 @@
-# QGIS Enhancement 334: Adding screenshots to PyQGIS documentation
+# QGIS Enhancement 333: Adding screenshots to PyQGIS documentation
 
 **Date** 2025-02-025
 
@@ -21,7 +21,7 @@ site at https://webgeodatavore.github.io/pyqgis-samples/index.html. This site
 included some great content, including screenshots and example code for many PyQGIS classes.
 For example, here's what the site includes for the ``QgsMapLayerComboBox`` class:
 
-![webgeodatavore_screenshot.png](images/qep334/webgeodatavore_screenshot.png)
+![webgeodatavore_screenshot.png](images/qep333/webgeodatavore_screenshot.png)
 
 Unfortunately, this site is outdated and has not been updated for either QGIS 3.x or Qt 5,
 and accordingly is no longer a valuable resource. This is a shame, as the example
@@ -152,7 +152,7 @@ def generate_screenshot(dest_path: Path):
 
 The resultant documentation page looks like this:
 
-![character_widget.png](images/qep334/character_widget.png)
+![character_widget.png](images/qep333/character_widget.png)
 
 
 ### QgsColorBox
@@ -185,7 +185,7 @@ def generate_screenshot(dest_path: Path):
 
 The resultant documentation page looks like this:
 
-![qgscolorbox.png](images/qep334/qgscolorbox.png)
+![qgscolorbox.png](images/qep333/qgscolorbox.png)
 
 
 ### QgsMapLayerComboBox
@@ -225,7 +225,7 @@ def generate_screenshot(dest_path: Path):
 
 The resultant documentation page looks like this:
 
-![qgsmaplayercombobox.png](images/qep334/qgsmaplayercombobox.png)
+![qgsmaplayercombobox.png](images/qep333/qgsmaplayercombobox.png)
 
 
 ## Deliverables
