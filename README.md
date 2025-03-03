@@ -1,20 +1,20 @@
 QEP Process and workflow
 ---
 
-QEP's (QGIS Enhancement Proposals) are used in the process of creating and discussing new enhancements or policy for
+QEPs (QGIS Enhancement Proposals) are used in the process of creating and discussing new enhancements or policy for
 QGIS
 
-QEP's should generally be created for (only examples):
+QEPs should generally be created for (only examples):
 
 - Large application wide changes (e.g major UI redesign)
-- Large work with wider scope (e.g something that might effect how layers are loaded.)
+- Large work with wider scope (e.g something that might effect how layers are loaded)
 - Community processes and policies (e.g 3.0 release, changes to coding conventions)
 
 Generally smaller features do not require a QEP unless they can have large knock on effect.
 
 QEPs which describe project policies (such as those which describe coding conventions, acceptable practice for Pull
-Request reviews, etc) are mutable, and can be revised
-in future. See Processes and Policies section below for a description on how to amend an existing QEP.
+Request reviews, etc) are mutable, and can be revised in future. See Processes and Policies section below for a
+description on how to amend an existing QEP.
 
 ## Process and policies
 
