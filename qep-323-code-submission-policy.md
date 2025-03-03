@@ -56,3 +56,13 @@ Before a Pull Request can be merged to the repository, it must:
       regressions from the change, **if and only if** their original pull request had no
       activity or discussion after at least one week. *This is discouraged, but permissible.*
 - 2.4. Have no outstanding change requests or unresolved discussion from a **Core Contributor**.
+- 2.5. A Pull Request must remain open for at least 24 hours following submission, even if it has
+  already been approved (see 2.3). This is to allow wider feedback to be gathered prior to merge,
+  and to permit pre-merge feedback from developers in other time zones.
+  - Exceptions to this policy are:
+    - 2.5.1. Approved Pull Requests for backports to stable branches
+    - 2.5.2. "Emergency" pull requests, e.g. those which fix broken master builds, CI
+      infrastructure or which represent a time-sensitive security risk.
+    - 2.5.3. "Trivial" fixes. The definition of "trivial" is left open to common sense
+      and developer discretion, but is expected to include non-risky changes like
+      typo fixes, translation string fixes, tab order changes, or similar.
