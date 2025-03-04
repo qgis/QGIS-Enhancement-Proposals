@@ -88,6 +88,19 @@ Notes:
   // NOT allowed, the unique_ptr type is not explicit:
   auto myUniquePtr = createObjectFunction( 0, 5 );
   ```
+  - 3.1.3. ``auto`` may be used for variable types where the variable type is explicitly stated via a cast operation, including
+    ``dynamic_cast``, ``static_cast``, ``const_cast``, ``reinterpret_cast``, ``qobject_cast``,
+    ``qgsgeometry_cast``, or ``qgis::down_cast``. Eg
+
+  ``` cpp
+  // allowed, the pointer types are explicit during initialization:
+  auto markerSymbol = dynamic_cast< QgsMarkerSymbol* >( symbol );
+  auto vectorLayer = qobject_cast< QgsVectorLayer* >( layer );
+  if ( auto lineString = qgsgeometry_cast< const QgsLineString* >( geometry ) ) { ... }
+
+  // NOT allowed, the type is not explicit:
+  auto myLineStringPtr = downcastGeometryAsLineString( geometry );
+  ```
 
 - 3.2. If ``enums`` are to be used outside of a single .h/.cpp file (or there is a reasonable chance that they will be in future!), they should be placed inside the ``Qgis`` namespace.
 
