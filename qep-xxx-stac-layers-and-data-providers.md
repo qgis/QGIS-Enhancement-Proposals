@@ -12,9 +12,7 @@
 
 QGIS gained built-in support for STAC in 3.40, which was further extended with more functionality in 3.42. One usability improvement we'd like to make is allowing adding STAC endpoints/collections as layers.
 
-This functionality would live roughly at the intersection of the new STAC support, the OGC API Features data provider and the VPC data provider, re-using code from each of them. From a user point-of-view the starting point will be right clicking on
-either a STAC endpoint or a STAC collection in the Browser, which gives the option to "Add as layer". Clicking this, or dragging the tree item to the map or layer panel, would add a "STAC layer". As a starting point, a STAC layer would function
-identically to a OGC API Features layer, except with more limited styling functionality (possibly completely static).
+This functionality would live roughly at the intersection of the new STAC support, the OGC API Features data provider and the VPC data provider, re-using code from each of them. From a user point-of-view the starting point will be right clicking on either a STAC endpoint or a STAC collection in the Browser, which gives the option to "Add as layer". Clicking this, or dragging the tree item to the map or layer panel, would add a "STAC layer". As a starting point, a STAC layer would function identically to a OGC API Features layer.
 
 Next, there are several more or less orthogonal functionalities to be added:
 
@@ -27,42 +25,43 @@ Next, there are several more or less orthogonal functionalities to be added:
 
 * Support for filters could be added in the future, however as search functionality already exists in the Data Source Manager this proposal does not intend to provide an alternative search interface.
 * The current scope of work is limited adding STAC layers and previewing streamable assets, potentially with integration with the Temporal Controller in case there is enough time left. Download of assets and usage in algorithms is outside the scope of work.
-* Initially, only STAC endpoints that implement at least _STAC API - Core_, _STAC API - Features_ and _STAC API - Search_ will be handled. This may be relaxed in the future.
-* By using the same STAC handling (`QgsStac*`) as the existing STAC support the same limitation of support STAC versions will apply (and conversely, support for additional versions would benefit both parts of the code base).
+* Only STAC endpoints that implement at least _STAC API - Core_, _STAC API - Features_ and _STAC API - Search_ will be handled.
 
 ## Proposed Solution
 
-The core of this functionality would be a new data provider with key `stac`, those data source URI takes the same parameters as `QgsStacConnection` with the addition of an optional `collection` parameter.
+### Extent layer - Basics
 
-Additional menu items needs to be added for endpoints and collections in `QgsStacDataItemGuiProvider`, which adds a layer to the map using the data source URI for the aforementioned data provider, either just based on the extent of the items or rendering raster or point cloud data.
+As the `/search` endpoint defined by `_STAC API - Search_` is very similar to the `/items` endpoints in _OGC API Features_ it can be implemented in the existing `oapif` data provider. The changes would primarily be focused around `QgsOapifProvider::init()`. For layers showing the contents of a single STAC collection no change is required to the existing data provider. The usage of the `/search` endpoint would be triggered by an API those `/conformance` endpoint and `"links"` indicate the existing of this endpoint, if the data source URI has an empty `typename`.
 
-### STAC data provider
+The `QgsOapifProvider` would also be extended by the proper creation of `QgsVectorDataProviderTemporalCapabilities` when reading from a STAC endpoint, as indicated by the conformance classes.
 
-There was a bit of a design decision if this functionality should be built based on the OGC API Features provider (which makes re-use of the existing `QgsStac*` classes harder, and might instead require re-implementing some of the STAC-specific parsing) or be built from scratch
-using the `QgsStac*` classes (which would focus all STAC-specific functionality, but require some more work in setting up the data provider). The current plan is to go with the later option, as in practice the STAC data provider is likely to have more in common with the `QgsStac*` classes than the
-OGC API Features provider (which also would bring in a lot of functionality not needed for STAC, such as editing). This also enables supporting STAC endpoints that do not conform to OGC API Features (which, from the point-of-view of STAC, is optional).
+### Extent layer - Assets
 
-As such, a new `QgsStacDataProvider`, subclassing `QgsVectorDataProvider`, would be added together with the required "companion" classes (`QgsStacFeatureIterator`, `QgsStacFeatureSource`, etc.). These classes use the `QgsStac*` classes to access the STAC API, such as `QgsStacController`, `QgsStacItemCollection` and `QgsStacItem`.
-A new class will be added that handles construction of STAC API search requests (which can then be passed to `QgsStacController::fetchItemCollection`/`QgsStacController::fetchItemCollectionAsync`), tentatively named `QgsStacSearchQueryBuilder`.
+In order to expose assets retrieved from the API to other parts of QGIS they need to be stored with the other feature data. Therefore, a new class `QgsFeatureAsset` will be created, modelled after assets in STAC (`href`, `rel`, `title`, `type`, etc.) and `QgsFeature` will be extended by a `QVector<QgsFeatureAsset> assets` property. This data will be populated by `QgsOapifItemsRequest::processReply()`.
 
-### STAC raster and point cloud data providers
+### Extent layer - Identify tool
 
-Additionally, in order to support previewing of cloud optimized assets, we'll need `QgsRasterDataProvider` and `QgsPointCloudDataProvider` subclasses (`QgsStacRasterDataProvider` and `QgsStacPointCloudDataProvider`). They'll be implemented similarly to the extent-only `QgsStacDataProvider`, but using the sublayer-functionality to
-render rasters/point clouds at appropriate zoom-levels. `QgsVirtualPointCloudProvider` should be usable as a source to much of this (sublayer-related) functionality.
+Initial the assets will only be exposed in the identify tool. The `QgsIdentifyResultsDialog` would be extended with another subtree (sibling of `(Derived)`) with one row per asset. That subtree would only be shown for features containing assets. Clicking an item in this subtree will present the user with the choices "Download" and "Add to map" (for assets where this is relevant). In the future this may also be exposed via right click, or drag and drop for adding to the map.
 
-It would have been beneficial if we could have the same subclass for both extent, raster and point cloud data providers, however we'd risk running into the Diamond Inheritance problem so that is not an option.
+### Point cloud layer
 
-For these data providers we'll make use of some [STAC extensions](http://stac-extensions.github.io/) where available, notably Classification, Point Cloud, Projection and Raster.
+The `vpc` provider already provides rendering of point clouds indexed by a STAC-aligned format. It will be extended by the ability to optionally load the list of available point clouds dynamically based on the current map extent. As far as possible the network functionality should re-use parts of the `oapif` provider, such as the `QgsOapifItemsRequest`.
 
-### STAC layers
+When fed into a processing algorithm a first step would require downloading all items regardless of extent. This may be suboptimal, as for example the clip algorithm could in theory provide its down bounding box, however this optimization is kept out-of-scope for the current proposal.
 
-Initially, we'll just use `QgsVectorLayer`, `QgsRasterLayer` and `QgsPointCloudLayer`.
+### Raster layer
 
-There are some upsides as well as downsides with this approach as we'd be using most of the existing plumbing from these layer classes. For example this means that STAC layers can be used in processing algorithms, which may or may not be advisable, but would not be impossible. A bigger drawback is that it is not currently
-possible (AFAICT) to "lock down" configuration of layers. For example, for temporal filtering support, we'd as part of creating the STAC layer (such as a `QgsVectorLayer`) create a `QgsVectorLayerTemporalProperties` based on the settings from the data provider. However, this does not prevent a user from changing this configuration, which
-probably shouldn't be possible.
+TBD, out of scope for this proposal. Might use the GDAL `STACIT` driver.
 
-However, while it might longer term thus be a good idea to have either separate layer classes for STAC or alternatively introduce a way for data sources to limit what is user-configurable (both of which would be significant undertakings), I'd prefer to keep it outside the scope of the current proposal.
+### Integration with STAC browser
+
+Additional menu items needs to be added for endpoints and collections in `QgsStacDataItemGuiProvider`, which adds a layer to the map using the appropriate data source URIs, either just based on the extent of the items or rendering raster or point cloud data.
+
+### Layers with fixed configuration
+
+As STAC pre-defines some properties that are usually user-changable there needs to be a mechanism to prevent the user from making changes. For example, for temporal filtering support, we'd as part of creating the STAC layer (such as a `QgsVectorLayer`) create a `QgsVectorLayerTemporalProperties` based on the settings from the data provider. However, this does not prevent a user from changing this configuration, which probably shouldn't be possible.
+
+For now, this will be allowed, however a future iteration may introduce a way for the data provider to restrict changing certain layer configuration.
 
 <!--## Deliverables-->
 
@@ -76,7 +75,7 @@ None known.
 
 ## Performance Implications
 
-Similar issues as with OGC API Feature layers; as there is no generalization involved viewing such a layer at a very low zoom level could result in large amounts of data being fetched. However, STAC endpoints in general contain larger features, so the issue should be less prononced than with OGC API Feature layers.
+Similar issues as with general OGC API Feature layers; as there is no generalization involved viewing such a layer at a very low zoom level could result in large amounts of data being fetched. However, STAC endpoints in general contain larger features, so the issue should be less prononced than with OGC API Feature layers.
 
 <!--## Further Considerations/Improvements
 
