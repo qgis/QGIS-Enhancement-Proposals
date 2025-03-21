@@ -39,7 +39,7 @@ The proposed solution involves the following steps:
 ### Affected Files
 
 1. CMake build scripts
-2. Various source files (e.g. `#ifdef EMSCRIPTEN`)
+2. Various source files (e.g. `#ifdef WITH_EMSCRIPTEN`)
 3. New Github Action
 
 ## Risks
