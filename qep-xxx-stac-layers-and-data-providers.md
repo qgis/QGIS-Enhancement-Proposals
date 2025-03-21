@@ -37,11 +37,11 @@ The `QgsOapifProvider` would also be extended by the proper creation of `QgsVect
 
 ### Extent layer - Assets
 
-In order to expose assets retrieved from the API to other parts of QGIS they need to be stored with the other feature data. Therefore, a new class `QgsFeatureAsset` will be created, modelled after assets in STAC (`href`, `rel`, `title`, `type`, etc.) and `QgsFeature` will be extended by a `QVector<QgsFeatureAsset> assets` property. This data will be populated by `QgsOapifItemsRequest::processReply()`.
+In order to expose assets retrieved from the API to other parts of QGIS they need to be stored with the other feature data. Therefore, a new class `QgsFeatureAsset` will be created, modelled after assets in STAC (`href`, `rel`, `title`, `type`, etc., however the same class will be usable for other data providers as well) and registered with the Qt Meta Type System so that it can be stored as a list in a feature attribute. This data will be populated by `QgsOapifItemsRequest::processReply()` in the fixed field `"assets"`. STAC endpoints that also contain a property of the same name will produce a warning and not contain any assets.
 
 ### Extent layer - Identify tool
 
-Initial the assets will only be exposed in the identify tool. The `QgsIdentifyResultsDialog` would be extended with another subtree (sibling of `(Derived)`) with one row per asset. That subtree would only be shown for features containing assets. Clicking an item in this subtree will present the user with the choices "Download" and "Add to map" (for assets where this is relevant). In the future this may also be exposed via right click, or drag and drop for adding to the map.
+Initial the assets will only be exposed in the identify tool. The `QgsIdentifyResultsDialog` would be extended with another subtree (sibling of `(Derived)`) with one row per asset, using the `title` or as a fall back the `rel` as the displayed text, with the other information being shown as tool tip. That subtree would only be shown for features containing assets. Clicking an item in this subtree will present the user with a dialog with the choices "Download" and "Add to map" (for assets where this is relevant). In the future this may also be exposed via right click, or drag and drop for adding to the map.
 
 ### Point cloud layer
 
