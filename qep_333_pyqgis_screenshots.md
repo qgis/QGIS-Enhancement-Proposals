@@ -57,13 +57,13 @@ method from [scripts/make_api_rst.py](https://github.com/qgis/pyqgis-api-docs-bu
 modified to include an extra component in the generated class headers:
 
 ``` py
-header += generate_screenshot(package, class_name, _class)
+header += generate_screenshots(package, class_name, _class)
 ```
 
-Where ``generate_screenshot`` is defined as follows:
+Where ``generate_screenshots`` is defined as follows:
 
 ``` py
-def generate_screenshot(package, class_name: str, _class) -> str:
+def generate_screenshots(package, class_name: str, _class) -> str:
     """
     Generates screenshots for a class, and returns corresponding markdown
     """
@@ -76,7 +76,7 @@ def generate_screenshot(package, class_name: str, _class) -> str:
     spec = importlib.util.spec_from_file_location('script', script_path)
     executed_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(executed_module)
-    func = getattr(executed_module, 'generate_screenshot')
+    func = getattr(executed_module, '__generate_screenshots')
     images = func(image_path)
 
     # format images as markdown:
@@ -90,12 +90,12 @@ This function checks whether a Python file matching the current class name exist
 ``screenshots/{module name}`` folder in the ``pyqgis-api-docs-builder`` repository. For
 example, if the current class is ``QgsMapLayerComboBox`` from the ``gui`` module, the
 function checks whether ``screenshots/gui/qgsmaplayercombobox.py`` exists. If so,
-it dynamically loads it and executes the ``generate_screenshot`` method from that file.
+it dynamically loads it and executes the ``__generate_screenshots`` method from that file.
 
-The ``generate_screenshot`` method must have the signature:
+The ``__generate_screenshots`` method must have the signature:
 
 ``` py
-def generate_screenshot(dest_path: Path) -> Dict[str, str]:
+def __generate_screenshots(dest_path: Path) -> Dict[str, str]:
     """
     Generates screenshots for the class.
     
@@ -147,7 +147,7 @@ from pathlib import Path
 from qgis.gui import CharacterWidget
 from screenshots.utils import ScreenshotUtils
 
-def generate_screenshot(dest_path: Path):
+def __generate_screenshots(dest_path: Path):
     widget = CharacterWidget()
 
     im = ScreenshotUtils.capture_widget(widget, width=490, height=320)
@@ -173,7 +173,7 @@ from screenshots.utils import ScreenshotUtils
 
 from qgis.PyQt.QtGui import QColor
 
-def generate_screenshot(dest_path: Path):
+def __generate_screenshots(dest_path: Path):
     widget = QgsColorBox()
     widget.setColor(QColor(100, 150, 200))
 
@@ -210,7 +210,7 @@ from qgis.gui import QgsMapLayerComboBox
 from screenshots.utils import ScreenshotUtils
 
 
-def generate_screenshot(dest_path: Path):
+def __generate_screenshots(dest_path: Path):
     layer = QgsVectorLayer('Point', 'A point layer', 'memory')
     layer2 = QgsVectorLayer('Line', 'A line layer', 'memory')
     raster = QgsRasterLayer('x', 'Raster layer')
