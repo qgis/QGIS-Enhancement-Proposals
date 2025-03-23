@@ -77,7 +77,13 @@ def generate_screenshot(package, class_name: str, _class) -> str:
     executed_module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(executed_module)
     func = getattr(executed_module, 'generate_screenshot')
-    return func(image_path)
+    images = func(image_path)
+
+    # format images as markdown:
+    result = ''
+    for image, desc in images.items():
+        result += f"{desc}\n\n.. image:: {image}"
+    return result
 ```
 
 This function checks whether a Python file matching the current class name exists in the
@@ -89,16 +95,16 @@ it dynamically loads it and executes the ``generate_screenshot`` method from tha
 The ``generate_screenshot`` method must have the signature:
 
 ``` py
-def generate_screenshot(dest_path: Path) -> str:
+def generate_screenshot(dest_path: Path) -> Dict[str, str]:
     """
     Generates screenshots for the class.
     
     Screenshots should be stored in the dest_path folder.
     
-    The method should return the corresponding markdown to include in the class
-    header, containing `.. image:: filename.png` tags as desired.
+    The method should return a dictionary of generated image filenames to descriptions,
+    which will be used to generate formatted image tags in the documentation.
     
-    Multiple images may be generated and included in the returned markdown. 
+    Multiple images may be generated and included in the returned dictionary.
     """
 ```
 
@@ -147,7 +153,7 @@ def generate_screenshot(dest_path: Path):
     im = ScreenshotUtils.capture_widget(widget, width=490, height=320)
     im.save((dest_path / 'characterwidget.png').as_posix())
 
-    return ("\n.. image:: characterwidget.png\n")
+    return {"characterwidget.png": "CharacterWidget in a default state"}
 ```
 
 The resultant documentation page looks like this:
@@ -179,8 +185,8 @@ def generate_screenshot(dest_path: Path):
     im = ScreenshotUtils.capture_widget(widget, width=320, height=320)
     im.save((dest_path / 'color_box_hue.png').as_posix())
 
-    return ("\nQgsColorBox using the QgsColorWidget.ColorComponent.Value component:\n\n.. image:: color_box_value.png\n" +
-            "\nQgsColorBox using the QgsColorWidget.ColorComponent.Hue component:\n\n.. image:: color_box_hue.png\n")
+    return {"color_box_value.png": "QgsColorBox using the QgsColorWidget.ColorComponent.Value component",
+            "color_box_hue.png": "QgsColorBox using the QgsColorWidget.ColorComponent.Hue component"}
 ```
 
 The resultant documentation page looks like this:
@@ -219,8 +225,8 @@ def generate_screenshot(dest_path: Path):
     im_expanded = ScreenshotUtils.capture_combo_with_dropdown(combo)
     im_expanded.save((dest_path / 'qgsmaplayercombobox_expanded.png').as_posix())
 
-    return ("\nQgsMapLayerComboBox in the collapsed state:\n\n.. image:: qgsmaplayercombobox_collapsed.png\n" +
-            "\nQgsMapLayerComboBox in the expanded state:\n\n.. image:: qgsmaplayercombobox_expanded.png\n")
+    return {"qgsmaplayercombobox_collapsed.png": "QgsMapLayerComboBox in the collapsed state",
+            "qgsmaplayercombobox_expanded.png": "QgsMapLayerComboBox in the expanded state"}
 ```
 
 The resultant documentation page looks like this:
