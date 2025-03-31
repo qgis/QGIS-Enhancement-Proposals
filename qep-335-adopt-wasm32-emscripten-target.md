@@ -39,7 +39,11 @@ The proposed solution involves the following steps:
 ### Affected Files
 
 1. CMake build scripts
-2. Various source files (e.g. `#ifdef WITH_EMSCRIPTEN`)
+   - Turning off certain features when the Emscripten toolchain is detected (e.g. `-DWITH_AUTH:BOOL=FALSE`)
+   - We might introduce new feature flags to disable certain features that won't work with Emscripten in CMake
+2. Various source files
+   - Conditionally exclude certain code blocks with `#ifndef Q_OS_WASM`
+      - see [`QtGlobal` docs](https://doc.qt.io/qt-5/qtglobal.html#Q_OS_WASM)
 3. New Github Action
 
 ## Risks
