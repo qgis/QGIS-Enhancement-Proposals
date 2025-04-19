@@ -12,7 +12,7 @@
 
 When opening a QGIS project containing Python or other executable code (such as macros, feature actions , or expression functions), the user is currently prompted with a security warning in the message bar.
 
-> **Seurity warning:** Python macros cannot currently be run. [[Enable Macros]]
+> **Security warning:** Python macros cannot currently be run. [[Enable Macros]]
 
 This has a few problems:
 
