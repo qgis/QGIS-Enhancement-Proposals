@@ -39,6 +39,10 @@ Movements can be done using the keyboard or mouse and are free: unconstrained by
 
 Forward and backward movement will be controlled by the up and down keys (and mouse wheel). Lateral movement will be controlled by the left and right keys (and lateral movement of the mouse wheel). Lateral mouse movements will allow you to turn without moving. Vertical mouse movements allow you to look up or down.
 
+In order to match existing, binding to W/A/S/D keys (for forward, left, backward and right) will also be added.
+
+Movement speed can be changed by holding `Ctrl` (decrease speed) or `Shift` (increase speed) keys.
+
 ### 2D view inset
 
 When this mode is enabled, an inset with the 2D view is displayed as an overlay to help the user navigation. It is centered on the user's current X/Y position, and its extent is adjusted based on the camera's tilt (the larger the far plane, the larger the extent).
@@ -46,6 +50,14 @@ When this mode is enabled, an inset with the 2D view is displayed as an overlay 
 This inset could also be a standalone feature enabled from the 3D view settings ("Navigation Synchronization").
 
 As in Google Street View, the position and size of this inset would be fixed.
+
+See <https://github.com/qgis/QGIS-Enhancement-Proposals/pull/341#discussion_r2156539364>.
+
+### Existing navigation modes
+
+The current **Walk** mode should be renamed **Fly** as the pedestrian view is more a real walk mode.
+
+As we will have 3 navigation modes the 3D UI should display the current mode in use and a way to switch from one to another.
 
 ## Deliverables
 
@@ -55,7 +67,7 @@ As in Google Street View, the position and size of this inset would be fixed.
 
 ### Example(s)
 
-See associated PR.
+See associated [PR](https://github.com/qgis/QGIS-Enhancement-Proposals/pull/341).
 
 ### Affected Files
 
