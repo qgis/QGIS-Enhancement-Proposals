@@ -14,8 +14,6 @@ This QGIS enhancement adds a human-level navigation mode to the 3D view (like Go
 
 This mode can be activated by selecting a specific point or by default from the center of the map. Once this navigation mode is activated, the camera's elevation is locked at 1.80 meters above the ground. This height can be configured in the 3D view configuration dialog.
 
-When this mode is activated, a small inset with the 2D view is superimposed on the 3D view.
-
 ## Proposed Solution
 
 ### Enabling and disabling this tool
@@ -37,31 +35,30 @@ Optionally, the button can be placed in the Camera menu but since no pop-up or d
 
 Movements can be done using the keyboard or mouse and are free: unconstrained by obstacles or roads.
 
-Forward and backward movement will be controlled by the up and down keys (and mouse wheel). Lateral movement will be controlled by the left and right keys (and lateral movement of the mouse wheel). Lateral mouse movements will allow you to turn without moving. Vertical mouse movements allow you to look up or down.
+Forward and backward movement will be controlled by the `up` and `down` keys. Lateral movement will be controlled by the `left` and right keys. Lateral mouse movements will allow you to turn without moving. Vertical mouse movements allow you to look up or down.
 
-In order to match existing, binding to W/A/S/D keys (for forward, left, backward and right) will also be added.
+Here is the whole key mapping:
 
-Movement speed can be changed by holding `Ctrl` (decrease speed) or `Shift` (increase speed) keys.
+* ARROW and WASD : forward/backward/shift left/shift right
+  * `Ctrl`: temporary decrease speed
+  * `Shift`: temporary increase speed
+* `Space`: jump **optional**
 
-### 2D view inset
+Here is the whole mouse mapping:
 
-When this mode is enabled, an inset with the 2D view is displayed as an overlay to help the user navigation. It is centered on the user's current X/Y position, and its extent is adjusted based on the camera's tilt (the larger the far plane, the larger the extent).
-
-This inset could also be a standalone feature enabled from the 3D view settings ("Navigation Synchronization").
-
-As in Google Street View, the position and size of this inset would be fixed.
-
-See <https://github.com/qgis/QGIS-Enhancement-Proposals/pull/341#discussion_r2156539364>.
+* mouse move: move look at (up, down, left, right)
+* left mouse click: toogle engage/disengage mouse (also bound to QuoteLeft)
+* right mouse click: quit mode (also bound to Esc)
+* Wheel : permanent speed factor (as in current walk mode)
 
 ### Existing navigation modes
 
-The current **Walk** mode should be renamed **Fly** as the pedestrian view is more a real walk mode.
+The current **Walk** mode will be renamed **Fly** as the pedestrian view is more a real walk mode.
 
-As we will have 3 navigation modes the 3D UI should display the current mode in use and a way to switch from one to another.
+As we will have 3 navigation modes, the 3D UI should display the current mode in use and a way to switch from one to another.
 
 ## Deliverables
 
-* 2D view inset class
 * new maptool class
 * new toolbar button image
 
@@ -71,7 +68,9 @@ See associated [PR](https://github.com/qgis/QGIS-Enhancement-Proposals/pull/341)
 
 ### Affected Files
 
-*(optional)*
+* QgsCameraController
+* map3dconfigwidget.ui
+* Qgs3DMapConfigWidget
 
 ## Risks
 
@@ -83,7 +82,8 @@ None
 
 ## Further Considerations/Improvements
 
-* identification
+* identification without changing of maptool
+* add a configuration panel to set key/mouse bindings according to user needs
 
 ## Backwards Compatibility
 
