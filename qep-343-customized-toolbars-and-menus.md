@@ -16,7 +16,7 @@ In addition to activating or deactivating action items within the predefined men
 
 Custom toolbars can currently be created with the plugin [Customize ToolBars](https://plugins.qgis.org/plugins/CustomToolBar/). The plugin has good ratings and has been downloaded frequently, showing that there is an interest for this functionality. Limitations of this plugin are:
 
-  * the storing of the settings in a binary file outside of the QGIS folder structure
+  * the storing of the settings in a binary file outside the QGIS folder structure
   * possible maintenance issues
   * loading of saved configurations is not possible through the plugin GUI (less intuitive for users)
   * it's a plugin
@@ -45,10 +45,26 @@ Current interface of the Customize ToolBars plugin
 
 Layer attribute form dialog (drag and drop designer; add container)
 
+### Processing algorithms
+
+Currently, processing algorithms can be added to the "Processing Algorithms Toolbar", through a non-intuitive and cumbersome user experience.
+
+We propose to drop this logic, to integrate all processing algorithms in the new toolbars and menus customization.
+
+### Affected Files
+
+- src/app/qgscustomization.[cpp|h]
+
+The new interface to customize toolbars and menus will be new sections in the Interface Customization dialog:
+
+![](./images/qep343/proposal-settings.png)
+
+Example of new sections in the Interface Customization dialog.
+
 ### Delimitation
 
-  * A restart of QGIS is necessary to take into account the changes (as is already the case for modifications in the Interface Customization dialog).
-  * Processing algorithm features are only available if they have been added to the toolbars beforehand through the Settings > Options > Processing > Menus dialog → activate "Add button in toolbar"
+  * A restart of QGIS could be necessary to take into account the changes (as it is already the case for modifications in the Interface Customization dialog).
+    - We will try to overcome this limitation, but if it is necessary then the user will be advertised
   * If plugin actions are added to custom toolbars/menus and the configuration is imported within a profile where those plugins are missing, the missing items will be ignored. There will be no tracking of dependencies from plugins and therefore no warnings if a certain action is missing.
   * Personal Python scripts will not be available.
   * Customization is limited to toolbars and menus, as we have not identified any need for further customization of the browser, docks, status bar or widgets so far.
@@ -63,4 +79,4 @@ No change in performance to be expected.
 
 ## Further Considerations/Improvements
 
-In a further step, the integration of all processing algorithms to choose from for custom menus or toolbars could be considered. Any additional need for customization for browser, dock, status bar or widget elements could also be discussed.
+In a further step, any additional need for customization for browser, dock, status bar or widget elements could also be discussed.
