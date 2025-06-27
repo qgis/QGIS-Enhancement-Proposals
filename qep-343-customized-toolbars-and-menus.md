@@ -33,17 +33,14 @@ Additions to the Interface Customization dialog would be:
   * an "export configuration" button opening the profile folder at QGIS > QGISCUSTOMIZATION.ini
 
 
+Possible integration of a drop-down menu similar to the layer attribute form dialog:
 ![](./images/qep343/drop-down-menu.png)
 
-Possible integration of a drop-down menu similar to the layer attribute form dialog
-
+Current interface of the Customize ToolBars plugin:
 ![](./images/qep343/customize-toolbars-plugin.png)
 
-Current interface of the Customize ToolBars plugin
-
+Layer attribute form dialog (drag and drop designer; add container):
 ![](./images/qep343/drag-drop-designer-container.png)
-
-Layer attribute form dialog (drag and drop designer; add container)
 
 ### Processing algorithms
 
