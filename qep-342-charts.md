@@ -35,23 +35,29 @@ to symbol classes with a render function taking a render context object.
 The charting capabilities will then be exposed through the layout designer
 via a new layout charts item.
 
-### Qgs{Line,Bar,Pie}Chart classes
+### Qgs{Line,Bar,Pie}ChartPlot classes
 
-A new series of chart classes - QgsLineChart, QgsBarChart, and QgsPieChart -
+A new series of chart classes - QgsLineChartPlot, QgsBarChartPlot, and QgsPieChartPlot -
 will be added to render these specific chart items. The classes would be
-parented to pre-existing QgsPlot classes and re-impelment the render( QgsRenderContext & )
+parented to pre-existing QgsPlot classes and re-implement the render( QgsRenderContext & )
 and renderContent( QgsRenderContext &, QRectF ) functions.
 
 Preparatory work will be needed to split Qgs2DPlot into a generic Qgs2DPlot
-and a specialized Qgs2DXyPlot so axis-less graphs such as QgsPieChart can
-be parented to the generic Qgs2DPlot.
+and a specialized Qgs2DXyPlot so axis-less graphs such as QgsPieChartPlot can
+be parented to the generic Qgs2DPlot. The existing classes are marked as non-stable,
+permitting this API break.
 
 All three chart style implementations would rely on QgsSymbol classes to
-render its data components. E.g., for the bar chart, a QgsFillSymbol would
+render their data components. E.g., for the bar chart, a QgsFillSymbol would
 be used to render the bars. This will ensure that rendered charts within
 print and atlas layouts look and feel exactly the same as other items and map
 canvases. The chart rendering will inject a couple of variables into a chart
 scope to allow for users to leverage data-defined properties.
+
+In addition, a pair of QgsChartPlotRegistry and QgsChartPlotGuiRegistry will be added to
+keep track of available chart types. This will also enable python plugins to
+extend the current set of chart types. Their functions and members will match
+pre-existing QGIS registry classes such as callouts and sensors registries.
 
 ### Chart data handling: QgsPlotData
 
@@ -59,10 +65,96 @@ A new QgsPlotData class will be added to cover generic plots/charts series
 used to render the charts. The class will also hold the categories used
 to render charts when the X axis type is set to represent categories.
 
+```
+class CORE_EXPORT QgsPlotData
+{
+  public:
+
+    QgsPlotData() = default;
+    ~QgsPlotData();
+
+    /**
+     * Returns the list of series forming the plot data.
+     * \note the series' ownership is retained by this object.
+     */
+    QList<QgsAbstractPlotSeries *> series() const;
+
+    /**
+     * Adds a series to the plot data.
+     * \note the series' ownership is transferred to this object.
+     */
+    void addSeries( QgsAbstractPlotSeries *series SIP_TRANSFER );
+
+    /**
+     * Clears all series from the plot data.
+     */
+    void clearSeries();
+
+    QStringList categories() const;
+    void setCategories( const QStringList &categories );
+
+  private:
+
+    QList<QgsAbstractPlotSeries *> mSeries;
+    QStringList mCategories;
+};
+```
+
 A QgsAbstractPlotSeries abstract class will be added, holding basic information
 such as the series name as well as styling components. A QgsXyPlotSeries
 implementation to hold the data used to render line, bar, and pie charts.
 The class will return raw values stored in a QList of QPair<double, double>.
+
+```
+class CORE_EXPORT QgsAbstractPlotSeries
+{
+  public:
+
+    QgsAbstractPlotSeries() = default;
+    virtual ~QgsAbstractPlotSeries() = default;
+
+    /**
+     * Returns the series' name.
+     */
+    QString name() const;
+
+    /**
+     * Sets the series' name.
+     */
+    void setName( const QString &name );
+
+  private:
+
+    QString mName;
+};
+
+class CORE_EXPORT QgsXyPlotSeries : public QgsAbstractPlotSeries
+{
+  public:
+
+    QgsXyPlotSeries() = default;
+    ~QgsXyPlotSeries() = default;
+
+    /**
+     * Returns the series' list of XY pairs of double.
+     */
+    QList<std::pair<double, double>> data() const SIP_SKIP;
+
+    /**
+     * Appends a pair for of XY  double values to the series.
+     */
+    void append( const double &x, const double &y );
+
+    /**
+     * Clears the series' data.
+     */
+    void clear();
+
+  private:
+
+    QList<std::pair<double, double>> mData;
+};
+```
 
 The Qgs2DPlot class’ render( QgsRenderContext & ) and renderContent( QgsRenderContext &, QRectF )
 functions will be tweaked to add a new QgsPlotData pointer. This is possible as
@@ -71,7 +163,8 @@ the plot classes are currently marked as unstable.
 Finally, a new QgsVectorLayerPlotDataGenerator class will be added that takes
 care of generating plot data from vector layers. The class will iterate through
 features to prepare the plot data based on a provided set of user configured
-series. The iteration and data preparation will happen in a non-blocking
+series. The class will take care of filtering features as well as aggregating
+values. The iteration and data preparation will happen in a non-blocking
 manner off the main thread.
 
 ### Layout chart item
@@ -86,8 +179,8 @@ the main thread, with a busy/synchronization indicator shown as a placeholder
 until the dataset is prepared and ready to be rendered. This mimics what is
 done with other items such as the map item as well as the elevation profile item.
 
-The chart item will be able to take into account an atlas context to allow
-for atlas-driven charts.
+The chart item will pass on crucial expression scopes - such atlas scope - to
+the data generator. This will enable atlas-driven charts within atlas layouts.
 
 ## Deliverables
 
@@ -95,6 +188,10 @@ for atlas-driven charts.
 - Implementation of plot data classes as well as a data plot generator for vector layers to dynamically generate data
 - Implementation of a layout chart item
 - Exposing charting classes to python bindings
+
+## Affected Files
+
+- src/core/qgsplot.*
 
 ## Risks
 
