@@ -32,6 +32,11 @@ Additions to the Interface Customization dialog would be:
   * a "provide .ini file" option to load an existing configuration
   * an "export configuration" button opening the profile folder at QGIS > QGISCUSTOMIZATION.ini
 
+Some quality of life ideas are:
+
+  * being able to add every element from a QGIS native toolbar/menu in one click into a custom toolbar/menu
+  * being able to duplicate an already existing custom toolbar/menu
+
 
 Possible integration of a drop-down menu similar to the layer attribute form dialog:
 ![](./images/qep343/drop-down-menu.png)
