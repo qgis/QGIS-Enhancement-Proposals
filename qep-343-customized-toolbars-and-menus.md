@@ -57,9 +57,7 @@ To replace this logic, we propose to have the possibility of integrating any pro
 
 The new interface to customize toolbars and menus will be new sections in the Interface Customization dialog:
 
-![](./images/qep343/proposal-settings.png)
-
-Example of new sections in the Interface Customization dialog.
+![Example of new sections in the Interface Customization dialog](./images/qep343/proposal-settings.png)
 
 ### Delimitation
 
