@@ -49,7 +49,7 @@ Layer attribute form dialog (drag and drop designer; add container)
 
 Currently, processing algorithms can be added to the "Processing Algorithms Toolbar", through a non-intuitive and cumbersome user experience.
 
-We propose to drop this logic, to integrate all processing algorithms in the new toolbars and menus customization.
+To replace this logic, we propose to have the possibility of integrating any processing algorithm into the new customization of toolbars and menus.
 
 ### Affected Files
 
