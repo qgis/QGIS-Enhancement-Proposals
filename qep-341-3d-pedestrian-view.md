@@ -24,7 +24,6 @@ Once the mode is activated:
 
 * the camera moves to a human-like height above the terrain at the selected location
 * the camera is facing the same direction as before activation
-* the 2D map inset is displayed (see below)
 * the movement mode changes (see below)
 
 The user exits this mode by clicking the previous toolbar button (still pressed) or by pressing the *Esc* key or by doing a right click with the mouse.
