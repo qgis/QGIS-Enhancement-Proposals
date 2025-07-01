@@ -145,14 +145,14 @@ The 3D intersection algorithm can be used in the elevation tool to extract the c
 
 SFCGAL can calculate the centre line in longitudinal direction for 2D polygon features (e.g. road axis):
 
-![](https://pad.oslandia.net/uploads/fbca3d1b-7fe3-4c6a-923b-f7045ba8843f.png)
+![](file://images/qep340/medial_axis_2d.png)
 
 #### Straight skeleton extrusion
 
 One features in SFCGAL is the ability to generate “false” roofs by extruding the straight skeleton of a polygon.
 Methods to convert 2D building footprints into 3D existed previously, but the quality and efficiency of the algorithm provided by CGAL allow for a significantly more effective solution for this use case, ensuring a precise and functional roof design.
 
-![](https://pad.oslandia.net/uploads/2a6d0962-8a32-4dd8-97d4-33b3e055c67d.png)
+![](file://images/qep340/straight_skeleton_extrusion.png)
 
 Here is a example to do this operation:
 
@@ -174,7 +174,7 @@ These algorithms enhance the capability to analyze visibility between geometric 
 
 These algorithms enable determining visible areas from a point or an edge, as illustrated in the following example.
 
-![](https://pad.oslandia.net/uploads/9179a140-2c33-4e44-bb67-48b1e35186b3.png)
+![](file://images/qep340/visibility.png)
 
 ## Deliverables
 
