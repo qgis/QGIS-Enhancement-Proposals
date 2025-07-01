@@ -5,7 +5,7 @@
 **Contact** loic dot bartoletti at oslandia dot com, benoit dot de dot mezzo at oslandia dot com, jean dot felder at oslandia dot com, julien dot cabieces at oslandia dot com
 **Version** QGIS 3.XX
 
-# Summary
+## Summary
 
 This enhancement proposal outlines the integration of [SFCGAL](https://sfcgal.org) (Simple Features for Computational Geometry Algorithms Library) into QGIS. SFCGAL is an open-source library that provides advanced 3D geometry capabilities and is already well-integrated with PostGIS and GDAL.
 
@@ -85,53 +85,9 @@ This class will be available in Python.
 
 ### Integration into QgsGeometry
 
-At first, there is no plan to use SFCGAL algorithm within `QgsGeometry`. But some geometry functionalities in `QgsGeometry` are limited with GEOS due to Z/M drop or unmanaged kind of geometries (TIN, SOLID, etc.). Theses functionalities could be improved by using SFCGAL. To do so we will need to change each implied function and add an if/else condition which calls a new `isSFCGALCompatible` function. This is a similar approach to what GDAL does ([see also](https://github.com/OSGeo/gdal/blob/ce93839b1752fb40af064d5da49c85a0d7b8fc78/ogr/ogrgeometry.cpp#L8360)).
+At first, there is no plan to use SFCGAL algorithm within `QgsGeometry`. But some geometry functionalities in `QgsGeometry` are limited with GEOS due to Z/M drop or unmanaged kind of geometries (TIN, SOLID, etc.). Theses functionalities could be improved by using SFCGAL. To do so, some functions (like intersects, intersection, buffer (2D), offset, convexhull, combine, difference) will have an extra parameter to set the backend. Others functions (like buffer3D, centroid3D, area3D or Constrained Delaunay Triangulation Simplification) will be dedicated to SFCGAL.
 
-The `isSFCGALCompatible` function will, for example:
-
-* let the priority to GEOS
-* allow SFCGAL usage for PolyhedralSurface or TIN
-* read some local setting to force the use of GEOS or SFCGAL
-
-For example for the `intersection` function:
-
-```cpp
-QgsGeometry QgsGeometry::intersection( const QgsGeometry &geometry, const QgsGeometryParameters &parameters ) const
-{
-  if ( !d->geometry || geometry.isNull() )
-  {
-    return QgsGeometry();
-  }
-
-  mLastError.clear();
-#ifdef WITH_SFCGAL
-  if ( isSFCGALCompatible() || geometry.isSFCGALCompatible() )
-  {
-    QgsSfcgalGeometry sfcgalGeom( *d->geometry.get() );
-    std::unique_ptr< QgsSfcgalGeometry> result( sfcgalGeom.intersection( *geometry.d->geometry.get(), &mLastError ) );
-
-    if ( mLastError.isEmpty() )
-      return QgsGeometry( std::move( result->asQgisGeometry( &mLastError ) ) );
-    return QgsGeometry();
-  }
-  else
-#endif
-  {
-    QgsGeos geos( d->geometry.get() );
-
-    std::unique_ptr< QgsAbstractGeometry > resultGeom( geos.intersection( geometry.d->geometry.get(), &mLastError, parameters ) );
-
-    if ( !resultGeom )
-    {
-      QgsGeometry geom;
-      geom.mLastError = mLastError;
-      return geom;
-    }
-
-    return QgsGeometry( std::move( resultGeom ) );
-  }
-}
-```
+The backend parameter will be an `enum` with values in `[GEOS, SFCGAL]`.
 
 ## Use cases that leverage SFCGAL's capabilities
 
@@ -214,7 +170,9 @@ These algorithms enable determining visible areas from a point or an edge, as il
 
 1. Potential increase in build complexity due to the additional dependency.
 
-2. Low: Maintenance burden of keeping SFCGAL integration up-to-date with future QGIS versions. Like other dependencies.
+1. Low: Maintenance burden of keeping SFCGAL integration up-to-date with future QGIS versions. Like other dependencies.
+
+1. Thread safety: CGAL is [mainly thread safe](https://doc.cgal.org/latest/Manual/preliminaries.html#Preliminaries_thread_safety) and SFCGAL is just the simple feature overhead. It has no static nor global variables. The library can be called with multiple thread to create geometries or to retrieve data from the same geometry object. But concurrent calls to modify the same geometry object will result in unexpected behaviour.
 
 ## Performance Implications
 
