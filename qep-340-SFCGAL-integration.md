@@ -85,9 +85,11 @@ This class will be available in Python.
 
 ### Integration into QgsGeometry
 
-At first, there is no plan to use SFCGAL algorithm within `QgsGeometry`. But some geometry functionalities in `QgsGeometry` are limited with GEOS due to Z/M drop or unmanaged kind of geometries (TIN, SOLID, etc.). Theses functionalities could be improved by using SFCGAL. To do so, some functions (like intersects, intersection, buffer (2D), offset, convexhull, combine, difference) will have an extra parameter to set the backend. Others functions (like buffer3D, centroid3D, area3D or Constrained Delaunay Triangulation Simplification) will be dedicated to SFCGAL.
+At first, there is no plan to use SFCGAL algorithm within `QgsGeometry`. But some geometry functionalities in `QgsGeometry` are limited with GEOS due to Z/M drop or unmanaged kind of geometries (TIN, SOLID, etc.). Theses functionalities could be improved by using SFCGAL. To do so, some functions (like intersects, intersection, buffer (2D), offset, convexhull, combine, difference) will have an extra parameter to set the backend. The backend parameter will be an `enum` with values in `[GEOS, SFCGAL]`.
 
-The backend parameter will be an `enum` with values in `[GEOS, SFCGAL]`.
+Others functions will be dedicated to SFCGAL (like buffer3D, centroid3D, area3D or Constrained Delaunay Triangulation Simplification) and others dedicated to GEOS.
+
+In case the functionality is available in both backends but there is no need to actually expose a particular backend (bug or inefficiency), the choice will be made to expose only one backend.
 
 ## Use cases that leverage SFCGAL's capabilities
 
