@@ -18,17 +18,17 @@ This mode can be activated by selecting a specific point or by default from the 
 
 ### Enabling and disabling this tool
 
-A button will be added to the 3D view toolbar to activate this tool and select where to begin navigation. Once the button is clicked (it stays pressed), a marker will be placed vertically above the center of the 3D view. The user moves the marker to the desired location and confirms with a left mouse click or the Enter key.
+A drop-down menu (with the 3 navigation modes) in the "camera" tool in the toolbar to easy the switching from one mode to another.
 
-Once the mode is activated:
+Once this mode is activated, the user will select where to begin navigation: a marker will be placed vertically above the center of the 3D view. The user moves the marker to the desired location and confirms with a left mouse click or the Enter key.
+
+Once the user click to select the starting point:
 
 * the camera moves to a human-like height above the terrain at the selected location
 * the camera is facing the same direction as before activation
 * the movement mode changes (see below)
 
-The user exits this mode by clicking the previous toolbar button (still pressed) or by pressing the *Esc* key or by doing a right click with the mouse.
-
-Optionally, the button can be placed in the Camera menu but since no pop-up or dialog box is displayed, the user will lose the indication that they have switched to that tool and will not know how to exit that tool.
+The user exits this mode by switching to another navigation mode or by pressing the *Esc* key or by doing a right click with the mouse.
 
 ### Movements
 
@@ -55,6 +55,10 @@ Here is the whole mouse mapping:
 The current **Walk** mode will be renamed **Fly** as the pedestrian view is more a real walk mode.
 
 As we will have 3 navigation modes, the 3D UI should display the current mode in use and a way to switch from one to another.
+
+### Integration
+
+The pedestrian view map tool will handle the location picking stage (with a rubberband) in its dedicated class file (something like `QgsWalkModeMapTool`) and this map tool will call API functions at the "app" level to activate the walk mode at the user specified location (and set it back at the previous mode when it quits).
 
 ## Deliverables
 
