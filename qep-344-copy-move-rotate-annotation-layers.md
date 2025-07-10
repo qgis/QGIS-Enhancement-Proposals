@@ -7,7 +7,7 @@
 
 ## Summary
 
-This QEP proposes to enhance annotation layers in QGIS by adding support for moving, copying, and rotating annotation items. These improvements aim to align the editing experience of the layout designer, improving overall UX consistency across the application.
+This QEP proposes to enhance annotation layers in QGIS by adding support for moving, copying, and rotating annotation items. These improvements aim to align the annotating editing experience to that of the layout designer, improving overall UX consistency across the application.
 
 ## Proposed Solution
 
