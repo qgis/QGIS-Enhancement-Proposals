@@ -15,8 +15,8 @@ Currently, moving an annotation requires three separate clicks: one to select, o
 
 To improve usability and align with the layout designer experience, the current "Modify Annotation" tool will be split into two separate tools:
 
-1. **Move/Copy/Rotate Annotation Items** (text and marker annotations)
-2. **Edit Annotation Geometry Vertices** (polygon and line annotations)
+1. **Move/Copy/Rotate Annotation Items**
+2. **Edit Annotation Geometry Vertices** (polygon, line and text-along-line annotations)
 
 This separation allows for more intuitive interactions and clearer UX behavior.
 
@@ -29,10 +29,10 @@ This tool will retain its current behavior. It will allow editing of annotation 
 Once an annotation item is selected, users will be able to:
 
 - **Move** the item using a click & drag with the primary mouse button.
-- **Copy/Paste** current selection. This will  be achieved using the `ctrl+c` (copy), `ctrl+x` (cut) and `ctrl+v` (paste) shortcuts. When pasted, the new items will appear with a slight offset from their original position.
-- **Rotate** the item using a spinbox widget, displayed as an overlay in the top-right corner of the map canvas.
+- **Copy/Paste** the current selection using the standard shortcuts: `ctrl+c` (copy), `ctrl+x` (cut), and `ctrl+v` (paste). When pasted, the new items will be positioned relative to the current mouse cursor — the top-left corner of the pasted annotations will align with the cursor location. The `ctrl+shift+v` shortcut will be used for the paste in place action.
+- **Rotate** the item interactively using a spinbox widget, displayed as an overlay in the top-right corner of the map canvas.
 
-Multiple annotation items will be selectable using a **rubberband selection**. All operations will apply to the selected group. `Shift` modifier will allow to add elements to the current selection and `ctrl` to remove elements.
+Multiple annotation items will be selectable using a **rubberband selection**. All operations will apply to the selected group. `Shift` modifier will allow to add elements to the current selection,`ctrl` to remove elements, and `alt` to invert the selection. Combinations of modifiers for intersect/within selections will also be possible, similar to the select features tool behaviour.
 
 ### Code Changes Overview
 
@@ -44,7 +44,7 @@ Multiple annotation items will be selectable using a **rubberband selection**. A
 
 - **Multi-selection**: Use `QgsRubberBand` to support group selection of annotation items.
 
-- Extend the `QgsAnnotation` serialization logic to store rotation values in the project file.
+- Extend the `QgsAnnotationItem` serialization logic to store rotation values in the project file.
 
 ## Deliverables
 
