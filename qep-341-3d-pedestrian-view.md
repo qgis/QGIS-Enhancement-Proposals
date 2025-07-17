@@ -28,11 +28,11 @@ Once the user click to select the starting point:
 * the camera is facing the same direction as before activation
 * the movement mode changes (see below)
 
-The user exits this mode by switching to another navigation mode or by pressing the *Esc* key or by doing a right click with the mouse.
+The user exits this mode by switching to another navigation mode or by pressing the *Esc* key.
 
 ### Movements
 
-Movements can be done using the keyboard or mouse and are free: unconstrained by obstacles or roads.
+Movements can be done using the keyboard or mouse and are free: unconstrained by obstacles or roads. The user moves are restricted in the current extent.
 
 Forward and backward movement will be controlled by the `up` and `down` keys. Lateral movement will be controlled by the `left` and right keys. Lateral mouse movements will allow you to turn without moving. Vertical mouse movements allow you to look up or down.
 
@@ -41,13 +41,10 @@ Here is the whole key mapping:
 * ARROW and WASD : forward/backward/shift left/shift right
   * `Ctrl`: temporary decrease speed
   * `Shift`: temporary increase speed
-* `Space`: jump **optional**
 
 Here is the whole mouse mapping:
 
 * mouse move: move look at (up, down, left, right)
-* left mouse click: toogle engage/disengage mouse (also bound to QuoteLeft)
-* right mouse click: quit mode (also bound to Esc)
 * Wheel : permanent speed factor (as in current walk mode)
 
 ### Existing navigation modes
@@ -55,6 +52,12 @@ Here is the whole mouse mapping:
 The current **Walk** mode will be renamed **Fly** as the pedestrian view is more a real walk mode.
 
 As we will have 3 navigation modes, the 3D UI should display the current mode in use and a way to switch from one to another.
+
+### Elevation
+
+Elevation will be computed with the `heightAt` function. As the actual implementation is to coarse, we are working on a pull request in order to improve it.
+
+When the user moves in a no-data area the previous valid elevation will be used.
 
 ### Integration
 
