@@ -55,9 +55,12 @@ As we will have 3 navigation modes, the 3D UI should display the current mode in
 
 ### Elevation
 
-Elevation will be computed with the `heightAt` function. As the actual implementation is to coarse, we are working on a pull request in order to improve it.
+Elevation will be computed with the `heightAt` function. When the user moves in a no-data area the previous valid elevation will be used.
 
-When the user moves in a no-data area the previous valid elevation will be used.
+As the actual implementation is to coarse, we are working on a QGIS pull request (outside this QEP) in order to improve it. It mostly involves two changes:
+
+* listen to the DTM texture generation in `QgsTerrainGenerator` and store them in a cache. The cache has some logic to only keep the highest level when available.
+* in `Qgs3DMapScene`, when a better level is stored, reload the relevant vector tiles if necessary
 
 ### Integration
 
