@@ -31,7 +31,7 @@ This could look like approximatively this
 
 These areas would be defined as start and end distances from the first point of the line or polygon. It would be possible to define the unit of those distances.
 
-A new property would be added on QgsSymbolLayer [ones](https://github.com/qgis/QGIS/blob/d01be3798eb05c74a61629042f7189ad9c594b1e/src/core/symbology/qgssymbollayer.h#L147) and it would be possible to explicity set a data defined property for all `QgsTemplatedLineSymbolLayerBase` symbol layers (which marker line and hash line symbol layer inherits from). It would be possible then to define those blank areas either:
+A new Property would be added to the QgsSymbolLayer [enum](https://github.com/qgis/QGIS/blob/d01be3798eb05c74a61629042f7189ad9c594b1e/src/core/symbology/qgssymbollayer.h#L147) and it would be possible to explicity set a data defined property for all `QgsTemplatedLineSymbolLayerBase` symbol layers (which marker line and hash line symbol layer inherits from). It would be possible then to define those blank areas either:
 - in a static way, 
 - with a specific data field,
 - an auxiliary data storage field,
