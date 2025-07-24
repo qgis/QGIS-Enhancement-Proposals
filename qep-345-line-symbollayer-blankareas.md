@@ -31,6 +31,8 @@ This could look like approximatively this
 
 These areas would be defined as start and end distances from the first point of the line or polygon. It would be possible to define the unit of those distances.
 
+While it will be possible to use screen or page based units like millimeters or inches, it is expected that this will be of limited use as the blank regions would then change size and position when the map scale is changed. Rather, it is expected users will typically set the region distance unit to "Map units" or "Meters at scale" so that the regions remain fixed in place regardless of the map scale. Accordingly, the default unit for the property will be set to Map Units.
+
 A new Property would be added to the QgsSymbolLayer [enum](https://github.com/qgis/QGIS/blob/d01be3798eb05c74a61629042f7189ad9c594b1e/src/core/symbology/qgssymbollayer.h#L147) and it would be possible to explicity set a data defined property for all `QgsTemplatedLineSymbolLayerBase` symbol layers (which marker line and hash line symbol layer inherits from). It would be possible then to define those blank areas either:
 - in a static way, 
 - with a specific data field,
