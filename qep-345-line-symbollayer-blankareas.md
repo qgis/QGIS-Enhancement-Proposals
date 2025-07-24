@@ -26,17 +26,6 @@ This could look like approximatively this
 
 ![poc.gif](images/qep345/poc.gif)
 
-### Fixed marker position
-
-We also propose to add an option "fixed marker position" to fix markers positions whatever the current displayed area and zoom level. Indeed, without this option, you would get this behavior
-
-![nonfixed.gif](images/qep345/nonfixed.gif)
-
-This option will be false by default which is the actual behavior.
-
-Enabling this option will imply that we disable feature clipping for the given line symbol layer. The flag `Qgis::SymbolLayerFlag::DisableFeatureClipping` would be added to current flags if this option is set.
-
-When set, all the geometry would be drawn entirely and not clipped. This would have performance implication. A tooltip would inform user about this.
 
 ### The blank areas
 
