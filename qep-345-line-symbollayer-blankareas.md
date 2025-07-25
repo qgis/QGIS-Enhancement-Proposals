@@ -40,7 +40,7 @@ This property will be a string of comma separated distances.
 
 When used with a field, this information would then be stored per feature, per layer, per symbol layer.
 
-A new provide a map tool to edit those blank areas would be inserted within marker line symbol layer widget.
+A new widget would be inserted within marker line symbol layer widget.
 
 ![blankareas_widget.png](images/qep345/blankareas_widget.png)
 
