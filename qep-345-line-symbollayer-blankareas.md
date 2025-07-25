@@ -32,7 +32,6 @@ These areas would be defined as start and end distances from the first point of 
 While it will be possible to use screen or page based units like millimeters or inches, it is expected that this will be of limited use as the blank regions would then change size and position when the map scale is changed. Rather, it is expected users will typically set the region distance unit to "Map units" or "Meters at scale" so that the regions remain fixed in place regardless of the map scale. Accordingly, the default unit for the property will be set to Map Units.
 
 A new Property would be added to the QgsSymbolLayer [enum](https://github.com/qgis/QGIS/blob/d01be3798eb05c74a61629042f7189ad9c594b1e/src/core/symbology/qgssymbollayer.h#L147) and it would be possible to explicity set a data defined property for all `QgsTemplatedLineSymbolLayerBase` symbol layers (which marker line and hash line symbol layer inherits from). It would be possible then to define those blank areas either:
-- in a static way, 
 - with a specific data field,
 - an auxiliary data storage field,
 - an expression.
@@ -41,9 +40,15 @@ This property will be a string of comma separated distances.
 
 When used with a field, this information would then be stored per feature, per layer, per symbol layer.
 
-A new widget to edit those blank areas would be inserted within marker line symbol layer widget.
+A new provide a map tool to edit those blank areas would be inserted within marker line symbol layer widget.
 
 ![blankareas_widget.png](images/qep345/blankareas_widget.png)
+
+It won't be possible to edit statically those areas because:
+- We consider there are few use cases where user would like to define blank areas for ALL features
+- There could be misunderstanding between the static distances and the ones created with the maptool, making believe user than the later can edit the former
+- It will still be possible to define distances array thanks to expression
+
 
 #### QgsMapToolDefineBlankArea
 
