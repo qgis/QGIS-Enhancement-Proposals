@@ -72,6 +72,8 @@ the map tool defined zone would be set on `QgsTemplatedLineSymbolLayerBase` symb
 
 ![link_auxstorage.png](images/qep345/link_auxstorage.png)
 
+`QgsMapToolDefineBlankArea` will reuse part of the logic already defined in the [label map tool](https://github.com/qgis/QGIS/blob/a8f44fa00e7daa3c8c73d098d602c16ff76051ba/src/app/labeling/qgsmaptoollabel.cpp#L715)
+
 `QgsMapToolDefineBlankArea` will define its own rubber band class `QgsMapToolBlankAreaRubberBand` to edit the areas. It would retrieve symbol layer offset, and layer geometries within the view extent and will use the  [offsetLine](https://github.com/qgis/QGIS/blob/d01be3798eb05c74a61629042f7189ad9c594b1e/src/core/symbology/qgssymbollayerutils.h#L1175) method to properly compute the rubber band areas to be drawn (in a way like the one in the above video).
 
 
