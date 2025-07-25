@@ -18,13 +18,11 @@ The rest of the proposal will mention markers but everything describe here appli
 
 ## Proposed Solution
 
-In order to have a proper display of the markers along the line, I propose to:
-- Give user a way to identify blank area where markers are not displayed
-- Use the already existing annotation feature to add, move, rotate or even change marker symbology
-
-This could look like approximatively this
+In order to have a proper display of the markers along the line, I propose to give user a way to identify blank areas where markers are not displayed. This could look like approximatively this
 
 ![poc.gif](images/qep345/poc.gif)
+
+User could then use another point layer with marker symbol to place and rotate other marker where he wants to. 
 
 
 ### The blank areas
