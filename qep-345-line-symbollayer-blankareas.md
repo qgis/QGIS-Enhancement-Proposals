@@ -37,6 +37,8 @@ A new Property would be added to the QgsSymbolLayer [enum](https://github.com/qg
 - an auxiliary data storage field,
 - an expression.
 
+This property will be a string of comma separated distances. 
+
 When used with a field, this information would then be stored per feature, per layer, per symbol layer.
 
 A new widget to edit those blank areas would be inserted within marker line symbol layer widget.
