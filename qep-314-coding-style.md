@@ -131,7 +131,7 @@ Notes:
 
   ``` cpp
   // preferred form:
-  if ( QgsMarkerSymbol *marker == renderer->symbol() )
+  if ( QgsMarkerSymbol *marker = renderer->symbol() )
   {
      // do something with marker
   }
@@ -147,7 +147,7 @@ Notes:
   c++17 [if statement with initializer](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0305r0.html) form can be used to limit the scope:
 
   ``` cpp
-  if ( QgsMarkerSymbol *marker == renderer->symbol; marker->symbolLayerCount() > 1 )
+  if ( QgsMarkerSymbol *marker = renderer->symbol; marker->symbolLayerCount() > 1 )
   {
      ...
   }
