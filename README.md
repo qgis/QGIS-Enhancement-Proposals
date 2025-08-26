@@ -51,7 +51,34 @@ When the discussion and voting period ends, one of the following actions are tak
   outcome of the proposal.
 - **If the proposal was rejected**: the Pull Request should be closed
 
-## List of approved QEPs
+## Navigating QEPs
+
+### Effective QEPs
+
+All QEP-files (e.g. QEP-4-QGIS_Long_Term_Releases.rst or qep-332-sql-query-history.md) that are currently effective
+(adopted, and not since withdrawn) are placed in this repo, as a file. And conversely files in this format
+in the repo are effective.
+
+### All other QEPs (rejected, under discussion, undecided, etc.)
+
+These don't yet have a name or number, and they don't yet have a file in the master branch (but they may have a file in
+a PR). To see them, look under pullrequests (or in some cases under Issues).
+
+### Withdrawn QEPs
+
+As of August 2025 there has not yet existed any adopted QEPs that was since withdrawn. If that happens, the
+QEP should be placed in a subfolder called `withdrawn`, and have the title renamed accordingly, so
+no one will read the file out of context and believe it is still in effect.
+
+### Researching QEP discussions
+
+Discussions may be found in a few different places. For both approved and not approved QEPs.
+
+- Search in this repo, under pull requests
+- Search in this repo, under issues
+- Search in mailing list
+
+# List of the most significant QEPs
 
 ### Policy/process related QEPs
 
