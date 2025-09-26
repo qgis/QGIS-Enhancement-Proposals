@@ -10,7 +10,7 @@
 
 # Summary
 
-With Qt 4 around the corner and the transition to Qt 6. We could leverage the ability of Qt Quick library to create fluid and dynamic user interfaces, to prepare the model designer for the year to come. 
+With Qt 4 around the corner and the transition to Qt 6. We could leverage the ability of Qt Quick library to create fluid and dynamic user interfaces, to prepare the model designer for the years to come. 
 
 Benefice of using Qt Quick:
 * Allow using modern control directly on the model canvas unlike in the graphics view where inserting a QWidgets in the scene is so performance heavy it’s actually frown upon to use (https://www.qt.io/blog/2017/01/19/should-you-be-using-qgraphicsview)
@@ -37,8 +37,6 @@ And to port the interactions around it. The rest of the model designer for examp
 ### The entry point of QML : A QQuickWidget
 
 The QQuickWidget is a regular widget but display a QQuickWindow to display a QML scene. The QQuickWidget will replace the current QgraphicsView and hold much less responsibility as other will take over this role.
-
-During the time of development the two framework can co exists side by side.
 
 For example:
 
@@ -127,7 +125,7 @@ Component {
   Loader {
     id: NodeTypeLoader
     // Load the good qml for each node type
-    objectName: "attributeEditorLoader" + node.id
+    idName: "AlgorithmName" + node.id
     sourceComponent: outputComponentItem.qml || childAlgComponentItem.qml
   }
 }
