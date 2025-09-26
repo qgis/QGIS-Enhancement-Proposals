@@ -29,7 +29,7 @@ This QEP is not about porting the whole model designer to QML but only the canva
 
 And to port the interactions around it. The rest of the model designer for example the dialog when editing an algorithm or an input remains unchanged.
 
-![alt text](<./image/qep346/overview what to port.png>)
+![alt text](<./images/qep346/overview what to port.png>)
 
 ## Proposed Solution
 
@@ -42,7 +42,7 @@ During the time of development the two framework can co exists side by side.
 
 For example:
 
-![alt text](<./image/qep346/qquickwidget-qgis.png>)
+![alt text](<./images/qep346/qquickwidget-qgis.png>)
 
   *Working QQuickWidget with a single rectangle in QML. One tab for qml one tab for QGraphicsView*
 
@@ -181,10 +181,10 @@ There are too much things named model since we are not going to rename the Qt te
 
 ### Example(s)
 
-![alt text](<./image/qep346/qquickwidget-qgis.png>)
+![alt text](<./images/qep346/qquickwidget-qgis.png>)
 
 
-![alt text](<./image/qep346/node-editor-factice.png>)
+![alt text](<./images/qep346/node-editor-factice.png>)
 
 *Example of a node editor in QML based on GraphFlow if it where in QGIS. This will not be the final looks of the PR, just as a exemple of another working node editor*
 
