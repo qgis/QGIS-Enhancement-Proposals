@@ -10,7 +10,7 @@
 
 # Summary
 
-With Qt 4 around the corner and the transition to Qt 6. We could leverage the ability of Qt Quick library to create fluid and dynamic user interfaces, to prepare the model designer for the years to come. 
+With QGIS 4 around the corner and the transition to Qt 6. We could leverage the ability of Qt Quick library to create fluid and dynamic user interfaces, to prepare the model designer for the years to come. 
 
 Benefice of using Qt Quick:
 * Allow using modern control directly on the model canvas unlike in the graphics view where inserting a QWidgets in the scene is so performance heavy it’s actually frown upon to use (https://www.qt.io/blog/2017/01/19/should-you-be-using-qgraphicsview)
@@ -19,7 +19,7 @@ Benefice of using Qt Quick:
     * a live preview 
     * Dynamic visual feedback to the users
 
-This would be the first time Qt Quick and QML would be used in the core of QGIS, but QML have been tested for multiple years by mobile oriented project like QField and Mergin Maps.
+QGIS already built with Qt Quick thanks to the QML widget in form attribut. And QML is already a proven library for UI that have been tested for multiple years by mobile oriented project like QField and Mergin Maps.
 
 *If accepted it would be funded by the QGIS Anwendergruppe Schweiz*
 
