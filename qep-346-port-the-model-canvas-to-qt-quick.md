@@ -135,6 +135,17 @@ Component {
 
 The same proven model/view/delegate approach will be used for others items in the model designer. e.g: links, comments, group box etc...
 
+### Separate UI logic from Business Logic
+
+One of the key benefits of Qt Quick is a clear separation between the UI related code and the business logic. 
+
+But if we are not careful the two can still creep onto each other. To ensure that both take care of their own responsibilities, we can enact simple rules as:
+ * The state of the model would be strictly managed in c++.
+ * No javascript function in QML like  `function foo()` and only call the appropriate c++ function instead for example `QgsQuickMapCanvasMap::zoom`
+
+
+Compared to today code where ui and state are sometimes tied together for example the lifetime of a QGraphicsItems is tie to the next repaint so we find ourselves requesting the UI graphics items stored in the model state.
+  
 
 ### The tools
 
@@ -162,9 +173,16 @@ The QgsModelViewMouseHandles will be ported to QML
 
 ### Along side with the current QGraphicsView implementation
 
-Given the complexity and risks involved. We will keep the current QGraphicsView implementation and the newer Qt Quick implementation co-exists together for as long as needed. 
+Given the complexity and risks involved. We will keep the current QGraphicsView implementation and the newer Qt Quick implementation co-exists during one point release.
 
-We would drop the old implementation of the model canvas only once we meet two conditions: reach feature parity, and the usability from the user perspective is the same or better than with the current implementation.
+This as also the benefit of not dropping the old implementation on a LTS. The calendar would be as follow: 
+
+* QGIS 4.2 Introduces the new model designer canvas
+* QGIS 4.4 Drop the old QgraphicsView implementation
+
+Later release will follow regular development cycle 
+
+in 4.2 a toggle will be added for users to switch to legacy canvas in the processing menu `"View" -> "switch to legacy canvas"`. that will switch to the previous implementation with a stacked widget.
 
 ### backward compatibility of .model3 file  
 
@@ -185,6 +203,12 @@ There are too much things named model since we are not going to rename the Qt te
 ![alt text](<./images/qep346/node-editor-factice.png>)
 
 *Example of a node editor in QML based on GraphFlow if it where in QGIS. This will not be the final looks of the PR, just as a exemple of another working node editor*
+
+### Developer guide : How to contribute to the model designer
+
+The model designer is quite a beast to contribute to. With a mix of python, c++, and soon QML. 
+
+Alongside the development, we would write a high level overview of how the different part of the model design work, and interact together. And write few tips for people wanting to contribute to the model designer at the destination of newcomers and more seasoned QGIS developers as well.
 
 ### Affected Files
 
@@ -220,7 +244,7 @@ The biggest risk would be to not reach feature parity.
 
 ## Performance Implications
 
-Should improve both in terme of speed and of feeling of "snapiness"
+Should improve both in term of speed and of feeling of "snapiness"
 
 ## Further Considerations/Improvements
 
@@ -228,4 +252,19 @@ See the benefice on summary
 
 ## Backwards Compatibility
 
-Only unstable API should be touched
+Assume to break the API for a limited set of classes.
+
+The classes related to the Graphics View Framework will be marked as deprecated and removed upon completion of the project
+
+Which include:
+ * `ModelerScene` and `QgsModelGraphicsScene`)
+ * `QgsModelGraphicsView`
+ * All classes that inherit QGraphicsItem:
+   * `ModelerInputGraphicItem` and `QgsModelParameterGraphicItem`
+   * `ModelerChildAlgorithmGraphicItem` and `QgsModelChildAlgorithmGraphicItem`
+   * `QgsModelCommentGraphicItem`
+   * QgsModelArrowItem
+   * ...
+
+> **_NOTE:_**  While we remove the class, the code responsible for calling legacy dialog will be ported over Qt Quick
+
