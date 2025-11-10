@@ -119,7 +119,9 @@ The XML file would be written when selecting the **apply** button from the custo
 
 In order to keep backward compatibility, a function would load the actual ini file into the new inner structure so it would be then written in XML.
 
-QGIS would also read the `Processing\Configuration\(BUTTON_XXX/ICON_xxx/MENU_xxxx)` old settings from global QGIS configuration and would convert it to the new structure. Those settings would then been removed. 
+QGIS would also read the `Processing\Configuration\(BUTTON_XXX/ICON_xxx/MENU_xxxx)` old settings from global QGIS configuration and would convert it to the new structure. 
+
+QGIS would keep the old settings and old customization ini file so we don't break profile that could be then opened with older QGIS version. On the other hand, new customization modifications made with QGIS 4 would not be visible in older QGIS versions.
 
 #### Dropping the "Widgets" part
 
