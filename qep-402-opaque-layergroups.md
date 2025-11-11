@@ -6,13 +6,15 @@
 
 **Contact** oliver dot jeker at bd dot so dot ch / david at opengis dot ch
 
-**Version** QGIS 4.X.X
+**Version** QGIS 4.0 or 4.2
 
 # Summary
 
-We would like to extend QGIS with the capability to serve opaque layergroups through OGC WMS. Opaque layergroups hide all their children, grandchildren, ... (named opaque childlayers in this QEP) in the layertree. In [GeoServer](https://docs.geoserver.org/main/en/user/data/webadmin/layergroups.html#layer-group-modes) it's called an opaque container, while in QGIS we would use "opaque" as the descriptive word as well and keep layer groups to follow QGIS-style wording.
+We would like to extend QGIS with the capability to serve **opaque layergroups** through OGC WMS. Opaque layergroups hide all their children, grandchildren, ... (named **opaque childlayers** in this QEP) in the layertree. In GeoServer it's called an [opaque container](https://docs.geoserver.org/main/en/user/data/webadmin/layergroups.html#layer-group-modes), while in QGIS we would use "opaque" as the descriptive word as well and keep layer groups to follow QGIS-style wording.
 
-Our motivation is to hide implementation details from the user. One usage example for an opaque layergroup is a detailed road_polygon dataset and an overview road_line dataset. The point and polygon layer of these two datasets are contained in the opaque layergroup "roads".
+Our motivation is to hide implementation details from the user. One usage example for an opaque layergroup is a detailed road_polygon dataset and an overview road_line dataset. The point and polygon layer of these two datasets are contained in the opaque layergroup "Roads".
+
+![roads](images/qep402/roads.png)
 
 ## Intended behaviour
 
@@ -21,7 +23,23 @@ Most behaviour of an opaque layergroup is the same as in the "normal" already ex
 ### Differing behaviour for
 
 * **GetCapabilities**   
-Opaque layergroups hide all their opaque childlayers in the GetCapabilities response. Only the opaque layergroup itself is returned and looks like a "singlesource" layer (QgsVectorLayer, QgsRasterLayer) in the layer tree.
+Opaque layergroups hide all their **opaque childlayers** in the GetCapabilities response. Only the opaque layergroup itself is returned and looks like a "singlesource" layer (QgsVectorLayer, QgsRasterLayer) in the layer tree.
+
+    ```xml
+    <Layer queryable="1">
+    <Name>Roads</Name>
+    <Abstract>This is an opaque layergroup</Abstract>
+    <CRS>CRS:84</CRS>
+    <CRS>EPSG:4326</CRS>
+    <CRS>EPSG:3857</CRS>
+    <EX_GeographicBoundingBox>[...]</EX_GeographicBoundingBox>
+    <BoundingBox CRS="EPSG:3857" maxx="930992.313" maxy="5947431" minx="930871" miny="5947339"/>
+    <BoundingBox CRS="EPSG:4326" maxx="47.03281" maxy="8.363247" minx="47.032245" miny="8.362156"/>
+    <Style>[...]</Style>
+    </Layer>
+    ```
+
+    Without any `<Layer>` elements in this object.
 
 * **GetContext**    
 Opaque childlayers are not listed.
@@ -37,7 +55,7 @@ Expose the new property in the group setting information.
     ```
 
 * **Requests on children (like GetMap, GetFeatureInfo, GetStyle(s), GetLegendGraphic(s), DescribeLayer)**    
-Requests containing a opaque childlayers in the "layers" parameter get the same error response as when requesting a layer that does not exist in the layer tree.
+Requests containing a **opaque childlayers** in the "layers" parameter get the same error response as when requesting a layer that does not exist in the layer tree.
     ```xml
     <ServiceExceptionReport xmlns="http://www.opengis.net/ogc" version="1.3.0">
         <ServiceException code="LayerNotDefined">The layer 'RoadsInOpaqueGroup' does not exist.</ServiceException>
@@ -56,49 +74,41 @@ There is a different behavior on requesting a non-existent layer or an excluded 
  | GetStyle / GetStyles| OGC_LayerNotDefined  | Empty reply      |
  | GetLegendGraphic    | OGC_LayerNotDefined  | OGC_LayerNotDefined | 
 
-We propose to handele the opaque childlayers same like the non-existent layer and return `OGC_LayerNotDefined`. Why is the behavior different on excluded layers?
+We propose to handele the **opaque childlayers** same like the non-existent layer and return `OGC_LayerNotDefined`.
 
 ### Same behaviour for
 
-Normal layergroups and opaque layergroups on:
+Normal layergroups and **opaque layergroups** on:
 
 * **GetMap** request on the opaque layergroup   
-Requests containing opaque layergroups in the "layers" parameter are rendered the same way as normal layergroups. 
+Requests containing **opaque layergroups** in the "layers" parameter are rendered the same way as normal layergroups. 
 * **GetFeatureInfo**
 * **GetLegendGraphic**
 * etc.
 
-### Preferred behavior on duplicate layer names in the layer tree
-
-***Note that it's bad practice to use same named layers in the same QGIS project. If this preferred behavior brings us too much complexity into the code, we would not make it part or the implementation.***
-
-For a configuration containing a layer with the same name both as child of an opaque layer and in a non-opaque part of the layer tree:
-* When requesting the layer name, only the layer in the non-opaque part of the layer tree must be rendered.
-* When requesting the opaque layer, only the child of the opaque layer must be rendered.
-
-Be aware of the fact, that same named layers usually [get merged](https://github.com/qgis/QGIS/pull/33952).
-
 ## Proposed Solution
 
-Add a checkbox or dropdown to the form "Set Group WMS Data" to choose if the group is opaque or not. Maybe we could rename the form to "Set Group WMS Properties" or similar.
+Add a checkbox or dropdown to the form "Set Group WMS Data" to choose if the group is opaque or not.
 
 ![group_wms_data.png](images/qep402/group_wms_data.png)
 
-This would mean there would be a new member `isOpaque` in the `QgsMapLayerServerProperties` of the `QgsLayerTreeGroup`.
+(As well we propose to change the dialog title to "Set Group WMS Properties")
 
-This information is accessible via `QgsMapLayerServerProperties *QgsLayerTreeGroup::serverProperties()`.
+A new member `isOpaque` will be added to the `QgsMapLayerServerProperties` of `QgsLayerTreeGroup` store this configuration.
 
-In the server classes it might be handled similar to the `wmsRestrictedLayers` (the excluded layers), but with the difference, that they are not hidden on everything (e.g. rendered on GetMap requests of the group).
+In the server classes it can be handled similar to the `wmsRestrictedLayers` (the excluded layers), but with the difference, that they are not hidden on everything (e.g. rendered on GetMap requests of the group).
 
 On `QgsWmsRenderContext::initOpaqueGroupLayers()` it checks the `isOpaque` on the groups' server properties and fills up the `QStringList mOpaqueChildLayers`. They should not be considered in `removeUnwantedLayers`, because it still should be rendered. 
 
-On a request on one of the opaque childlayers it should check `QgsWmsParameter::LAYER` against `mOpaqueChildLayers` and throw the `OGC_LayerNotDefined` error "The layer '%1' does not exist."
+On a request on one of the **opaque childlayers** it should check `QgsWmsParameter::LAYER` against `mOpaqueChildLayers` and throw the `OGC_LayerNotDefined` error "The layer '%1' does not exist."
 
 On `GetCapabilties` it should return in functions like `appendLayersFromTreeGroup` and be detected for removing in `appendDrawingOrder` etc.
 
-### Duplicate layer names handling
+### Preferred behavior on duplicate layer names in the layer tree
 
-The layer name should just not be added to the `mOpaqueGroupLayers`, when there is a same named layer outside an opaque layergroup. On requesting the layer outside the opaque layergroup it should care in `QgsWmsRenderContext::searchLayersToRender()` that it should not render the same named layer inside an opaque layergroup.
+QGIS Server currently [merges layers with identical names](https://github.com/qgis/QGIS/pull/33952). The opaque layergroup proposed in this QEP allows for more control over grouping and thus will have higher priority. If doable *without adding too much complexity*, our targetted behavior will be:
 
+* When requesting the layer name, only the layer in the non-opaque part of the layer tree must be rendered.
+* When requesting the opaque layer, only the child of the opaque layer must be rendered.
 
-
+A layername will not be added to the `mOpaqueGroupLayers`, when there is a identical named layer outside an opaque layergroup. On requesting the layer outside the opaque layergroup it should care in `QgsWmsRenderContext::searchLayersToRender()` that it should not be "merged" with the identical named layer inside an opaque layergroup.
