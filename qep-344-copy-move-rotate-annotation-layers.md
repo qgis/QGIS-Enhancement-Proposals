@@ -27,7 +27,7 @@ The tool will only allow single selection. When clicking on a node with a preexi
 
 This tool will rely on the preexisting QgsGraphicsViewMouseHandles class used by the layout designer to offer the following functionalities against a single or multiple selected items:
 
-- **Move** the item(s) using a click & drag with the primary mouse button.
+- **Move** the item(s) using a click-click behavior on one of the selected item(s) using the primary mouse button to match what is done with the map canvas' move feature(s) tool. Upon implementation, a click+drag behavior will also be tested to see if that offers a better behavior.
 - **Resize** the item(s) interactively using selection corner resizing handles.
 - **Rotate** the item(s) interactively using the selection corner rotation handles.
 - **Copy/Paste** the item(s) using the standard shortcuts: `ctrl+c` (copy), `ctrl+x` (cut), and `ctrl+v` (paste). When pasted, the new items will be positioned relative to the current mouse cursor — the top-left corner of the pasted annotations will align with the cursor location. The `ctrl+shift+v` shortcut will be used for the paste in place action.
