@@ -109,6 +109,16 @@ On `GetCapabilties` it should return in functions like `appendLayersFromTreeGrou
 QGIS Server currently [merges layers with identical names](https://github.com/qgis/QGIS/pull/33952). The opaque layergroup proposed in this QEP allows for more control over grouping and thus will have higher priority. If doable *without adding too much complexity*, our targetted behavior will be:
 
 * When requesting the layer name, only the layer in the non-opaque part of the layer tree must be rendered.
-* When requesting the opaque layer, only the child of the opaque layer must be rendered.
+* When requesting the opaque layergroup, only the child of the opaque layergroup must be rendered, and not merged with another same named layer outside the opaque layergroup. But when requesting a opaque layergroup having the same name as another layer outside an opaque layergroup, the opaque layergroup should be merged with the same named layer.
+
+But e.g. when having a opaque group "roads":
+``` 
+- roads
+  |- roadline
+  |- roadpoly
+- roadline
+``` 
+
+When requesting "roads" only the first roadline is rendered. And when requesting roadline only the second roadline is rendered.
 
 A layername will not be added to the `mOpaqueGroupLayers`, when there is a identical named layer outside an opaque layergroup. On requesting the layer outside the opaque layergroup it should care in `QgsWmsRenderContext::searchLayersToRender()` that it should not be "merged" with the identical named layer inside an opaque layergroup.
