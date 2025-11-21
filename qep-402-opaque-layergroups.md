@@ -104,11 +104,11 @@ On a request on one of the **opaque childlayers** it should check `QgsWmsParamet
 
 On `GetCapabilties` it should return in functions like `appendLayersFromTreeGroup` and be detected for removing in `appendDrawingOrder` etc.
 
-### Preferred behavior on duplicate layer names in the layer tree
+### Preferred behavior on duplicate layer names / short name in the layer tree
 
-QGIS Server currently [merges layers with identical names](https://github.com/qgis/QGIS/pull/33952). The opaque layergroup proposed in this QEP allows for more control over grouping and thus will have higher priority. If doable *without adding too much complexity*, our targetted behavior will be:
+QGIS Server currently [merges layers with identical names (or short names)](https://github.com/qgis/QGIS/pull/33952). The opaque layergroup proposed in this QEP allows for more control over grouping and thus will have higher priority. If doable *without adding too much complexity*, our targetted behavior will be:
 
-* When requesting the layer name, only the layer in the non-opaque part of the layer tree must be rendered.
+* When requesting the layer name (or short name), only the layer in the non-opaque part of the layer tree must be rendered.
 * When requesting the opaque layergroup, only the child of the opaque layergroup must be rendered, and not merged with another same named layer outside the opaque layergroup. But when requesting a opaque layergroup having the same name as another layer outside an opaque layergroup, the opaque layergroup should be merged with the same named layer.
 
 But e.g. when having a opaque group "roads":
