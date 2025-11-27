@@ -96,7 +96,9 @@ They are in written to `QgsField::mComment` on `QgsAttributesFormProperties::app
 
 ### Visual improvements
 
-Since noone reads a tooltip when they don't know that there is one, this QEP also proposes an icon 🛈 (U+1F6C8) in the form. This icon visually informs the user that the field contains additional information. The tooltip will appear when the icon is clicked.
+Currently, the comment is shown in the attribute form as a tooltip for the field name or alias (the tooltip on the editor widgets is handled individually by the editor widget itself).
+
+However, since no one reads a tooltip when they do not know that there is one and the attribute form is often used by inexperienced users, this QEP also proposes an icon 🛈 (parameterized SVG) in the form. This icon visually informs the user that the field contains additional information. The tooltip will appear when the icon is clicked.
 
 ![info icon](images/qep403/info-icon.png)
 
