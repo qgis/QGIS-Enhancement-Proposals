@@ -20,7 +20,7 @@ That's why client-side comments should be introduced.
 
 ## The existing server-side comments
 
-More context regarding the server-side comments.
+By "server-side" comments, we refer to comments defined in the provider or the database. This also includes comments defined in a GeoPackage, even though GeoPackages are not servers.
 
 ### Where are they defined?
 
@@ -30,7 +30,7 @@ Column comments are defined directly in the database. They are mainly used in `P
 COMMENT ON COLUMN plan.chcantoncode.ilicode IS 'This is the abbreviation of the canton (e.g. ZH for Zurich)';
 ```
 
-Another provider that utilizes them is the `GrassLayers`.
+Other providers that utilize them include the `OgrProvider` and the `GrassLayers`. The behavior regarding this enhancement here is the same.
 
 They are read on `loadFields` within the provider and are then stored in the `QgsField` objects.
 
