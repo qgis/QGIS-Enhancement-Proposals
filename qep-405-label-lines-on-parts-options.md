@@ -31,7 +31,7 @@ The available options will be:
   "label every part" checkbox unchecked.
 - “Label every part with same text”. This corresponds to the current behavior which is activated when the user manually
   checks the "label every part" checkbox
-- “Place lines on parts”. This is a brand new behavior, as described below.
+- “Split label text lines over parts”. This is a brand new behavior, as described below.
 
 To accomodate the new behavior selection, an enum `Qgis::MultiPartLabelingBehavior` will be introduced. The existing
 `QgsPalLayerSettings::labelPerPart` boolean will be deprecated, and replaced with a getter/setter for the new enum
@@ -43,7 +43,9 @@ API for `labelPerPart` remains intact.
 This new behavior option will split the label text over the parts of a multi-geometry feature.
 
 The label text will be split at new line characters, and each line will be placed separately over corresponding
-parts from the input feature geometry.
+parts from the input feature geometry. Note that the splitting will occur AFTER the existing setting for
+"Wrap on character" is applied, so any custom new line character the user has configured for that setting will
+be respected when placing labels for multipart geometries.
 
 If the multipart geometry does not contain sufficient parts for the label text then the excess lines will be ignored.
 
