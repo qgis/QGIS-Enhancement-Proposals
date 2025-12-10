@@ -13,7 +13,7 @@
 Currently, when labeling multi-part geometries, QGIS has two behaviors:
 
 1. Only the largest part is labeled. This is the default behavior.
-2. Every part is labeled with the same text. This behavior is actived when the user checks the
+2. Every part is labeled with the same text. This behavior is activated when the user checks the
    "Label every part of multi-part features" checkbox.
 
 This QEP proposes a new option for labeling multi-part geometries in order to give users more cartographic
