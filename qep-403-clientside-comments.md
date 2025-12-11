@@ -68,7 +68,7 @@ When we edit the comment in the attribute form settings, a client-side comment i
 
 ![client set](images/qep403/client-side-comment.png)
 
-If no client-side comment is defined (it's `NULL`- removed again using the x-arrow on the right), the server-side comment is taken into account again.
+If no client-side comment is defined (it's `NULL`- removed again using the x-arrow on the right), the server-side comment is taken into account and it's displayed as placeholder text (gray) again.
 
 When a client-side comment contains an empty string (`""`), the client-side comment is taken into account, and **not** the server-side comment. This means using an empty string will prevent any comment from being displayed at all.
 
