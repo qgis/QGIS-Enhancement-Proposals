@@ -34,7 +34,7 @@ A group box `Manual Customization` will integrate both this feature and the blan
 ![](images/qep406/maptool.png)
 
 - User could select a map tool to add item **(1)**: `Left click` would generate a new marker at the given position.
-- User could select a map tool to select already created item to move/delete/rotate them **(2)**: This map tool would follow the principles described [here](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/bbfc1046ff63394e423f2b3b960a99d6734b08b8/qep-344-copy-move-rotate-annotation-layers.md#2-selectmove-annotations) (except for the resize part). Pressing the `Del` button would delete selected markers.
+- User could select a map tool to select already created item to move/delete/rotate them **(2)**: This map tool would follow the principles described [here](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/bbfc1046ff63394e423f2b3b960a99d6734b08b8/qep-344-copy-move-rotate-annotation-layers.md#2-selectmove-annotations) (except for the resize part). Pressing the `Del` button would delete selected markers. Extra items would be red highlighted so user could differenciate them from the line symbol layer regular non modifiable markers.
 
 ### Map tools
 
