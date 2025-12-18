@@ -18,12 +18,14 @@ The main challenge of this feature is ensuring that these new functionalities do
 
 - Add a new editing section to the toolbar within the elevation profile panel.
 - Display the editing icon for the layer currently selected in the elevation profile tree view.
-- Synchronize edition state between the main canvas and the elevation profile: enabling edition on a layer from the elevation profile will activate it in the main canvas, and vice versa.
+- Synchronize edition state between the main canvas and the elevation profile windows: enabling edition on a layer from any of the elevation profile window will activate it in the main canvas and the other elevation profile windows, and vice versa.
 - Synchronize selection: it is the same between the elevation plots and the main layer.
 
 The different operations (Add, Delete, Move, Select) will be implemented by creating new tools that inherit from `QgsPlotTool`. 
 
-This editing toolbox will not be enabled if the selected layer is not a point layer.
+This editing toolbar will not be enabled if the selected layer is not a point layer.
+
+This toolbar will not be visible by default to avoid cluttering the default user experience. It can be enabled using a new "Toolbars" submenu in the "Options" menu.
 
 ### Selection
 
