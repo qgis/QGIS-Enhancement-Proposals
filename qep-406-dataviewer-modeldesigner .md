@@ -29,6 +29,8 @@ A new button positioned on the branch of the model will be added. With an icon m
 
 ![Invoking the data viewer1](images/qep406/model_designer_dataviewer_invoke.png)
 
+> **_NOTE:_**  The feature count on each branch will be part of QGIS 4.0 and is not part of this QEP
+
 
 ![Invoking the data viewer2](images/qep406/model_designer_dataviewer_overview.png)
 
@@ -37,6 +39,23 @@ A new button positioned on the branch of the model will be added. With an icon m
 Once invoked, the data viewer will have three main areas: the toolbar, the map canvas for a visual feedback and an attribute table for the details of data within this model step.
 
 ![Anatomy of the data viewer](images/qep406/model_designer_dataviewer_common.png)
+
+### The split between map canvas and attribut table
+
+The attibut table and the map canvas are both present in the data viewer. They can be splitted and resized as user wish.
+
+On top of it we will add some logics to make it seamless for the user: On non geographic feature(e.g spreadsheet-like), only the attribute table while be displayed and the map canvas while be hidden.  While on the opposite side for non vector data but geographic feature, only the map canvas will be displayed and the attribute table will be hidden 
+
+### Focus on the toolbar
+
+For a first iteration a good starting point would be to have: 
+
+* Zoom to full extent
+* Zoom map to selected rows
+* Select all/ Invert / None / By expression
+* Toggle project layer : Display or not the project layer in the map canvas
+
+The toolbar is flexible enough so it can be embellish later on with more tools.  
 
 # Proposed Solution
 
@@ -57,7 +76,7 @@ You can think of it like a breakpoint in programming except it doesn't stop the 
 The data viewer will be updated on each new run of the model, so users will be able to monitor the change in their model at a certain branch. (`QgsProcessingAlgorithmDialogBase::algorithmFinished` signal can be used to achieve this)
 
 
-> **_NOTE:_**  The data viewer will only be updated when relevant, i.e if the branch or the algorithm watched has not been deleted
+> **_NOTE:_**  The data viewer will only be updated if the branch or the algorithm watched has not been deleted, otherwise it will be left blank.
 
 ## Leverage existing capabilities of QGIS
 
@@ -89,7 +108,7 @@ While with the current approach, you can view any data supported in QgsMapCanvas
 
 However, what does support inspecting other data type in QGIS is the Identify Results Panel. In a future iteration of the data viewer we could also have a Identify widget and they could switch with a stack widget with the attribut table could switch.
 
-we could make with a new convenience custom widget for this similar to what exists for the `QgsAttributeTableView` something like *QgsIdentifyResultsTreeView*. This widget could also be used in other areas of QGIS and external plugins as well. 
+we could make a new convenience custom widget for this similar to what exists for the `QgsAttributeTableView` something like *QgsIdentifyResultsTreeView*. This widget could also be used in other areas of QGIS and external plugins as well. 
 
 ![Improve support inspecting non vector data](images/qep406/model_designer_dataviewer_identify.png)
 
