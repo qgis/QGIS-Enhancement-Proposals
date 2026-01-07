@@ -16,9 +16,11 @@ Currently, debugging a model inside the model designer is cumbersome and involve
 
 We propose to introduce a new data viewer, that would be a dialog specialized to visualize and inspect intermediate step in a model. 
 
-This dialog can then be turned into a dock. It will be composed of components already existing in QGIS, in order to speak the same language as the user, and reduce the overhead of code maintenance.   
+This dialog can then be turned into a dock. It will be composed of components already existing in QGIS, in order to speak the same language as the user, and reduce the overhead of code maintenance. 
 
-This might seem like an easy feature to implement at first glance. What could go wrong it's just a `QDialog` and a `QgsMapCanvas` (*Right ?*). Yet it's also easy to get it wrong, and if we want to build upon the feature it's important to have an agreed upon design. 
+This might seem like an easy feature to implement at first glance. What could go wrong it's just a `QDialog` and a `QgsMapCanvas` (*Right ?*). Yet it's also a tightrope walk exercise between providing a insightful peek of the data inside your model, and basically building QGIS onto itself in the model designer.
+
+This QEP, try to be a good balance, in keeping thing simple yet relevant in the context of the model designer
 
 
 ## Presentation from the user perspective
@@ -40,11 +42,15 @@ Once invoked, the data viewer will have three main areas: the toolbar, the map c
 
 ![Anatomy of the data viewer](images/qep406/model_designer_dataviewer_common.png)
 
+> **_NOTE:_**  The toolbar above, is only here as an example and does not reflect the final actions (see section underneath)
+
 ### The split between map canvas and attribut table
 
 The attibut table and the map canvas are both present in the data viewer. They can be splitted and resized as user wish.
 
-On top of it we will add some logics to make it seamless for the user: On non geographic feature(e.g spreadsheet-like), only the attribute table while be displayed and the map canvas while be hidden.  While on the opposite side for non vector data but geographic feature, only the map canvas will be displayed and the attribute table will be hidden 
+On top of it we will add some logics to make it seamless for the user:
+*  On non geographic feature(e.g spreadsheet-like), only the attribute table while be displayed and the map canvas while be hidden.  While on the opposite side for non vector data but geographic feature, only the map canvas will be displayed and the attribute table will be hidden.
+* Layer CRS will be used, and fallback to the project CRS if not available.  
 
 ### Focus on the toolbar
 
@@ -52,10 +58,13 @@ For a first iteration a good starting point would be to have:
 
 * Zoom to full extent
 * Zoom map to selected rows
-* Select all/ Invert / None / By expression
-* Toggle project layer : Display or not the project layer in the map canvas
+* Select all/ Invert / None
+* *Toggle project layer* : Display or not the project layer in the map canvas
+* *Add to the project*. If you have more complex data add the possibilty to fallback in the project to view them in full fledge QGIS.
 
-The toolbar is flexible enough so it can be embellish later on with more tools.  
+The toolbar is flexible enough so it can be embellish later on with more tools. 
+
+> **_NOTE:_**  The tools will only be enabled when it made sense to, exemple no need to have the select tool on raster data.
 
 # Proposed Solution
 
@@ -74,6 +83,8 @@ You can think of it like a breakpoint in programming except it doesn't stop the 
 ## Update on each run of the model
 
 The data viewer will be updated on each new run of the model, so users will be able to monitor the change in their model at a certain branch. (`QgsProcessingAlgorithmDialogBase::algorithmFinished` signal can be used to achieve this)
+
+Along the **dockable ability, update on each run, are really the salt of the data viewer**. because previously each time you outputed something to your project(e.g trought a temporary output). It was static and new temporary layer would be added each time you want to see your change to a model, effectively flooding your project with temporary layer all named the same.
 
 
 > **_NOTE:_**  The data viewer will only be updated if the branch or the algorithm watched has not been deleted, otherwise it will be left blank.
