@@ -19,7 +19,7 @@ weighted against other components, especially the news section.
 - The layout lacks outbound links to QGIS.org and other useful links
 such as the visual release changelog.
 
-Crucially, the current welcome page does not facilitate able and willing
+Crucially, the current welcome page does not facilitate directing able and willing
 users into supporting the QGIS project. Considering the crucial role
 donations play in the continuity of QGIS, this feels like a significant
 gap worthy of addressing.
@@ -56,13 +56,16 @@ to users of the importance of community donation** while **lowering the
 bar for those able and willing to support QGIS’ continued development**
 by offering a direct on-click link to QGIS.org’s donation page.
 
+The welcome page will also offer useful outbound links such as the visual
+release changelog that will open in users' external browser.
+
 ### API Considerations / Affected Files
 
 The work here will not add any new core or GUI classes. A new
-QquickWidget-based QgsWelcomePage class will supersede the current class
+QQuickWidget-based QgsWelcomePage class will supersede the current class
 living in src/app.
 
-Preexisting classes will be leverage in the implementation of this new
+Preexisting classes will be leveraged in the implementation of this new
 welcome page, including:
 
 - QgsNewsFeedModel and QgsNewsFeedParser for the latest news section;
@@ -72,8 +75,10 @@ welcome page, including:
 These classes might be tweaked with new functionalities to support the
 implementation of the finalized layout mock-up.
 
+The new QgsWelcomePage will be added as floating overlay on top of the main
+window.
 
 ## Deliverables
 
-A new functional welcome page that matches the PCS-approved finalized
+A new functional welcome page that matches the PSC-approved finalized
 layout mockup.
