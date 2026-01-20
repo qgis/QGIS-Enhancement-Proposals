@@ -37,19 +37,19 @@ The proposition for now is to make the **Bandit Security Analysis** and **Secret
 
 When a critical vulnerability issue or malicious code is found, this check will block a new plugin/version from being uploaded and show more details about it:
 
-<img width="934" height="381" alt="image" src="https://github.com/user-attachments/assets/62bd2199-1e19-41d2-bb7a-51a3185048ac" />
+![](./images/qep408/bandit-check.png)
 
 
 ## Secrets Detection
 
 When a hardcoded secret, API key... is found, this check will block a new plugin/version from being uploaded and show more details about it:
 
-<img width="927" height="300" alt="image" src="https://github.com/user-attachments/assets/0da507c7-a5e9-4b96-b481-7950eab99cc0" />
+![](./images/qep408/secrets-check.png)
 
 ## Other checks
 Code quality, file permissions and suspicious files checks will stay as non-blocking validators and be available on the Plugin Version Details Page > Security Scan tab.
 
-<img width="944" height="713" alt="image" src="https://github.com/user-attachments/assets/77bfc655-341d-403f-8e46-c877876f6143" />
+![](./images/qep408/other-checks.png)
 
 ## Risks
 
