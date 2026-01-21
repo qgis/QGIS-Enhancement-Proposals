@@ -14,9 +14,9 @@ The QGIS Plugins Repository continues to grow and has recently surpassed 3,000 p
 
 With this growth, it is increasingly important to strengthen our security measures and ensure that malicious or low-quality plugins are not distributed through QGIS infrastructure.
 
-To address this, new Security and Quality Assurance (QA) checks have been introduced in the QGIS Plugins Website (see https://github.com/qgis/QGIS-Plugins-Website/pull/219). These checks are automatically executed whenever a new plugin or a new plugin version is uploaded.
+To address this, new Security and Quality Assurance (QA) checks have been introduced in the QGIS Plugins Website (see https://github.com/qgis/QGIS-Plugins-Website/pull/219). These checks are automatically executed synchronously during the upload process, similar to existing validators.
 
-This QEP proposes to make these checks mandatory and blocking: any new plugin or plugin version that triggers at least one critical security issue would be rejected and not published in the repository until the issue is resolved.
+This QEP proposes to make these checks mandatory and blocking: any new plugin or plugin version that triggers at least one critical security issue will be immediately rejected and not published in the repository until the issue is resolved. By running the checks synchronously, no plugin with critical security issues will be uploaded to the QGIS infrastructure, ensuring that only secure plugins are available to users.
 
 ## New security and QA checks
 
@@ -61,7 +61,36 @@ None
 
 ## Further Considerations/Improvements
 
-None
+### Email Notifications for Blocked Uploads
+
+Since the security and QA checks run synchronously during the upload process (like existing validators), the plugin will not be uploaded if it has a critical security issue. An email notification will be sent to the plugin maintainer to inform them of the rejection. This is particularly important for:
+
+- **Automated CI/CD Deployments**: Most plugin deployment processes are automated via CI, so developers may not see the HTML rejection page in the web interface and rely solely on the email notification to be informed of the blockage
+- **Web Uploads**: Even for manual web uploads, email notifications provide a convenient record and reminder to address security issues before re-uploading
+
+The email notification should include:
+- Which check(s) failed (Bandit Security Analysis and/or Secrets Detection)
+- Summary of critical issues found
+- Guidance on how to resolve the issues and re-upload
+
+### Future Enhancements
+
+As the security and QA validation system matures, additional checks are planned to be added over time, including:
+
+- **SPDX License Header Requirements**: Validation of proper license headers in source files
+- **Binary Blob Detection**: Identification of unexpected binary files that may pose security risks
+- **GPL Compliance Checks**: Verification of GPL license compliance and proper attribution
+- **Additional Code Quality Metrics**: Extended static analysis and code quality validations
+
+### Hybrid Validation Approach
+
+As more checks are added to the system, a hybrid validation approach may be considered to balance security requirements with performance:
+
+- **Synchronous (Blocking) Checks**: Critical security validations (Bandit, Secrets Detection, and future critical checks) that must pass before upload completes. This ensures no plugin with known critical security issues is ever uploaded to the infrastructure.
+
+- **Asynchronous (Non-blocking) Checks**: Less critical validations (license compliance, code quality, documentation checks) that can run after upload and notify developers of issues without preventing initial publication.
+
+This approach would maintain strong security guarantees while allowing for more comprehensive validation without impacting upload performance. The system would clearly distinguish between security-critical issues (immediate blocking) and quality/compliance issues (post-upload notifications).
 
 ## Issue Tracking ID(s)
 
