@@ -14,9 +14,17 @@ The QGIS Plugins Repository continues to grow and has recently surpassed 3,000 p
 
 With this growth, it is increasingly important to strengthen our security measures and ensure that malicious or low-quality plugins are not distributed through QGIS infrastructure.
 
-To address this, new Security and Quality Assurance (QA) checks have been introduced in the QGIS Plugins Website (see https://github.com/qgis/QGIS-Plugins-Website/pull/219). These checks are automatically executed synchronously during the upload process, similar to existing validators.
+To address this, new Security and Quality Assurance (QA) checks have been introduced in the QGIS Plugins Website (see https://github.com/qgis/QGIS-Plugins-Website/pull/219) as a soft validator.
 
-This QEP proposes to make these checks mandatory and blocking: any new plugin or plugin version that triggers at least one critical security issue will be immediately rejected and not published in the repository until the issue is resolved. By running the checks synchronously, no plugin with critical security issues will be uploaded to the QGIS infrastructure, ensuring that only secure plugins are available to users.
+This QEP proposes running all security and QA checks asynchronously after plugin upload as a blocking validator. Developers get instant upload confirmation, then receive email results when checks complete.
+
+**Important:** Plugins won't be available for approval or download until:
+1. All checks complete successfully, AND
+2. No critical security issues found (Bandit or Secrets Detection)
+
+For trusted users who normally get auto-approval, this still applies - auto-approval only happens if checks pass.
+
+This approach gives fast uploads without compromising security, and approvers are automatically notified when plugins are ready for review.
 
 ## New security and QA checks
 
@@ -30,67 +38,171 @@ There are currently five checks that will run when uploading a new plugin versio
 The result is detailed under the Plugin Version Details Page > Security Scan tab.
 More details about these are available at https://plugins.qgis.org/docs/security-scanning
 
-The proposition for now is to make the **Bandit Security Analysis** and **Secrets Detection** a blocking validator if at least one critical issue is found.
+The proposition for now is to make the **Bandit Security Analysis** and **Secrets Detection** a blocking validator if at least one critical issue is found. When critical issues are detected, the plugin version will be blocked from approval and public download until the issues are resolved.
 
 
 ## Bandit Security Analysis
 
-When a critical vulnerability issue or malicious code is found, this check will block a new plugin/version from being uploaded and show more details about it:
+Critical vulnerabilities found here block the plugin from approval and download until fixed. Email includes:
+
+- Issue summary and severity
+- File/line locations
+- Remediation guidance
 
 ![](./images/qep408/bandit-check.png)
 
 
 ## Secrets Detection
 
-When a hardcoded secret, API key... is found, this check will block a new plugin/version from being uploaded and show more details about it:
+Hardcoded secrets block the plugin until removed. Email includes:
+
+- Secret type (API key, password, token, etc.)
+- File/line locations
+- How to fix it
 
 ![](./images/qep408/secrets-check.png)
 
 ## Other checks
-Code quality, file permissions and suspicious files checks will stay as non-blocking validators and be available on the Plugin Version Details Page > Security Scan tab.
+
+Code quality, file permissions, and suspicious files checks 
 
 ![](./images/qep408/other-checks.png)
 
+## Asynchrounous run
+
+All the checks mentioned above will run asynchronously after the plugin upload and their results are included in email notifications and displayed on the Plugin Version Details Page > Security Scan tab. These comprehensive checks provide maintainers with actionable feedback on code quality and potential issues to address in future updates.
+
+
 ## Risks
 
-Some existing plugins will encounter the blocking validator when uploading a new version. However, we have implemented these checks as a soft validator, so they can be fixed and avoid being blocked later.
+Plugins aren't available during the check (usually a few minutes). This is mitigated by:
+
+- Fast validation (most checks complete in minutes)
+- Immediate email notifications
+- Clear status indicators ("Validating" or "Blocked")
+- Easy re-upload workflow
+- No vulnerable plugins ever reach users
+
+This balances fast uploads with strong security guarantees.
 
 ## Performance Implications
 
-None
+- Uploads complete instantly (no waiting for checks)
+- All checks run in parallel via task queue
+- Better server resource management
+- Immediate upload confirmation for developers
 
 ## Further Considerations/Improvements
 
-### Email Notifications for Blocked Uploads
+### Asynchronous Validation Architecture
 
-Since the security and QA checks run synchronously during the upload process (like existing validators), the plugin will not be uploaded if it has a critical security issue. An email notification will be sent to the plugin maintainer to inform them of the rejection. This is particularly important for:
+The implementation uses a task queue-based architecture to process all checks asynchronously:
 
-- **Automated CI/CD Deployments**: Most plugin deployment processes are automated via CI, so developers may not see the HTML rejection page in the web interface and rely solely on the email notification to be informed of the blockage
-- **Web Uploads**: Even for manual web uploads, email notifications provide a convenient record and reminder to address security issues before re-uploading
+**Upload Flow:**
+1. Plugin uploaded and stored
+2. Status set to `validating` (not yet available)
+3. Validation task queued
+4. Instant confirmation email to maintainer
+5. All checks run in parallel
+6. Results stored in database
+7. Status updated:
+   - `validated` (no critical issues) → Available for approval/download
+   - For trusted users: auto-approved if checks pass
+   - `blocked` (critical issues) → Unavailable until fixed
+8. Results email sent to maintainer (and approvers if ready for review)
 
-The email notification should include:
-- Which check(s) failed (Bandit Security Analysis and/or Secrets Detection)
-- Summary of critical issues found
-- Guidance on how to resolve the issues and re-upload
+**Components:**
+- **Task Queue**: Celery or similar task broker for asynchronous job processing
+- **Workers**: Background processes that execute validation checks in parallel
+- **Database**: Stores validation results, check status, and issue details
+- **Email Service**: Sends notifications at key stages (upload confirmation, results)
+
+### Email Notifications for Validation Results
+
+Email notifications are sent at two key stages:
+
+#### Stage 1: Upload Confirmation (Immediate)
+
+Sent immediately upon successful upload to confirm receipt:
+
+**Subject:** Plugin Upload Confirmation: [Plugin Name] v[Version]
+
+**Content:**
+- Plugin name and version
+- Upload timestamp
+- Validation status (Validating)
+- **Important notice**: Plugin is not yet available for approval or download
+- Estimated completion time
+- Link to track progress on plugin details page
+- What to expect in the next email
+
+#### Stage 2: Validation Results (After Checks Complete)
+
+**Subject:** Plugin Validation Results: [Plugin Name] v[Version]
+
+**Content for Clean Validation (All Checks Passed):**
+- ✓ All checks passed
+- **Plugin status**:
+  - Trusted users: Auto-approved and available for download
+  - Regular users: Ready for approval (approvers are notified)
+- Summary of checks performed
+- Link to detailed results
+
+**Recipients:** Plugin maintainer(s) + Plugin approvers (when ready for review)
+
+**Content for Issues Found:**
+- Issues summary (count by severity)
+- **Availability status**:
+  - Critical issues: **BLOCKED** - not available until fixed
+  - Non-critical only: Available for approval, but improvements recommended
+- Critical issues details:
+  - Bandit/Secrets Detection findings
+  - File/line references
+  - How to fix
+- Non-critical issues:
+  - Code quality suggestions
+  - Optional improvements
+- Link to re-upload corrected version
+- Support contact
+
+**Recipients:** Plugin maintainer(s)
+
+**For each issue type in email:**
+- Clear title and severity badge
+- Specific details (file names, line numbers, issue descriptions)
+- Example fixes or remediation guidance
+- Best practices documentation links
+
+### Best Practices Documentation
+
+Emails link to the (docs)[https://plugins.qgis.org/docs/security-scanning] on:
+- Fixing Bandit security issues
+- Secret management
+- Code quality (Flake8)
+- File permissions
+- Handling suspicious files
+
+### Security Considerations
+
+- Emails contain no sensitive data beyond what maintainers need to fix issues
+- No API keys or passwords are included in emails
+- Validation reports are also available via secure web interface
+- Email access logs are maintained for audit purposes
+- **Plugins with critical security issues are never made publicly available**, protecting end users from vulnerabilities
 
 ### Future Enhancements
 
-As the security and QA validation system matures, additional checks are planned to be added over time, including:
+As the security and QA validation system matures, additional checks are planned to be added over time, all following the same asynchronous pattern:
 
 - **SPDX License Header Requirements**: Validation of proper license headers in source files
 - **Binary Blob Detection**: Identification of unexpected binary files that may pose security risks
 - **GPL Compliance Checks**: Verification of GPL license compliance and proper attribution
 - **Additional Code Quality Metrics**: Extended static analysis and code quality validations
+- **Dependency Vulnerability Scanning**: Checking for known vulnerabilities in plugin dependencies
+- **Malware Signature Detection**: Advanced scanning for known malicious patterns
 
-### Hybrid Validation Approach
+All new checks will automatically integrate into the existing asynchronous validation pipeline and be included in validation result emails.
 
-As more checks are added to the system, a hybrid validation approach may be considered to balance security requirements with performance:
-
-- **Synchronous (Blocking) Checks**: Critical security validations (Bandit, Secrets Detection, and future critical checks) that must pass before upload completes. This ensures no plugin with known critical security issues is ever uploaded to the infrastructure.
-
-- **Asynchronous (Non-blocking) Checks**: Less critical validations (license compliance, code quality, documentation checks) that can run after upload and notify developers of issues without preventing initial publication.
-
-This approach would maintain strong security guarantees while allowing for more comprehensive validation without impacting upload performance. The system would clearly distinguish between security-critical issues (immediate blocking) and quality/compliance issues (post-upload notifications).
 
 ## Issue Tracking ID(s)
 
