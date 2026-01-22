@@ -175,7 +175,7 @@ Sent immediately upon successful upload to confirm receipt:
 
 ### Best Practices Documentation
 
-Emails link to the (docs)[https://plugins.qgis.org/docs/security-scanning] on:
+Emails link to the [docs](https://plugins.qgis.org/docs/security-scanning) on:
 - Fixing Bandit security issues
 - Secret management
 - Code quality (Flake8)
