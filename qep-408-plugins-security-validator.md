@@ -203,6 +203,20 @@ As the security and QA validation system matures, additional checks are planned 
 
 All new checks will automatically integrate into the existing asynchronous validation pipeline and be included in validation result emails.
 
+### Manual Validation for Existing Plugin Versions
+
+For plugin versions that existed before the implementation of the security and QA validation system, a manual check feature will be added. This allows:
+
+- Plugin maintainers and administrators to trigger security and QA checks on existing plugin versions
+- Review of older versions for security vulnerabilities and code quality issues
+- Identification of potential issues across the plugin repository
+
+**Important limitations:**
+- Manual checks on existing plugin versions are **informational only**
+- Running checks will **not change the plugin's current status** (approved, in review, etc.)
+- Previously approved plugins remain approved regardless of check results
+- This feature is intended for awareness and voluntary improvements, not enforcement
+
 
 ## Issue Tracking ID(s)
 
