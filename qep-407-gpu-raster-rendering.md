@@ -91,6 +91,14 @@ Current GPU path uses synchronous readback for QPainter integration (~3ms). This
 
 **Cross-platform**: Metal (macOS), D3D11 (Windows), Vulkan→OpenGL (Linux)
 
+## Renderer Pipeline Integration
+
+**Supported**: RGB, gray, pseudocolor, paletted renderers; brightness/contrast/gamma; hue/saturation/colorize; layer opacity; source NoData.
+
+**CPU fallback**: Reprojection, hillshade, contour, custom nuller, non-tiled rasters.
+
+See [qgsrastergpufactory.cpp](https://github.com/wietzesuijker/QGIS/blob/feat/gpu-raster-qrhi/src/gui/raster/qgsrastergpufactory.cpp) for extraction logic and [testqgsrastergpuparity.cpp](https://github.com/wietzesuijker/QGIS/blob/feat/gpu-raster-qrhi/tests/src/gui/testqgsrastergpuparity.cpp) for 29 GPU/CPU parity tests.
+
 ## Risks and Mitigations
 
 | Risk | Mitigation |
