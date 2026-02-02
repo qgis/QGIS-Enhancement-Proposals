@@ -121,6 +121,8 @@ to help other reviewers prioritize their review time.
 
 If a contributor fails to make their change meaningfully less extractive,
 maintainers may lock the conversation and/or close the pull request/issue/QEP.
+In case of repeated violations of our policy, the QGIS project reserves itself
+the right to ban temporarily or definitely the infringing person.
 
 # Copyright
 
