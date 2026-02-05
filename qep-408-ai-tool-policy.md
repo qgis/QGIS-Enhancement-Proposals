@@ -4,7 +4,7 @@
 
 **Author** Even Rouault (@rouault)
 
-**Contact** even at rouault at spatialys dot com
+**Contact** even dot rouault at spatialys dot com
 
 **Version** N/A
 
