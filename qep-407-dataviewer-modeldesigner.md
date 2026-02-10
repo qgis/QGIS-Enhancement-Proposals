@@ -44,7 +44,7 @@ Once invoked, the data viewer will have three main areas: the toolbar, the map c
 
 > **_NOTE:_**  The toolbar above, is only here as an example and does not reflect the final actions (see section underneath)
 
-### The split between map canvas and attribut table
+### The split between map canvas and attribute table
 
 The attibut table and the map canvas are both present in the data viewer. They can be splitted and resized as user wish.
 
@@ -61,19 +61,19 @@ For a first iteration a good starting point would be to have:
 * Select all/ Invert / None
 * *Toggle project layer* : Display or not the project layer in the map canvas
 * *Add to the project*. If you have more complex data add the possibilty to fallback in the project to view them in full fledge QGIS.
-* Short cut to hide or show the attribut table
+* Short cut to hide or show the attribute table
 
 The toolbar is flexible enough so it can be embellish later on with more tools. 
 
 > **_NOTE:_**  The tools will only be enabled when it made sense to, exemple no need to have the select tool on raster data.
 
-### Performance consideration of the attribut table
+### Performance consideration of the attribute table
 
-Temporary output may contains several thousand features, showing them all at once in the attribut table would bog down the responsiveness of QGIS.
+Temporary output may contains several thousand features, showing them all at once in the attribute table would bog down the responsiveness of QGIS.
 
 We would limit the number of displayed to a certain number. A reasonable limit would be around ~1500 features. To counter act this artificial limitation, a new setting would be introduce for users wishing to increase the limit.  
 
-We can hope this limitation is only temporary and that the attribut table refactor will bring us batch loading. 
+We can hope this limitation is only temporary and that the attribute table refactor will bring us batch loading. 
 
 # Proposed Solution
 
@@ -154,9 +154,9 @@ The rest of the code to achieve the QEP is trivial to implement using standard Q
 
 ### Improve support for inspecting non vector data
 
-While with the current approach, you can view any data supported in QgsMapCanvas. But inspecting the tabular data the attribut table only supports browsing vector data.
+While with the current approach, you can view any data supported in QgsMapCanvas. But inspecting the tabular data the attribute table only supports browsing vector data.
 
-However, what does support inspecting other data type in QGIS is the Identify Results Panel. In a future iteration of the data viewer we could also have a Identify widget and they could switch with a stack widget with the attribut table could switch.
+However, what does support inspecting other data type in QGIS is the Identify Results Panel. In a future iteration of the data viewer we could also have a Identify widget and they could switch with a stack widget with the attribute table could switch.
 
 we could make a new convenience custom widget for this similar to what exists for the `QgsAttributeTableView` something like *QgsIdentifyResultsTreeView*. This widget could also be used in other areas of QGIS and external plugins as well. 
 
