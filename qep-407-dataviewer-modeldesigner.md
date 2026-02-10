@@ -61,10 +61,19 @@ For a first iteration a good starting point would be to have:
 * Select all/ Invert / None
 * *Toggle project layer* : Display or not the project layer in the map canvas
 * *Add to the project*. If you have more complex data add the possibilty to fallback in the project to view them in full fledge QGIS.
+* Short cut to hide or show the attribut table
 
 The toolbar is flexible enough so it can be embellish later on with more tools. 
 
 > **_NOTE:_**  The tools will only be enabled when it made sense to, exemple no need to have the select tool on raster data.
+
+### Performance consideration of the attribut table
+
+Temporary output may contains several thousand features, showing them all at once in the attribut table would bog down the responsiveness of QGIS.
+
+We would limit the number of displayed to a certain number. A reasonable limit would be around ~1500 features. To counter act this artificial limitation, a new setting would be introduce for users wishing to increase the limit.  
+
+We can hope this limitation is only temporary and that the attribut table refactor will bring us batch loading. 
 
 # Proposed Solution
 
