@@ -89,6 +89,36 @@ Along the **dockable ability, update on each run, are really the salt of the dat
 
 > **_NOTE:_**  The data viewer will only be updated if the branch or the algorithm watched has not been deleted, otherwise it will be left blank.
 
+
+### Note on the ownership of layers 
+
+Since the results layers of a previous run is not stable (neither pointer nor layer id). The safer choice is to let the layer store handle the ownership of the temporary layers. And only query the layer using ` QgsProcessingUtils::mapLayerFromString`, the *child id* and the *output parameter name*. A more complete example can be found underneath.
+
+
+Eventually we could clone the layer if we need to modify it. so we have the complete freedom over it. 
+
+This would look roughly like this: 
+
+```
+QgsModelDesignerDialog::showDataViewerForChildOutput( const QString &childId, const QString &outputParamName )
+{
+
+    const QgsProcessingModelChildAlgorithmResult result = mLastResult.childResults().value( childId );
+    const QVariantMap childAlgorithmOutputs = result.outputs();
+    // Safe guard on childAlgorithmOutputs
+
+    const QVariant output = childAlgorithmOutputs.value( outputParamName);
+    // Safe guard on output Variant
+
+    if ( QgsMapLayer *resultLayer = QgsProcessingUtils::mapLayerFromString( output.toString(), mLayerStore ) )
+    {
+        std::unique_ptr<QgsMapLayer> layer( resultLayer->clone() );
+        // Optional have fun with this layer in the data viewer, and don't mess with the original layer in the layer store
+    
+    }
+}
+```
+
 ## Leverage existing capabilities of QGIS
 
 One of the main strenghts of QGIS is the render engine along and all the utilities around the map canvas. So this QEP proposes to leverage the existings capabilities, both from end user perspective, and code wise.
