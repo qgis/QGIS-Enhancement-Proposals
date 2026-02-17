@@ -14,6 +14,13 @@ LLM/AI are nowadays a reality, that whether we like it or not, introduces new
 challenges in our collaborative environment that need to be addressed. This document
 describes the policy of the QGIS project in that matter.
 
+# Warning
+
+It is not currently a settled question within the QGIS community whether code
+created by LLMs is acceptable in the QGIS codebase at all. This QEP is addressed
+at the interaction aspects of LLM content, and should not be viewed as the project
+taking a position on whether or not LLM contributions are acceptable.
+
 # Policy
 
 QGIS's policy is that contributors can use whatever tools they would like to
