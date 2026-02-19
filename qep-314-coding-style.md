@@ -127,6 +127,32 @@ Notes:
 - 3.6. Don't use ``qDebug()``, ``qWarn()`` or other Qt debug print functions. Instead use ``QgsDebugError`` for unexcepted error logging only, or ``QgsDebugMsgLevel`` (with a level of 2 or higher, depending on how "noisy" the logging will be) for debug outputs which occur in normal operations.
 - 3.7. Member variables should normally be in the private section and made available via getters and setters. This ensures full compatibility with the PyQGIS bindings and allows refactoring in future without API breakage.
 - 3.8. Avoid use of Qt "auto connect slots" (i.e. those named ``void on_mSpinBox_valueChanged``). Auto connect slots are fragile and prone to breakage without warning if UI files are refactored.
+- 3.9. Limit the leakage of variables used for `if` statements by initializing them within the `if` statement scope. E.g.
+
+  ``` cpp
+  // preferred form:
+  if ( QgsMarkerSymbol *marker = renderer->symbol() )
+  {
+     // do something with marker
+  }
+  
+  // instead of leaking variables, e.g:
+  QgsMarkerSymbol *marker = renderer->symbol();
+  if ( marker )
+  {
+    ...
+  }
+  ```
+
+  c++17 [if statement with initializer](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2016/p0305r0.html) form can be used to limit the scope:
+
+  ``` cpp
+  if ( QgsMarkerSymbol *marker = renderer->symbol; marker->symbolLayerCount() > 1 )
+  {
+     ...
+  }
+  ```
+  
 
 ### 4. Memory safety
 
