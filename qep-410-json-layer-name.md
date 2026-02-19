@@ -58,7 +58,7 @@ QGIS Server generates the `id` by joining the layer name and the feature ID (usu
 
 While this provides some kind of information, a client cannot rely on it because both the layer name and the feature ID (primary key) can contain dots. This makes it impossible to parse the string accurately to determine where the layer name ends and the feature ID begins. And, since a client cannot know which property represents the primary key, it cannot simply cut it from the end of the `id` object.
 
-## Proposed Solution
+# Proposed Solution
 
 A [new QGIS Server extra parameter](https://docs.qgis.org/3.44/en/docs/server_manual/services/wms.html#getfeatureinfo) should be introduced: `WITH_LAYER_NAME_PROPERTY=layer_name`.
 
@@ -124,7 +124,7 @@ To ensure consistency, the new extra attribute should be included in the other f
 
 The name of the extra property can be passed via the parameter. However, if the client passes `true`, `on`, `yes` or `1`, the default should align with the current `display_name`/`DisplayName` like this: `layer_name`/`LayerName`.
 
-### Name collition with feature attribute name
+### Name collision with feature attribute name
 
 This concerns only JSON, not XML etc. where multiple same-named values are allowed. To keep valid GeoJSON, we cannot return same-named properties. Therefore, in the event of a collision, the feature attribute is ignored and the extra property is prioritized. This aligns with the behavior of `WITH_DISPLAY_NAME` (there is still a [bug](https://github.com/qgis/QGIS/issues/65004) but it does not concern this QEP).
 
