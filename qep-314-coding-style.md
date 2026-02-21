@@ -116,11 +116,11 @@ Notes:
   }
   ```
 
-- 3.5. Use ``QStringLiteral`` for untranslated literals, and ``QLatin1String`` for string comparisons. E.g.
+- 3.5. Use ``operator""_s`` for untranslated literals, and ``operator""_L1`` for string comparisons. E.g.
 
   ``` cpp
-  const QString s = QStringLiteral( "my string" );
-  if ( s == QLatin1String( "another string" ) )
+  const QString s = u"my string"_s;
+  if ( s == "another string"_L1 )
       ...
   ```
 
