@@ -12,6 +12,8 @@
 
 Add on-the-fly contour line labels for raster layers rendered with the Contour renderer. A second pass of GDAL's contour API generates label geometries independently from the renderer, and labels are placed along them via the existing PAL labeling engine. Accessed through the Labels tab in Layer Properties, consistent with existing vector labeling. See [issue #53415](https://github.com/qgis/QGIS/issues/53415).
 
+**AI Tool Usage** This QEP and the reference implementation were developed with assistance from Claude (Anthropic). The contributor reviewed all code, made architectural decisions, built and tested locally, and can answer questions about the implementation. Per [QEP #408](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-408-ai-tool-policy.md).
+
 ## Proposed Solution
 
 ### Architecture
