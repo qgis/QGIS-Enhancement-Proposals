@@ -61,13 +61,13 @@ These operations share the same user workflow:
 * select the active layer to edit (a QgsVectorLayer with PolyhedralSurface). The new features will be saved in this layer
 * click on the edit button of the 3D view, the 3D primitive creation toolbar is enabled
 
-  ![create_primitive_menu.png](images/qep407/create_primitive_menu.png)
+  ![create_primitive_menu.png](images/qep412/create_primitive_menu.png)
 
 * click a button to create a new primitive, the map tool user input dialog is displayed with default parameter values
 
   | Create cube | Create torus |
   | --- | --- |
-  | ![create_primitive_menu](images/qep407/create_cube_input.png) | ![create_primitive_menu](images/qep407/create_torus_input.png) |
+  | ![create_primitive_menu](images/qep412/create_cube_input.png) | ![create_primitive_menu](images/qep412/create_torus_input.png) |
 
 * first, the user selects the start position (this will set the X, Y and Z translation fields) by clicking on the 3D canvas with the left mouse button or by input value with the keyboard
 * the user can now set the value of the primitive’s first parameter, either by using the mouse or by entering a value with the keyboard
@@ -78,13 +78,13 @@ These operations share the same user workflow:
 
   | Set X | Set Y | Set Z |
   | --- | --- | --- |
-  | ![param1](images/qep407/create_cube_p1.png) | ![param2](images/qep407/create_cube_p2.png) | ![param3](images/qep407/create_cube_p3.png) |
+  | ![param1](images/qep412/create_cube_p1.png) | ![param2](images/qep412/create_cube_p2.png) | ![param3](images/qep412/create_cube_p3.png) |
 
 * the user can undo the previous inputs with the right mouse button or the Shift-TAB key
 * when the last parameter has been set, the user can adjust the parameter values in the dialog, and validate the creation dialog by clicking the validate button or by pressing the ENTER key
 * the feature field dialog is displayed and the user can set the field values for this new feature
 
-  ![create_cube_validate](images/qep407/create_cube_validate.png)
+  ![create_cube_validate](images/qep412/create_cube_validate.png)
 
 * when the user closes the dialog, the new feature is added to the layer
 * since the map tool is still active, the user can create another primitive
