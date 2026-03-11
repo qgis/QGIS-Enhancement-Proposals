@@ -1,4 +1,4 @@
-# QGIS Enhancement: Add 3D edition support
+# QGIS Enhancement: Add 3D editing support
 
 **Date** 2026/03/10
 
@@ -12,9 +12,9 @@
 
 This QEP proposes introducing vector layer editing directly within the 3D view by adding dedicated 3D user interface tools. It will allow users to create primitive objects (such as boxes, spheres, and tori) and to apply 3D operations (including boolean operations and duplication) to existing 3D objects.
 
-## 3D edition map tools
+## 3D editing map tools
 
-These new map tools will be developed within the 3D canvas beside 3D pointcloud attribute edition map tool. Four groups have been identified:
+These new map tools will be developed within the 3D canvas beside 3D pointcloud attribute editing map tool. Four groups have been identified:
 
 * 3D primitive creation
 * 3D boolean operations (intersection, difference, union)
@@ -31,15 +31,15 @@ All these map tools will be available according to the type of the active layer,
 
 Therefore when the active layer changes these map tools will be enabled/disabled according to their ability.
 
-The new map tools will be grouped in 4 new toolbars to increase the modularity the `Qgs3DMapCanvasWidget` class. These toolbars will keep their map tools outside the `Qgs3DMapCanvasWidget` class which in return will handle a bunch of edition toolbars. To do so a new abstract class `Qgs3DEditionToolBar` will be added to help in the creation of these edition toolbars.
+The new map tools will be grouped in 4 new toolbars to increase the modularity the `Qgs3DMapCanvasWidget` class. These toolbars will keep their map tools outside the `Qgs3DMapCanvasWidget` class which in return will handle a bunch of editing toolbars. To do so a new abstract class `Qgs3DEditingToolBar` will be added to help in the creation of these editing toolbars.
 
-Currently, the point cloud edition code is directly included in `Qgs3DMapCanvasWidget`. Using the same approach for the four new classes would make the code difficult to maintain. Therefore, the following changes are proposed:
+Currently, the point cloud editing code is directly included in `Qgs3DMapCanvasWidget`. Using the same approach for the four new classes would make the code difficult to maintain. Therefore, the following changes are proposed:
 
-* Move the existing point cloud edition code into its own file.
-* Introduce an abstract class `Qgs3DEditionToolBar`, which all editing toolbars will inherit from, and move the point cloud editing code into this new API.
-* Introduce four new editing toolbars, each inheriting from `Qgs3DEditionToolBar`.
+* Move the existing point cloud editing code into its own file.
+* Introduce an abstract class `Qgs3DEditingToolBar`, which all editing toolbars will inherit from, and move the point cloud editing code into this new API.
+* Introduce four new editing toolbars, each inheriting from `Qgs3DEditingToolBar`.
 
-`Qgs3DEditionToolBar` should have this API:
+`Qgs3DEditingToolBar` should have this API:
 
 * does the toolbar should be activated for the layer?  `bool accept( QgsMapLayer *layer )`
 * activate the toolbar `void activate( QgsMapLayer *layer )`
