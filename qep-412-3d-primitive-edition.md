@@ -121,7 +121,7 @@ This proposal plans to add the following arrangement operations to the toolbar:
 * rotate
 * scale
 * mirror
-* copy   =============================== array
+* duplicate
 
 These operations will be applied to a vector layer only.
 
@@ -157,7 +157,7 @@ These operations modify the existing feature and share the same user workflow:
 * the user validates the operation using the validate button in the dialog or by pressing the ENTER key
 * since the map tool is still active, the user can apply the same operation again
 
-#### Copy
+#### Duplicate
 
 This operation creates one or multiple features, here is its user workflow:
 
