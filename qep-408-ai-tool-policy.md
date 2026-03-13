@@ -114,7 +114,7 @@ they should paste the following response to request changes:
     and requires additional justification for why it is valuable enough to the
     project for us to review it. Please see our developer policy on
     AI-generated contributions:
-    https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-407-ai-tool-policy.md
+    https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-408-ai-tool-policy.md
 
 The best ways to make a change less extractive and more valuable are to reduce
 its size or complexity or to increase its usefulness to the community. These
