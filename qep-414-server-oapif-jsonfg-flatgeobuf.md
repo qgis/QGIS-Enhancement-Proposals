@@ -45,9 +45,6 @@ For JSON-FG quoting https://docs.ogc.org/DRAFTS/21-045.html:
 > features or feature collections are also valid GeoJSON features or feature collections.
 
 
-JSON-FG supports multiple geometry types in the same layer, which is not possible with GeoJSON. Even if this is not supported by QGIS internal data model
-this is a common use case for OAPIF, where a single layer may contain features with different geometry types.
-
 JSON-FG supports additional geometry types: CircularString, CurvePolygon, CompoundCurve, MultiCurve and
 MultiSurface that are not compatible with GeoJSON RFC7946.
 
@@ -89,9 +86,9 @@ virtual method in `QgsAbstractGeometry`,  the base implementation will call `asJ
 and the geometry classes that are not JSON RFC7946 compatible will override the base method
 and implement the JSON-FG specific (lossless) encoding.
 
-At the features collection level, we will need to add support for the `geometryType` property,
-which is required by the JSON-FG specification to indicate the geometry type of the features
-in the collection.
+At the features collection level, we will need to add support for the `featureType` property,
+which is required by the JSON-FG specification to indicate the type of the features
+in the collection (see the paragraph below about the feature schema).
 
 There are also the following additional properties that we will need to support, they are described in the
 JSON-FG specification, these will be added as additional properties in the JSON output by extending
@@ -195,7 +192,7 @@ This new class will internally use GDAL to export the features to FlatGeobuf for
 
 The API of the new class is not defined yet, but it will be similar to the existing `QgsJsonExporter` class, with a method like `exportFeaturesToFlatGeobuf(const QgsFeatureList &features, const QgsFlatGeobufExportOptions &options)`.
 
-Note that being FlatGeobuf a binary format, the output will be a byte array instead of a JSON object and the next/prev links in the (paged) OAPIF response will need to be sent in the the headers instead of the body of the response, this imply writing a dedicated method to handle the OAPIF response for FlatGeobuf output, in order to set the appropriate headers and to write the binary output to the response body (this will not have any impact on the public API).
+Note that being FlatGeobuf a binary format, the output will be a byte array instead of a JSON object and the next/prev links in the (paged) OAPIF response will need to be sent in the headers instead of the body of the response, this imply writing a dedicated method to handle the OAPIF response for FlatGeobuf output, in order to set the appropriate headers and to write the binary output to the response body (this will not have any impact on the public API).
 
 TODO: support for range requests will be considered for future improvements, but it is not in the scope of the current implementation.
 
