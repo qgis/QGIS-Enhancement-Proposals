@@ -1,6 +1,6 @@
 # QGIS Enhancement: Expression filter on vector layers
 
-**Date** 2026/03/23
+**Date** 2026/03/29
 
 **Author** Dave Signer (@signedav)
 
@@ -20,11 +20,11 @@ You will be able to choose the filter type: "WHERE clause" or "QGIS Expression",
 
 When "WHERE clause" is chosen, you will see the "traditional" query builder content (Mockup):
 
-![querybuilder-gui](images/qep414/querybuilder-gui.png)
+![querybuilder-gui](images/qep416/querybuilder-gui.png)
 
 When "QGIS Expression" is chosen, you will see the expression builder where you can create your expression (Mockup):
 
-![expression-gui](images/qep414/expression-gui.png)
+![expression-gui](images/qep416/expression-gui.png)
 
 This would include at least project and global scopes. 
 
