@@ -1,10 +1,10 @@
-# QGIS Enhancement: QGIS Server OAPIA Json-FG and FlatGeobuf formats
+# QGIS Enhancement: QGIS Server OAPIF JSON-FG and FlatGeobuf formats
 
 **Date** 2026/03/30
 
 **Author** Alessandro Pasotti
 
-**Contact** epaso at itopen dot it
+**Contact** elpaso at itopen dot it
 
 **Version** QGIS 4.2
 
@@ -24,6 +24,8 @@ improve the performances for large datasets.
 Other OAPIF implementations already support these formats (e.g. MapServer, GeoServer, ldproxy),
 and adding them to QGIS Server would make it more competitive and attractive
 to users who need these formats.
+
+QGIS WFS/OAPIF client already supports JSON-FG and FlatGeobuf, so adding support for these formats in QGIS Server would allow to have a complete end-to-end support for these formats in QGIS.
 
 For JSON-FG quoting https://docs.ogc.org/DRAFTS/21-045.html:
 
@@ -177,10 +179,9 @@ query string of the request to specify which profile is requested.
 
 Three profiles will be added to the OAPIF standard for JSON-FG:
 
-- RFC 7946 : `http://www.opengis.net/def/profile/OGC/0/rfc7946` is the default GeoJSON profile, which is the one currently supported by QGIS core,
-  and it is the one that will be used as the default profile for JSON-FG in QGIS Server.
-- jsonfg :`http://www.opengis.net/def/profile/OGC/0/jsonfg` JSON-FG profile
-- jsonfg-plus: `http://www.opengis.net/def/profile/OGC/0/jsonfg-plus` is the union of the previous two profiles, it will allow to support both JSON-FG
+- **rfc7946** : `http://www.opengis.net/def/profile/OGC/0/rfc7946` is the default GeoJSON profile, which is the one currently supported by QGIS server.
+- **jsonfg** :`http://www.opengis.net/def/profile/OGC/0/jsonfg` JSON-FG profile
+- **jsonfg-plus**: `http://www.opengis.net/def/profile/OGC/0/jsonfg-plus` is the union of the previous two profiles, it will allow to support both JSON-FG
   and GeoJSON features at the same time by providing the `geometry` member in WGS84 as a fallback for the cases where the geometry cannot be represented in GeoJSON RFC7946.
 
 For a detailed description of the JSON-FG and JSON-FG-PLUS profiles see: https://docs.ogc.org/DRAFTS/21-045.html#place
@@ -250,6 +251,8 @@ be supported in the current implementation, but it can be considered for future 
 
 See:
 https://docs.ogc.org/DRAFTS/21-045.html#bb_3d
+
+Range requests for FlatGeobuf will not be supported in the current implementation, but it can be considered for future improvements if there is enough demand for it.
 
 ## Backwards Compatibility
 
