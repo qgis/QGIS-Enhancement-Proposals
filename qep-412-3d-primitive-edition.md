@@ -105,9 +105,7 @@ These operations share the same user workflow:
 * select the active layer to edit (a QgsVectorLayer with PolyhedralSurface). The new features will be saved in this layer
 * click on the edit button of the 3D view, the 3D boolean operation toolbar is enabled
 * click a button to select the operation map tool, the map tool user input dialog is displayed
-* the user must first select at least 2 entities (more than two can be selected for the Union operation)
-  * entities can be selected using the 2D main window by any available method
-  * entities can also be selected in the 3D view by picking them on screen, using Shift/Ctrl modifiers to add or remove entities from the selection
+* the user must first select at least 2 entities (more than two can be selected for the Union operation), using Shift/Ctrl modifiers to add or remove entities from the selection
 * the user validates the operation using the validate button in the dialog or by pressing the ENTER key
 * the feature attributes dialog is displayed, allowing the user to enter values for the resulting feature
 * when the dialog is closed, the resulting feature is added to the layer
@@ -132,9 +130,7 @@ These operations modify the existing features and share the same user workflow:
 * select the active layer to edit (any QgsVectorLayer). The new features will be saved in this layer
 * click on the edit button of the 3D view, the 3D arrangement operation toolbar is enabled
 * click a button to select the operation map tool, the map tool user input dialog is displayed
-* first, the user have to select at least 1 entity
-  * entities can be selected using the 2D main window by any available method
-  * entities can also be selected in the 3D view by picking them on screen, using Shift/Ctrl modifiers to add or remove entities from the selection
+* first, the user have to select at least 1 entity, using Shift/Ctrl modifiers to add or remove entities from the selection
 * the user can now set the value of the operation parameter by mouse or with the keyboard
   * when the mouse moves, a 3D rubberband is displayed between the selection centroid (`centMapPt`) and the current raycasted point on the map under the mouse (`curMapPt`). Also a temporary representation of the operation result is displayed and adjusted according to the differences between `centMapPt` and `curMapPt`. The user can use the X Y Z keys to constraint lock mouve movements to an axis or a plane. The current constraint is displayed in the dialog
   * focus is set to the parameter field in the dialog, user can set a value with the keyboard
@@ -150,9 +146,7 @@ These operations modify the existing feature and share the same user workflow:
 * select the active layer to edit (any QgsVectorLayer). The new features will be saved in this layer
 * click on the edit button of the 3D view, the 3D arrangement operation toolbar is enabled
 * click a button to select the operation map tool, the map tool user input dialog is displayed
-* first, the user have to select 1 entity
-  * entity can be selected using the 2D main window by any available method
-  * entity can also be selected in the 3D view by picking them on screen, using Shift/Ctrl modifiers to add or remove entities from the selection
+* first, the user have to select 1 entity, using Shift/Ctrl modifiers to add or remove entities from the selection
 * If an arbitrary plane is chosen, it must be defined by selecting three points in the 3D view
 * the user validates the operation using the validate button in the dialog or by pressing the ENTER key
 * since the map tool is still active, the user can apply the same operation again
@@ -164,9 +158,7 @@ This operation creates one or multiple features, here is its user workflow:
 * select the active layer to edit (any QgsVectorLayer). The new features will be saved in this layer
 * click on the edit button of the 3D view, the 3D arrangement operation toolbar is enabled
 * click a button to select the operation map tool, the map tool user input dialog is displayed
-* first, the user have to select at least 1 entity
-  * entities can be selected using the 2D main window by any available method
-  * entities can also be selected in the 3D view by picking them on screen, using Shift/Ctrl modifiers to add or remove entities from the selection
+* first, the user have to select at least 1 entity, using Shift/Ctrl modifiers to add or remove entities from the selection
 * the user can now set the value of the direction and distance parameters by mouse or with the keyboard
   * when the mouse moves, a 3D rubberband is displayed between the selection centroid (`centMapPt`) and the current raycasted point on the map under the mouse (`curMapPt`). Also a temporary representation of the operation result is displayed and adjusted according to the differences between `centMapPt` and `curMapPt`. The user can use the X Y Z keys to constraint lock mouve movements to an axis or a plane. The current constraint is displayed in the dialog
   * focus is set to the parameter field in the dialog, user can set a value with the keyboard for the direction and the distance between copies.
@@ -188,9 +180,7 @@ These operations create 2 new features and share the same user workflow:
 * select the active layer to edit (a QgsVectorLayer with PolyhedralSurface). The new features will be saved in this layer
 * click on the edit button of the 3D view, the 3D arrangement operation toolbar is enabled
 * click a button to select the operation map tool, the map tool user input dialog is displayed
-* first, the user have to select at least 1 entity
-  * entities can be selected using the 2D main window by any available method
-  * entities can also be selected in the 3D view by picking them on screen, using Shift/Ctrl modifiers to add or remove entities from the selection
+* first, the user have to select at least 1 entity, using Shift/Ctrl modifiers to add or remove entities from the selection
 * If an arbitrary plane is chosen, it must be defined by selecting three points in the 3D view
 * the user can now set the plane position parameter by mouse or with the keyboard
   * when the mouse moves, a 3D plane is displayed under the cursor
@@ -208,10 +198,7 @@ This operation modify the existing feature and here is its user workflow:
 * select the active layer to edit (a QgsVectorLayer with PolyhedralSurface). The new features will be saved in this layer
 * click on the edit button of the 3D view, the 3D arrangement operation toolbar is enabled
 * click a button to select the operation map tool, the map tool user input dialog is displayed
-* first, the user have to select at least 1 entity
-  * entities can be selected using the 2D main window by any available method
-  * entities can also be selected in the 3D view by picking them on screen, using Shift/Ctrl modifiers to add or remove entities from the selection
-* the user can now select the the linestrings, the polygons or faces to extrude
+* first, the user have to select at least 1 entity face, using Shift/Ctrl modifiers to add or remove faces from the selection
 * the user can now set the value of the extrusion direction and height parameters by mouse or with the keyboard
   * when the mouse moves, a 3D rubberband is displayed between the selection centroid (`centMapPt`) and the current raycasted point on the map under the mouse (`curMapPt`). Also a temporary representation of the operation result is displayed and adjusted according to the differences between `centMapPt` and `curMapPt`. The user can use the X Y Z keys to constraint lock mouve movements to an axis or a plane. The current constraint is displayed in the dialog
   * focus is set to the parameter field in the dialog, user can set a value with the keyboard
