@@ -45,18 +45,38 @@ I propose to store the graph with simple data structure and not create a new gra
 Where the key would the childAlgorithm id and the QList the list of depends algorithms.
 
 
-And when located in the code
-```(diff)
-+++ b/src/core/processing/models/qgsprocessingmodelalgorithm.h                                                                                     
-@@ -614,6 +614,10 @@ class CORE_EXPORT QgsProcessingModelAlgorithm : public QgsProcessingAlgorithm                                                 
-                                                                                                                                                  
-    QMap< QString, QgsProcessingModelChildAlgorithm > mChildAlgorithms;                                                                           
+And when located in the code in the processing model class in `qgsprocessingmodelalgorithm.h` at line ~618
+```(diff)                                                                                                                                                  
+-    QMap< QString, QgsProcessingModelChildAlgorithm > mChildAlgorithms;                                                                           
                                                                                                                                                   
 +    // Graph of child algorithm dependencies,                                                                                                    
-+    // where the key is a child algorithm id, and the value is a list of child algorithm ids which depend on this child algorithm                 
++    // where the key is a child algorithm id, and the value is a adjacency list of child algorithm ids which depend on this child algorithm                 
 +    QMap< QString, QList< QString > > mChildAlgorithmGraph;                                                                                       
 +      
 ```
+
+Let's take an example how that would look once filled with value from this simple model below.  
+
+![](./images/qep415/simple_exemple.png)
+
+before the DAG each algorithms of the model would be store in a list (**python syntax is used for the sake of simplicity**)
+
+```
+mChildAlgorithms = ["Buffer","Extract by Expression", "Intersection", "Field Calculator"]
+```
+
+With the dependency graph, each algorithms are store in a map and adjacency lists of direct dependencies
+
+```
+mChildAlgorithmGraph = {
+    "Buffer" : ["Extract by Expression", "Intersection"],
+    "Extract by Expression" : ["Intersection"],
+    "Intersection", ["Field Calculator"],
+    "Field Calculator" : [],
+}
+```
+Notice how we find our original list of algorithms as the keys of the map.
+
 
 
 This introduction of the DAG will trickle down (in a good way) to some methods related to dependencies:
