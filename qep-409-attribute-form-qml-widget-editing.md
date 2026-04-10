@@ -45,14 +45,14 @@ class QgsAttributeFormQmlWidgetBridge : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY( QgsAttributeFormContext context READ context NOTIFY contextChanged )
+    Q_PROPERTY( QgsAttributeEditorContext context READ context NOTIFY contextChanged )
 
   public:
     Form() = default;
     ~Form() = default;
 
-    QgsAttributeFormContext context() const;
-    void setContext( const QgsAttributeFormContext &context );
+    QgsAttributeEditorContext context() const;
+    void setContext( const QgsAttributeEditorContext &context );
 
     Q_INVOKABLE setAttribute( const QString &name, const QVariant &value );
 }
@@ -61,7 +61,7 @@ class QgsAttributeFormQmlWidgetBridge : public QObject
 The object itself will be able to be expanded in the future to add more
 functionalities if need be.
 
-Note that the `QgsAttributeFormContext` class is already a `Q_GADGET`, which
+Note that the `QgsAttributeEditorContext` class is already a `Q_GADGET`, which
 means the only work required on that front will be to expose some of its
 properties as `Q_PROPERTY` for QML widgets to be able to receive contextual
 awareness of its current mode, the current feature, the parent feature, etc.
@@ -74,7 +74,7 @@ between the scene within the QML widget and its attribute form.
 ### Affected Files
 
 - qgsattributeform.cpp
-- qgsattributeformcontext.h
+- qgsattributeeditorcontext.h
 - qgswidgetwrapper.cpp
 - qgswidgetwrapper.h
 - qgsqmlwidgetwrapper.cpp
