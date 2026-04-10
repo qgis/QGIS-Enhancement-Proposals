@@ -19,21 +19,21 @@ With at the backbone of this proposal, the introduction of a dependency graph.
 
 ## Introduce a dependency graph 
 
-### A dependency graph as a direct acyclic graph (DAG)
+### A dependency graph as a directed acyclic graph (DAG)
 
 
 Currently all algorithms of a model are stored internally in a hashmap in the model class. And each stored child algorithm holds a list of its direct child dependency. The structure is mostly flat, there is no hierarchy in the way algorithms are stored in the models and dependencies are only known locally to one algorithm process.
 
-We propose to introduce a direct acyclic graph(DAG) to represent the dependency between geoprocessing. *Why a DAG ?* Because a DAG is already the natural way of behaving in the models, when we modify a model, the code takes extra care to not introduce a dependency loop making it effectively a dag. 
+We propose to introduce a directed acyclic graph(DAG) to represent the dependency between geoprocessing. *Why a DAG ?* Because a DAG is already the natural way of behaving in the models, when we modify a model, the code takes extra care to not introduce a dependency loop making it effectively a dag. 
 
 But without the proper backend structure we don't get all the goodies and algorithms available in a dag data structure. As for example *Kahn's algorithm* for topological sort, that we will discuss in the next section. 
 
 
-<img alt="Direct acyclic graph" src="images/qep415/DAG-exemple.png" height="400" /> 
+<img alt="Directed acyclic graph" src="images/qep415/DAG-exemple.png" height="400" /> 
  <!-- align="right"/> -->
 
 
-*Example of a direct acyclic graph (DAG)  in this example each node could be a processing algorithm* 
+*Example of a directed acyclic graph (DAG)  in this example each node could be a processing algorithm* 
 
 
 ### Implementation of the dag 
