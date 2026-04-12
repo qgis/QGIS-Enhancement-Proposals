@@ -95,7 +95,8 @@ We will assess Qt 6.11's support, and make the necessary changes in QGIS to hand
 
 It's possible to crash QGIS via certain combinations of undocking and stacking panels or toolbars (under KDE).
 We will assess whether there is anything QGIS can do to prevent this, or if not, provide detailed reports to the upstream
-Qt project to try to get these issues fixed.
+Qt project to try to get these issues fixed. The QGIS project itself has funds available to engage KDAB Qt maintainers
+to implement upstream fixes -- if possible, I will engage these maintainers to implement fixes required for Qt upstream.
 
 ## Risks
 
