@@ -11,7 +11,7 @@
 # Summary
 
 Over the last couple of years, most Linux distributions and desktop environments have been transitioning
-from the legacy X11 display server to the Wayland standard. The transition has reached a stage where
+from the mature X11 display server to the Wayland standard. The transition has reached a stage where
 many environments are now completely dropping support for the X11 server.
 
 This presents a challenge to Linux QGIS users, as the current QGIS versions have limitations and bugs
@@ -22,8 +22,10 @@ Wayland.
 
 Unfortunately, the Wayland maintainers are strongly opinionated have very strict ideas about what a
 modern application should be allowed to do, and their vision does not fit well with the
-needs of QGIS. While it will not be possible to completely support the full capabilities and user workflows
-that are possible in X11, there are opportunities to fix some of the current shortcomings.
+needs of QGIS (see eg https://www.kicad.org/blog/2025/06/KiCad-and-Wayland-Support/ for the issues
+encountered by a similar project). While it will not be possible to completely support the full
+capabilities and user workflows that are possible in X11, there are opportunities to fix some of
+the current shortcomings.
 
 # Issues to be addressed
 
