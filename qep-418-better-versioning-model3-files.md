@@ -39,7 +39,7 @@ We propose to introduce new information about the QGIS version the model was mad
 
 From the perspective of the user, the UI will be very similar of the warning already existing when opening a QGIS project (same terminology, color code, in message bar, on open). And similar to the project. Saving could effectively change the “.model3” file.
 
-**When loading a model created in a new version** :  “This model file was created by a newer version of QGIS (4.XX.X) and could not be completely loaded.”
+**When loading a model created in a new version** :  “This model file was created by a newer version of QGIS (4.XX.X) and might not be fully compatible with this version.”
 
 **When loading a model created in a previous version** : “Model file is older: This model file was saved by QGIS version 4.XX.X. When saving this model file, QGIS will update it to version 4.XX.X, possibly rendering it unusable with older versions of QGIS.”
 
