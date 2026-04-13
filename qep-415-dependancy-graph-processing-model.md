@@ -186,7 +186,7 @@ Now in the context of the model designer for debugging purposes it can be useful
 
 * Fix export to python 
 
-Export a model to a python implementation is borken as soon as there is a branch in the model (see ticket https://github.com/qgis/QGIS/issues/49053). Because the export to python flatten all algorithms and not necessarily in the right order
+Export a model to a python implementation is broken as soon as there is a branch in the model (see ticket https://github.com/qgis/QGIS/issues/49053). Because the export to python flatten all algorithms and not necessarily in the right order
 
 Once we have a working implementation in the processAlgorithm method. It’s easier to also adopt the Kahn's algorithm to the method responsible for exporting a model to python(  `QgsProcessingModelAlgorithm::asPythonCode`) As the kahn’s algorithm does not flatten if statements it would fix export to python in  every model that use branching logic. 
 
