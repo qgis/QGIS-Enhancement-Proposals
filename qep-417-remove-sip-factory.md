@@ -25,12 +25,11 @@ Both `std::unique_ptr` and `SIP_FACTORY` describes the same paradigm, making the
 
 ## Proposed Solution
 
-This QEP proposes to: 
-- Modify `sipify.py` script to add the `/Factory/` for every methods whom return type is a `std::unique_ptr`
-- Use a `std::unique_ptr` as a return type for every methods which has the `SIP_FACTORY` and remove the use of `SIP_FACTORY` for these methods
-- When no methods are using the `SIP_FACTORY` anymore, remove completely the `SIP_FACTORY` definition
+This QEP proposes to use a `std::unique_ptr` as a return type for every methods which has the `SIP_FACTORY` and remove the use of `SIP_FACTORY` for these methods when:
+  - The returned object does not inherit from QObject
+  - The returned object inherits from QObject but NEVER set its parent
 
-As a consequence, all methods already returning a `std::unique_ptr` but missing `SIP_FACTORY` (like [QgsLineSymbol::createSymbol](https://github.com/qgis/QGIS/blob/master/src/core/symbology/qgslinesymbol.h#L36) for instance) would be automatically fixed. At the moment, there are more than 100 of these in QGIS API, **all leading to memory leak when called from a Python context**. 
+**Note:** virtual methods fail to return `std::unique_ptr` because of a SIP issue. This QEP proposed to search a way to fix this issue. If this is actually not possible, an exception would be made for these methods.
 
 ## How to port the code
 
