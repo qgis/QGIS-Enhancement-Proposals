@@ -48,7 +48,7 @@ class QgsAttributeFormQmlWidgetBridge : public QObject
     Q_PROPERTY( QgsAttributeEditorContext context READ context NOTIFY contextChanged )
 
   public:
-    QgsAttributeFormQmlWidgetBridge() = default;
+    QgsAttributeFormQmlWidgetBridge( QgsAttributeForm *form );
     ~QgsAttributeFormQmlWidgetBridge() = default;
 
     QgsAttributeEditorContext context() const;
@@ -56,6 +56,10 @@ class QgsAttributeFormQmlWidgetBridge : public QObject
 
     Q_INVOKABLE void setAttribute( const QString &name, const QVariant &value );
     Q_INVOKABLE QVariant attribute( const QString &name );
+
+  private:
+
+    QgsAttributeForm mForm = nullptr;
 }
 ```
 
