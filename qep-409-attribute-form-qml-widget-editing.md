@@ -71,6 +71,56 @@ means the only work required on that front will be to expose some of its
 properties as `Q_PROPERTY` for QML widgets to be able to receive contextual
 awareness of its current mode, the current feature, the parent feature, etc.
 
+### Sample QML editor widget code
+
+This is a sample QML editor widget code that provides an example of how the
+new class would be used to set the value of a feature attribute, as well as
+accessing the attribute form context's current feature property.
+
+```
+import QtQuick
+import QtQuick.Controls
+import QtQuick.Layouts
+
+/**
+ * Note: QgsAttributeFormQmlWidgetBridge exposed as a singleton named attributeFormBridge
+ */ 
+
+Item {
+  width:400
+  height: childrenRect.height
+  
+  ColumnLayout {
+    width: parent.width
+    
+    Label {
+      id: label
+      // Example of dynamic binding using the formFeature property of the context
+      text: "Current 'field_a' value" + attributeFormBridge.context.formFeature.attribute("field_a")
+    }
+    
+    Button {
+      id: button1
+      text: "Set field attribute value to 'one'"
+      
+      onClicked: {
+        // Using the bridge to set a field/attribute value on the current feature
+        attributeFormBridge.setAttribute("field_a", "one");
+      }
+    }
+    Button {
+      id: button2
+      text: "Set field attribute value to 'two'"
+      
+      onClicked: {
+        // Using the bridge to set a field/attribute value on the current feature
+        attributeFormBridge.setAttribute("field_a", "two");
+      }
+    }
+  }
+}
+```
+
 ## Deliverables
 
 A new  `QgsAttributeFormQmlWidgetBridge` class which will act as the bridge
