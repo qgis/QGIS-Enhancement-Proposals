@@ -28,7 +28,7 @@ When "QGIS Expression" is chosen, you will see the expression builder where you 
 
 This would include at least project and global scopes. 
 
-We won't offer the combination of both. Even though it would be technically possible, it seems fairly fault-prone and hard to use. Using either one or the other seems right.
+We won't offer the combination of both. Even though it would be technically possible, it seems fairly fault-prone and hard to use. Making the choice between provider side filter or QGIS expression filter mutually exclusive will lead to a more user-friendly experience. (If a user wants to combine a provider side filter with qgis expression filtering, they have other options like setting a rule-based renderer on the layer to apply a qgis expression filter at render time only.)
 
 ## Backend
 
