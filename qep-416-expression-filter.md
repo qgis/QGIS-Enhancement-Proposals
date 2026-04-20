@@ -120,7 +120,7 @@ On `Qgis::FeatureRequestFilterType::NoFilter`, the `subsetExpression` has to be 
 
 ### Additional places to consider
 
-#### Extend 
+#### Extent 
 
 For example, via "Zoom to Layer(s)".
 
