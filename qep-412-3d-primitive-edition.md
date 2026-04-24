@@ -45,12 +45,6 @@ Currently, the point cloud editing code is directly included in `Qgs3DMapCanvasW
 * activate the toolbar `void activate( QgsMapLayer *layer )`
 * deactivate the toolbar `void deactivate()`
 
-### Active layer selection
-
-Currently, to select the active layer, a user must open the QGIS 2D main window and choose a layer in the layer browser panel. However, when working in a 3D view, the user may maximise it for easier navigation. To change the active layer in this situation, the user has to lower the 3D view, find the QGIS 2D main window, select a layer, and then return to the 3D view. This process is very inefficient.
-
-This could be solved by adding a drop-down selector with only the editable and VectorLayer layers. This drop-down selector will be synchronized with the one on the 2D view. When a layer is selected in this drop-down selector, its editing mode is enabled.
-
 ### 3D primitive creation
 
 These new map tools will need the SFCGAL library to be efficient (at least v2.3.0).
