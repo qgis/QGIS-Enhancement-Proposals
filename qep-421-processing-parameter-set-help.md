@@ -33,7 +33,7 @@ We also suggest to add a CI test to force using help strings for all parameters,
 
 ### Affected Files
 
-- `src/analysis/processing/*.cpp
+- `src/analysis/processing/*.cpp`
 - `python/plugins/processing/algs/gdal/*.py`
 - `python/plugins/processing/algs/qgis/*.py`
 - `python/plugins/processing/tests/AlgorithmsTestBase.py`
