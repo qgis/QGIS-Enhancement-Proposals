@@ -89,6 +89,13 @@ This introduction of the DAG will trickle down (in a good way) to some methods r
 | `dependsOnChildAlgorithms`  | Not Changed   |
 | `availableDependenciesForChildAlgorithm`  | Not Changed   |
 
+> [!NOTE]  
+> The `conditionalBranch`   argument is only used for pruning logic in the execution of the model in `QgsProcessingModelAlgorithm::processAlgorithm`
+> As with the Khan's algorithm or graph traversal we won't need the pruning during the execution because with the graph traversal these branch just would
+> not being visited.
+>
+>Making this argument effectively obsolete, but keeping it around for the python API is cheap
+
 
 ### Kahn’s algorithm for execution 
 
@@ -157,7 +164,7 @@ With Kahn's algorithm, there is no need to have a logic to prune branches as the
 * Performance, execution speed
 
 
-kahn’s algorithm offers already better performance than the current implementation, but the kahn’s algorithm can also be adapted to be parallelized to compute independent branches concurrently. 
+kahn’s algorithm offers already better performance than the current implementation, but The bulk of performances would be drawn optimization on the directed acyclic graph, like the kahn’s algorithm can also be adapted to be parallelized to compute independent branches concurrently. 
 
 *Schutte, J. (2013). Implementing Parallel Topological Sort in a Java Graph Library [Master's thesis, University of Twente].*
 
@@ -212,3 +219,11 @@ src/core/processing/models/qgsprocessingmodelalgorithm.cpp
 ## Risks
 
 Low, all the changes are internal to the model and not exposed through the API. 
+
+But the evaluation of the model represent the end goals of users when creating a model. We need to ensure that the meaning of the processing model remains the same at all times. 
+
+So, we propose a test driven development approach. In this approach we would write tests first, then ensure that they pass during the development.
+
+The tests would consist of checking the output of real life processing models, we would pull the models from https://hub.qgis.org/models/ along with sample data. The tests added will also be useful beyond the work of this single proposal.
+
+
