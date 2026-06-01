@@ -2,15 +2,15 @@
 
 ## Summary
 
-This QEP documents the policy for maintaining a stable QGIS API. Developers must follow these policies
-when submitting changes to the QGIS code.
+This QEP documents the policy for maintaining a stable QGIS API and QGIS file formats. Developers must
+follow these policies when submitting changes to the QGIS code.
+
+## 1.0 Stable API Policy
 
 The stable API policy guarantees that (with exceptions) plugins and scripts written for a particular
 major QGIS release will continue to run without breakage and without requiring change in all future
 stable releases in that series. For instance, a plugin written for QGIS 4.2 will run without breakage
 in QGIS 4.6, 4.10, and later 4.x releases.
-
-## Stable API Policy
  
 - 1.1. The following parts of the QGIS API are subject to the stable API guarantee:
   - 1.1.1 The PyQGIS API
@@ -55,3 +55,34 @@ in QGIS 4.6, 4.10, and later 4.x releases.
   - 1.4.3 Breakage of the deprecated method is **NOT** permitted until a suitable major release. The 
     developer marking a method as deprecated must take care that they do not break any plugins
     or scripts which still use the deprecated API.
+
+## 2.0 Stable Document Format Policy
+
+The Stable Document Format Policy relates to file formats specifically designed for use in QGIS, such
+as QGS project files or QML styling files. It excludes all external file formats (such as geospatial
+data formats), or standards based formats (such as SLD styling files).
+
+- 2.1. The following QGIS generated file formats are subject to the stable document format policy (this
+  list is provided as a guide only, it is not exhaustive):
+  - 2.1.1 QGS/QGZ project files
+  - 2.1.2 QML styling files
+  - 2.1.3 QLR layer description files
+  - 2.1.4 QMD metadata files
+  - 2.1.5 QPT print layout templates
+  - 2.1.6 .model3 Processing models
+  - 2.1.7 Style database .xml exports
+- 2.2. Backward compatibility guarantee: Files created in earlier versions of QGIS must be fully compatible
+  with future QGIS releases, with compatibility code in place to ensure that they are interpreted losslessly.
+  - 2.2.1. In exceptional circumstances, a major release is permitted to drop compatibility for very old
+    objects. For instance, QGIS 3.0 dropped support for the QGIS 1 layer symbology and labeling. This should
+    only be done when the burden of maintaining compatibility is extreme and the real-world impact on users
+    is minimal. Prior to dropping any compatibility, a QEP must be submitted for wide discussion.
+- 2.3. Forward compatibility: no consideration is given to forward compatibility of any QGIS file formats.
+  These can be freely changed in any version (whether major, minor or patch), regardless of whether this
+  prevents opening newer files in older QGIS releases.
+  - 2.3.1 Furthermore, adding compatibility code to newer releases to add partial forward file compatibility
+    is discouraged, especially where it bloats the file formats or adds additional code maintenance burdens.
+- 2.4. Scope
+  - 2.4.1 The stable document format policy has consequences for other parts of QGIS. For instance, QGIS
+    expression functions must remain stable and cannot change behavior between QGIS versions, as that may
+    cause unintentional breakage of user's projects and documents.
