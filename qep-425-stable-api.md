@@ -52,9 +52,18 @@ in QGIS 4.6, 4.10, and later 4.x releases.
       to suppress the deprecation build warnings, **ONLY** for code in methods or classes which
       themselves are deprecated. (I.e. where the code calling the deprecated API will be removed at
       the same time as the deprecated API itself).
-  - 1.4.3 Breakage of the deprecated method is **NOT** permitted until a suitable major release. The 
+  - 1.4.3 Generally, breakage of the deprecated method is NOT permitted until a suitable major. The
     developer marking a method as deprecated must take care that they do not break any plugins
     or scripts which still use the deprecated API.
+  - 1.4.4 Exceptional Breakage: In rare, extreme circumstances, backwards-incompatible API changes
+    may be permitted prior to a new major release.
+    - 1.4.4.1 This exemption is strictly limited to cases where maintaining backward compatibility
+      poses a severe security risk, introduces an insurmountable maintenance burden, or fundamentally
+      blocks critical bug fixes.
+    - 1.4.4.2 Any such breaking change must be heavily justified, proposed publicly, and explicitly
+      approved by a QGIS Enhancement Policy prior to implementation.
+    - 1.4.4.3 Where possible, an accelerated deprecation warning should be provided to users
+      for at least one minor release before the breakage occurs.
 
 ## 2.0 Stable Document Format Policy
 
