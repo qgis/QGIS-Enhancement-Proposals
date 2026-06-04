@@ -26,7 +26,7 @@ When "QGIS Expression" is chosen, you will see the expression builder where you 
 
 ![expression-gui](images/qep416/expression-gui.png)
 
-This would include at least project and global scopes. 
+This would include at global scope and project scope. But we must be aware that with this the provider will need access to the project. Additionally, we need to be careful when accessing the project from a background thread.
 
 We won't offer the combination of both. Even though it would be technically possible, it seems fairly fault-prone and hard to use. Making the choice between provider side filter or QGIS expression filter mutually exclusive will lead to a more user-friendly experience. (If a user wants to combine a provider side filter with qgis expression filtering, they have other options like setting a rule-based renderer on the layer to apply a qgis expression filter at render time only.)
 
@@ -34,11 +34,12 @@ We won't offer the combination of both. Even though it would be technically poss
 
 ### Set the subset expression
 
-This subset expression will be set via the layer `QgsVectorLayer::setSubsetExpression()` and provider `QgsDataProvider::setSubsetExpression()`, eventually landing in the `QgsAbstractFeatureSource` as the member `mSubsetExpression`.
+This subset expression will be set via the layer `QgsVectorLayer::setSubsetString()` and provider `QgsDataProvider::setSubsetString()`, landing in the `QgsAbstractFeatureSource` as the member `mSubsetString`. To divert it to the existing SubsetString new enumeration is introduced `ProviderSubsetFilterType` (`Query`|`Expression`).
 
-It is stored as the custom property `QgsMapLayer::mCustomProperties['storedSubsetExpression']` (aligned with the `subsetString`).
+It is stored as the current custom property `QgsMapLayer::mCustomProperties['storedSubsetString']` and `QgsMapLayer::mCustomProperties['providerSubsetFilterType']`.
 
 In the feature iterator, we then merge it into the feature request's filter expression so they can be compiled together into a server side filter (completely or partially) if possible. Otherwise, they are evaluated together on the client side.
+Because this must be implemented individually within every provider iterator, not all providers will support it from the beginning. To indicate whether subset expressions are supported it will has a flag in the provider's capabilities metadata.
 
 ### Merging to the filter expression
 
@@ -71,7 +72,7 @@ Also, it needs to set the filter type to `Expression` because the filter express
 
 ### Merging to the fids
 
-There is also a way to filter according to feature IDs: `QgsFeatureRequest( QgsFeatureId fid )` and `QgsFeatureRequest( const QgsFeatureIds &fids )`. 
+There is also a way to filter according to feature IDs: `QgsFeatureRequest( QgsFeatureId fid )` and `QgsFeatureRequest( const QgsFeatureIds &fids )`.  This needs to be upgraded to a filter expression type.
 
 ##### When providers can compile
 
@@ -87,7 +88,7 @@ If the providers are able to compile expressions into server side queries, this 
 
 ```
 
-So nothing has to be done here; it is just that it does not exclude an additional expression filter (the subset expression), which is done by setting the filter type as mentioned above.
+Technically, the functionality remains the same with a combined filter expression. But instead of appending it to the `whereClause`, it is added to the filter expression using the specific filter expression type.
 
 #### When providers cannot compile
 
@@ -124,7 +125,7 @@ On `Qgis::FeatureRequestFilterType::NoFilter`, the `subsetExpression` has to be 
 
 For example, via "Zoom to Layer(s)".
 
-This can be integrated once we are able to compile the subset expression.
+This can be integrated once we are able to compile the subset expression. In PostgreSQL e.g. in `computeExtend3D` by passing the cumpiled subset expression instead of the `filterWhereClause`.
 
 If this is not possible, we would need to iterate through all the fetched features, which can be a performance killer.
 
@@ -146,21 +147,22 @@ Visual feedback would be very helpful in the GUI to know whether the expression 
 
 ### Affected Files
 
-- qgsvectorlayer.h / cpp to setSubsetExpression etc. and probably featureCount/extent
-- qgsdataprovider.h / cpp to setSubsetExpression etc. and probably featureCount/extent
-- qgsfeaturerequest.cpp to improve `combineFilterExpression` and add the subset expression to the `QgsAbstractFeatureSource`
+- qgsvectorlayer.h / cpp to handle new providerSubsetFilterType etc. and probably featureCount/extent
+- qgsdataprovider.h / cpp to handle new providerSubsetFilterType etc. and probably featureCount/extent
+- qgsfeaturerequest.cpp to improve `combineFilterExpression` and set providerSubsetFilterType in the `QgsAbstractFeatureSource`
 - Provider-specific feature iterators (like e.g. qgspostgresfeatureiterator.cpp)
+- Provider-specific test suites
 
 ## Deliverables
 
-- Expression filter on all vector layers
-- Evaluation of compiled subset expressions on all vector layers currently supporting it for filter expressions
+- Expression subsets on vector layers based on PostgreSQL / OGR
 - Improving PostgreSQL iterator handling of partially compiled expressions (because it currently only supports complete compilation or none at all)
 
 ## Non-Deliverables
 
 The following are not part of this QEP:
 
+- Expression subsets on all the other vector layers
 - Optional preview in the GUI indicating whether it can be compiled (see above)
 - Cost calculator to evaluate if the part should be an outer or inner filter
 
