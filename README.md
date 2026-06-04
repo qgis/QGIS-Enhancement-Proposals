@@ -64,6 +64,7 @@ When the discussion and voting period ends, one of the following actions are tak
   QEP documents the standards and requirements for backporting changes from the ``master`` branch to Long Term Release (LTR)
   and current stable release branches in QGIS. Developers must follow these guidelines when submitting backports.
 - [#408 AI tool use policy](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-408-ai-tool-policy.md). This QEP documents the QGIS project policy regarding the use of AI/LLM tools by contributors.
+- [#425 Stable API and document format policy](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-425-stable-api.md). This QEP documents the QGIS project policy regarding API stability and document format stability.
 
 ## FAQ
 
