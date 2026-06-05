@@ -61,7 +61,7 @@ in QGIS 4.6, 4.10, and later 4.x releases.
       poses a severe security risk, introduces an insurmountable maintenance burden, or fundamentally
       blocks critical bug fixes.
     - 1.4.4.2 Any such breaking change must be heavily justified, proposed publicly, and explicitly
-      approved by a QGIS Enhancement Policy prior to implementation.
+      approved by a QGIS Enhancement Proposal prior to implementation.
     - 1.4.4.3 Where possible, an accelerated deprecation warning should be provided to users
       for at least one minor release before the breakage occurs.
 
