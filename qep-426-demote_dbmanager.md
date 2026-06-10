@@ -1,4 +1,4 @@
-# QGIS Enhancement 426: Demotion of DB Manager plugin to community plugin
+# QGIS Enhancement 426: Demotion of DB Manager plugin to external plugin
 
 ## Summary
 
@@ -29,7 +29,7 @@ Users who rely on this unported functionality have two paths forward:
 
 1. Sponsorship: Organizations and users who depend on specific missing features are heavily encouraged to sponsor
    core developers to port those capabilities directly into the Browser Panel.
-2. Community Maintenance: Because the DB Manager will remain available as a standalone plugin, a motivated
+2. External Maintenance: Because the DB Manager will remain available as a standalone plugin, a motivated
    community member or organization can step up to maintain and extend it outside of the core QGIS release cycle.
 
 ## Proposed Implementation Plan
