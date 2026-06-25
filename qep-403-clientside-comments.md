@@ -1,4 +1,4 @@
-# QGIS Enhancement: Title
+# QGIS Enhancement: Client-side field comments
 
 **Date** 2025/11/24
 
