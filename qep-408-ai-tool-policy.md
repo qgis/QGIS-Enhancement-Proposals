@@ -5,7 +5,11 @@
 **Author** Even Rouault (@rouault)
 
 **Contact** even dot rouault at spatialys dot com
+**Date** 2026/09/24
 
+**Author** the QGIS project contributors
+
+**Contact** qgis.org
 **Version** 2.0
 
 # Policy
