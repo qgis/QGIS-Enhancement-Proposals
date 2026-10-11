@@ -19,5 +19,5 @@ If we subsequently discover that you have used an AI, LLM, or any agent-based wo
 contribution, you will be subject to code reversion and contributor rights sanctioning.
 
 No LLM, AI or agent assisted text contributions are allowed in the https://github.com/qgis/qgis repository,
-this inludes every text that it is supposed to be entered by a human being (e.g. PR and issue titles,
+this includes every text that it is supposed to be entered by a human being (e.g. PR and issue titles,
 descriptions, comments etc.).
