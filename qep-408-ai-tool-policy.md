@@ -14,10 +14,10 @@
 
 # Policy
 
-No LLM, AI or agent assisted code contributions are allowed in the https://github.com/qgis/qgis repository.
+No LLM, AI or agent assisted code contributions are allowed in the https://github.com/qgis/QGIS repository.
 If we subsequently discover that you have used an AI, LLM, or any agent-based workflow for your
 contribution, you will be subject to code reversion and contributor rights sanctioning.
 
-No LLM, AI or agent assisted text contributions are allowed in the https://github.com/qgis/qgis repository,
+No LLM, AI or agent assisted text contributions are allowed in the https://github.com/qgis/QGIS repository,
 this includes every text that it is supposed to be entered by a human being (e.g. PR and issue titles,
 descriptions, comments etc.).
