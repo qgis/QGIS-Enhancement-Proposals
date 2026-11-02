@@ -135,20 +135,7 @@ We also encourage the user groups and community to use the same approach. To mak
 
 ### New fields in metadata
 
-**This part is independent from the federation. This just a summary of a the solution to the tagging problems we mentioned at the top of this proposal. As suggested by @Gustry , we will submit a dedicated QEP for the tagging system with more details.**
-
-Issued from the discussion in Laax, a suggestion of adding new fields in metadata was also raised to address quality issues:
-
-- `monetization`: free, freemium (paid add-ons), requires subscription, contains ads
-- `ai_usage`: none, assisted, generated
-- `network_access`: none, optional, required
-- `runtime_downloads`: true/false Does it fetch and install code or data files after installation?
-- `native_binaries`: true/false (e.g. H3)
-- `ui_location`: Where to find it: menu path, toolbar, Processing provider, context menu
-- `languages` / `scope`: UI languages; global or local (country/region)
-- `fork_of`: Original plugin, if any
-
-The website can store and display them first; the Desktop plugin manager can show and filter on them in a later release.
+Issued from the discussion in Laax, a suggestion of adding new fields in metadata was also raised to address quality issues. However, This part is independent from the federation and as suggested by @Gustry , we will submit a dedicated QEP for the tagging system with more details.
 
 ## Risks
 
