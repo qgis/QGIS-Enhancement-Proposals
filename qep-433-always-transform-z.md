@@ -46,7 +46,7 @@ What changes in the output, by source and destination CRS (measured with **Repro
 | | to: 2D CRS | to: 3D CRS | to: geocentric CRS |
 | --- | --- | --- | --- |
 | **from: 2D CRS, 2D geom** | no change | no change | no change |
-| **from: 2D CRS, 3D geom** | no change | no change | **changed** - Z read as ellipsoidal height ✅ |
+| **from: 2D CRS, 3D geom** | no change | no change | **changed** - Z read as ellipsoidal height ⚠️ |
 | **from: 3D CRS, 2D geom** | no change | no change | no change |
 | **from: 3D CRS, 3D geom** | no change | **changed** - Z converted to the destination vertical datum - correct ✅ | **changed** - X/Y/Z computed from the real height - correct ✅ |
 | **from: geocentric CRS** | **changed** - ellipsoidal height in Z - correct ✅ | **changed** - Z in the destination vertical datum - correct ✅ | no change |
