@@ -1,0 +1,166 @@
+<mxfile host="Electron">
+  <diagram name="Page-1" id="Yoh_NKnZv4FsgND1VuOo">
+    <mxGraphModel dx="1157" dy="1224" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" background="none" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="h_unSdH00De2XAsmJaer-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;startSize=23;linecap=round;linejoin=round;fillOpacity=100;fixedHeader=1;fillColor=#647687;fontColor=default;strokeColor=default;gradientColor=none;rounded=1;glass=0;shadow=0;swimlaneLine=0;perimeterSpacing=0;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" value="Plugin Manager" vertex="1">
+          <mxGeometry height="560" width="920" x="120" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-3" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" value="" vertex="1">
+          <mxGeometry height="490" width="140" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-4" parent="h_unSdH00De2XAsmJaer-1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" value="Close" vertex="1">
+          <mxGeometry height="20" width="70" x="760" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-5" parent="h_unSdH00De2XAsmJaer-1" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;" value="Help" vertex="1">
+          <mxGeometry height="20" width="70" x="840" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-6" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp;🧩 All" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-7" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;align=left;fillColor=light-dark(#66CC00,#4D9900);fillStyle=auto;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp;🗃️ Repository browser" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="240" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-8" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp;⚙️ Settings" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="267.5" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-9" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp;🧩 Installed" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-10" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp;🧩 Not installed" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-11" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp;🧩 Upgradeble" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-12" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp;🧩 New" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="150" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-13" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp;🧩 Invalid" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-14" parent="h_unSdH00De2XAsmJaer-1" style="rounded=0;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp;📦 Install from ZIP" vertex="1">
+          <mxGeometry height="30" width="140" x="10" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-16" parent="h_unSdH00De2XAsmJaer-1" style="rounded=1;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&lt;font style=&quot;color: light-dark(rgb(0, 0, 0), rgb(132, 132, 132));&quot;&gt;&amp;nbsp; &amp;nbsp;Search a repository&lt;/font&gt;" vertex="1">
+          <mxGeometry height="30" width="490" x="160" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-97" parent="h_unSdH00De2XAsmJaer-1" style="rounded=1;whiteSpace=wrap;html=1;arcSize=2;sketch=1;curveFitting=1;jiggle=2;" value="" vertex="1">
+          <mxGeometry height="240" width="750" x="160" y="80" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-136" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=11;align=left;fontColor=#596780;whiteSpace=wrap;sketch=1;curveFitting=1;jiggle=2;" value="Name" vertex="1">
+          <mxGeometry height="20" width="150" x="180" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-138" parent="h_unSdH00De2XAsmJaer-1" style="shape=line;strokeWidth=2;html=1;strokeColor=#DFE1E5;resizeWidth=1;sketch=1;curveFitting=1;jiggle=2;" value="" vertex="1">
+          <mxGeometry height="10" width="710" x="180" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-140" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" value="QGIS Official Plugin repository" vertex="1">
+          <mxGeometry height="20" width="190" x="180" y="136" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-147" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" value="QGIS Switzerland User Group" vertex="1">
+          <mxGeometry height="20" width="190" x="180" y="181" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-153" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" value="Swisstopo plugins Plugins repo" vertex="1">
+          <mxGeometry height="20" width="240" x="180" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-178" parent="h_unSdH00De2XAsmJaer-1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=light-dark(#66CC00,#4D9900);arcSize=0;sketch=1;curveFitting=1;jiggle=2;" value="" vertex="1">
+          <mxGeometry height="35" width="750" x="160" y="262.5" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-158" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" value="Jane Doe plugins repository" vertex="1">
+          <mxGeometry height="20" width="170" x="180" y="271" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-163" parent="h_unSdH00De2XAsmJaer-1" style="shape=line;strokeWidth=2;html=1;strokeColor=#DFE1E5;resizeWidth=1;sketch=1;curveFitting=1;jiggle=2;" value="" vertex="1">
+          <mxGeometry height="10" width="710" x="180" y="310" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-164" parent="h_unSdH00De2XAsmJaer-1" style="rounded=1;whiteSpace=wrap;html=1;align=left;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp; &amp;nbsp;Filter by trust (Official, UG, Community)" vertex="1">
+          <mxGeometry height="30" width="250" x="660" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-165" parent="h_unSdH00De2XAsmJaer-1" style="triangle;whiteSpace=wrap;html=1;rotation=90;sketch=1;curveFitting=1;jiggle=2;" value="" vertex="1">
+          <mxGeometry height="13.33" width="10" x="890" y="38.339999999999996" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-167" parent="h_unSdH00De2XAsmJaer-1" style="swimlane;whiteSpace=wrap;html=1;align=left;rounded=1;sketch=1;curveFitting=1;jiggle=2;" value="&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;Repository details" vertex="1">
+          <mxGeometry height="190" width="750" x="160" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-2" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" value="Jane Doe plugins repository" vertex="1">
+          <mxGeometry height="20" width="170" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-3" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;⚠️&amp;nbsp;Not verified by QGIS.org, add it at your own risk.&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="329" x="220" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-4" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;URL&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="170" x="10" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-5" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;https://jane.doe/plugins/plugins.xml&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="330" x="220" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-7" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Maintained by&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="170" x="10" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-8" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;Jane Doe&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="330" x="220" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-9" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=1;sketch=1;curveFitting=1;jiggle=2;" value="&lt;span style=&quot;font-weight: normal;&quot;&gt;Plugins&lt;/span&gt;" vertex="1">
+          <mxGeometry height="20" width="170" x="10" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-10" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;1248 plugins&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="330" x="220" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-11" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;Latest update&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="330" x="10" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-12" parent="h_unSdH00De2XAsmJaer-167" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;2 hours ago&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="330" x="220" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-13" parent="h_unSdH00De2XAsmJaer-167" style="rounded=1;whiteSpace=wrap;html=1;sketch=1;curveFitting=1;jiggle=2;fillColor=#FF9933;" value="&lt;div style=&quot;text-align: center;&quot;&gt;&lt;span style=&quot;background-color: transparent;&quot;&gt;➕&lt;/span&gt;&lt;span style=&quot;background-color: transparent; text-wrap-mode: nowrap; color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20parent%3D%221%22%20style%3D%22html%3D1%3BfillColor%3Dnone%3BstrokeColor%3Dnone%3BfontSize%3D12%3Balign%3Dleft%3BfontColor%3Dlight-dark(%23000000%2C%23919191)%3BwhiteSpace%3Dwrap%3BfontStyle%3D2%3B%22%20value%3D%22%20%26lt%3Bdiv%26gt%3BNot%20Added%26lt%3B%2Fdiv%26gt%3B%22%20vertex%3D%221%22%3E%3CmxGeometry%20height%3D%2220%22%20width%3D%2290%22%20x%3D%22920%22%20y%3D%22346%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;font face=&quot;monospace&quot; style=&quot;background-color: transparent;&quot;&gt;&lt;span style=&quot;font-size: 0px; text-wrap-mode: nowrap;&quot;&gt;➕&lt;/span&gt;&lt;/font&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255)); text-wrap-mode: nowrap; font-size: 0px;&quot;&gt;&lt;font color=&quot;rgba(237, 237, 237, 0)&quot; face=&quot;monospace&quot;&gt;➕&amp;nbsp;&amp;nbsp;&lt;/font&gt;&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp; Ad&lt;/span&gt;&lt;span style=&quot;background-color: transparent; text-wrap-mode: nowrap; color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20parent%3D%221%22%20style%3D%22html%3D1%3BfillColor%3Dnone%3BstrokeColor%3Dnone%3BfontSize%3D12%3Balign%3Dleft%3BfontColor%3Dlight-dark(%23000000%2C%23919191)%3BwhiteSpace%3Dwrap%3BfontStyle%3D2%3B%22%20value%3D%22%20%26lt%3Bdiv%26gt%3BNot%20Added%26lt%3B%2Fdiv%26gt%3B%22%20vertex%3D%221%22%3E%3CmxGeometry%20height%3D%2220%22%20width%3D%2290%22%20x%3D%22920%22%20y%3D%22346%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;d repository&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="119" x="10" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-168" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=11;align=left;fontColor=#596780;whiteSpace=wrap;sketch=1;curveFitting=1;jiggle=2;" value="URL" vertex="1">
+          <mxGeometry height="20" width="410" x="380" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-169" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=11;align=left;fontColor=#596780;whiteSpace=wrap;sketch=1;curveFitting=1;jiggle=2;" value="Trust" vertex="1">
+          <mxGeometry height="20" width="90" x="630" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-170" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;https://plugins.qgis.org/plugins/plugins.xml&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="240" x="380" y="136" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-171" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;https://qgis.ch/plugins/plugins.xml&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="230" x="380" y="181" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-172" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;https://swisstopo.ch/plugins/plugins.xml&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="230" x="380" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-173" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;https://jane.doe/plugins/plugins.xml&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="220" x="380" y="271" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-174" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;🏅Trusted by QGIS.org&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="140" x="630" y="136" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-175" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;✅ Trusted by QGIS.ch&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="140" x="630" y="181" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-176" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;⚠️&amp;nbsp;Not verified&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="140" x="630" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="h_unSdH00De2XAsmJaer-177" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=#000000;whiteSpace=wrap;fontStyle=0;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;⚠️&amp;nbsp;Not verified&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="140" x="630" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-15" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=11;align=left;fontColor=#596780;whiteSpace=wrap;sketch=1;curveFitting=1;jiggle=2;" value="Status" vertex="1">
+          <mxGeometry height="20" width="90" x="800" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-16" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=light-dark(#000000,#CDCDCD);whiteSpace=wrap;fontStyle=2;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;&lt;b&gt;Added&lt;/b&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="90" x="800" y="136" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-17" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=light-dark(#000000,#919191);whiteSpace=wrap;fontStyle=2;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;Not Added&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="90" x="800" y="181" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-18" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=light-dark(#000000,#919191);whiteSpace=wrap;fontStyle=2;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;Not Added&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="90" x="800" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="if733N9EdozOvksP-PTV-19" parent="h_unSdH00De2XAsmJaer-1" style="html=1;fillColor=none;strokeColor=none;fontSize=12;align=left;fontColor=light-dark(#000000,#CDCDCD);whiteSpace=wrap;fontStyle=2;sketch=1;curveFitting=1;jiggle=2;" value=" &lt;div&gt;Not Added&lt;/div&gt;" vertex="1">
+          <mxGeometry height="20" width="90" x="800" y="270" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
