@@ -14,7 +14,17 @@ The QGIS plugin ecosystem is a major selling point for QGIS and at the same time
 
 **During the  the contributor meeting in Laax, October 2026** we had a discussion to gather ideas and suggestions about how could we improve the QGIS Plugins repository. We are facing problems due to its exponential growth. This proposal stems from these discussions and moves us toward the federation of the majority of  plugins away to other repositories.
 
-The problems we want to solve:
+## This proposal at a glance
+
+This proposal seeks to address some fundamental issues in our plugins.qgis.org platform: reviewer overload, difficulty to conduct review, high security risk, high difficulty in ensuring compliance, these issues are addressed in the proposal:
+
+* We maintain a small collection of high quality plugins that are official, available out-of-the-box to all QGIS users with high utility value, maintained under a high governance standard and by trusted developers. This substantially de-risks us from a security perspective, reduces the review process to a single QEP acceptance event with a large corps of reviewers to assess the proposed new plugin, and provides us with the needed mechanisms to ensure compliance (UX, UI, Coding Standards, Security Practices etc.) Example plugins here might be .e.g QuickOSM, MetaSearch etc.
+* National User groups can embark on a similar process to 'bless' plugins that are of high utility in their community. It affords them the opportunity to e.g. publish and review plugins in their own language and speak to the needs of their community. These plugins are not exposed to QGIS general users by default and in the target community, it is a question of a few clicks to add all of the e.g. Algeria specific plugins to the plugin manager after educating the user about the lower level of oversight and higher risk profile they are exposed to. Example plugins here might be e.g. PDOK for the Netherlands user group.
+* 'Other' repos can innovate, invent, create their plugins freely with no oversight or slow review process from QGIS. They can apply to have their collection of plugins added to the registry or just provide instruction on adding their repository to QGIS directly. In the former case we again do not enable these plugins by default and guide the user through an educational step before they enable the repository.
+
+For search and discoverability,  we can still provide a way for the user to discover plugins and them guide them through the risks of adding third party code to QGIS.
+
+## The problems we want to solve:
 
 - **Overload:** There are too many new plugins/versions arriving on the Plugins repo for us to review effectively. The AI-assisted plugin development boom has increased the volume. We went from about 3k plugins at the beginning of 2026 to about 4.7k in October 2026. Reviews are shallow and there is only one main volunteer contributor (Admire a.k.a @NyakudyaA)  who does the reviews.
 
