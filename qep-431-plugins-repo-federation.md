@@ -32,7 +32,6 @@ For search and discoverability,  we can still provide a way for the user to disc
 - **Quality:** Some points were raised during the discussion about plugins that are forked from existing ones, plugins without open issue trackers, ones that are not easy to find in QGIS, ones with functionality duplicated, ones with non-English description.
 - **Tagging:** We don't have a proper tagging system to allow users to filter out desirable or undesirable plugins. We envisage tags like:  AI-assisted, needs subscription, binary blobs, post-install downloads, ads, manual installation....etc.
 - **Infrastructure pressure:** some parties harvest the whole repository regularly. This eats bandwidth, causing us to often exceed the Hetzner traffic cap. When we exceed the traffic cap it incurs overage fees. Batch downloaders also make download counts meaningless. 
-- **Rating Farming:** Ratings were open to vote-farming and have now been removed.
 
 Earlier this year, we have implemented the QA and security checks ([QEP 409](https://github.com/qgis/QGIS-Enhancement-Proposals/blob/master/qep-409-plugins-security-validator.md)). It detects code-related security and quality issues for each plugin uploaded. However, the concerns related to the points mentioned above still remain, and the majority of the checks are not mandatory so the system is not as effective as we might hope for.
 
