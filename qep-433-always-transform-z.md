@@ -23,7 +23,7 @@ Change default transformZ param from false to true in qgsabstractgeometry.h and 
 
 Switch the **TRANSFORM_Z** from default false to true in **Reproject Layer** processing algorithm.
 
-Remove all reduntant passes of the true flag when calling the appropriate **transform()** method.
+Remove all redundant passes of the true flag when calling the appropriate **transform()** method.
 
 ## Affected 
 
